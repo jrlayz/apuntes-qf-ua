@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apuntes Q&F UA 2026 | Carbohidratos + Farmacodinámica</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #f5f2eb;
+  --card: #fffdf8;
+  --card2: #ede9e0;
+  --text: #1a1714;
+  --muted: #6b6358;
+  --accent: #2d6a4f;
+  --accent2: #b5451b;
+  --accent3: #1b4d8a;
+  --accent4: #7b3fa0;
+  --accent5: #0d6e96;
+  --accent6: #c97200;
+  --border: rgba(0,0,0,0.09);
+  --highlight: #fff8e1;
+  --highlight-b: #f0c040;
+  --danger-bg: #fdecea;
+  --danger-text: #8b1a1a;
+  --info-bg: #e3f0ff;
+  --info-text: #0d3b7a;
+  --purple-bg: #f3eaff;
+  --purple-text: #4a1a7a;
+  --green-bg: #e8f5e9;
+  --green-text: #1b5e20;
+  --pharma-bg: #e8f4f0;
+  --pharma-text: #0d4a2f;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── MASTER HEADER ── */
+.master-header {
+  background: var(--text);
+  color: #f5f2eb;
+  padding: 2.5rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.master-header::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 260px; height: 260px;
+  border: 0.5px solid rgba(255,255,255,0.07);
+  border-radius: 50%;
+}
+.master-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 100px;
+  width: 160px; height: 160px;
+  border: 0.5px solid rgba(255,255,255,0.05);
+  border-radius: 50%;
+}
+.header-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.5rem;
+}
+.master-header h1 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1.1;
+}
+.master-header h1 em { color: rgba(255,255,255,0.5); font-style: italic; }
+.header-chips {
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+.chip {
+  font-size: 11px;
+  padding: 3px 12px;
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  color: rgba(255,255,255,0.5);
+}
+.chip.active {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* ── TOP MODULE NAV ── */
+.module-nav {
+  background: #111;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: sticky;
+  top: 0;
+  z-index: 300;
+}
+.module-nav::-webkit-scrollbar { display: none; }
+.module-btn {
+  flex-shrink: 0;
+  padding: 0.9rem 1.6rem;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.4);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+  white-space: nowrap;
+}
+.module-btn:hover { color: rgba(255,255,255,0.8); }
+.module-btn.active { color: #f0c040; border-bottom-color: #f0c040; }
+.module-btn .mod-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  margin-right: 7px;
+  vertical-align: middle;
+}
+
+/* ── FASE NAV ── */
+.fase-nav {
+  background: var(--card2);
+  border-bottom: 0.5px solid var(--border);
+  position: sticky;
+  top: 41px;
+  z-index: 200;
+}
+.fase-tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.fase-tabs::-webkit-scrollbar { display: none; }
+.fase-tab {
+  flex-shrink: 0;
+  padding: 0.85rem 1.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: 'Outfit', sans-serif;
+  white-space: nowrap;
+}
+.fase-tab:hover { color: var(--text); background: rgba(0,0,0,0.03); }
+.fase-tab.active { color: var(--text); border-bottom-color: var(--accent2); }
+.fase-tab .badge-num {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--accent2);
+  color: white;
+  font-size: 10px;
+  text-align: center;
+  line-height: 18px;
+  margin-right: 6px;
+}
+
+/* ── SUB NAV ── */
+.sub-nav {
+  background: var(--card);
+  border-bottom: 0.5px solid var(--border);
+  padding: 0 1rem;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sub-nav::-webkit-scrollbar { display: none; }
+.sub-btn {
+  padding: 0.55rem 1rem;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  border-bottom: 1.5px solid transparent;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-family: 'Outfit', sans-serif;
+}
+.sub-btn:hover { color: var(--text); }
+.sub-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── MODULE SECTIONS ── */
+.module-section { display: none; }
+.module-section.active { display: block; }
+
+/* ── CONTENT ── */
+.content { max-width: 840px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+.fase-section { display: none; animation: fadeUp 0.3s ease; }
+.fase-section.active { display: block; }
+.sub-section { display: none; }
+.sub-section.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.1rem;
+}
+.card-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.card-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.sec-header { margin-bottom: 1.75rem; }
+.sec-header .badge {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent2);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.sec-header h2 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.9rem;
+  font-weight: 400;
+}
+.sec-header p { font-size: 14px; color: var(--muted); margin-top: 0.3rem; }
+
+/* ── BOXES ── */
+.highlight {
+  background: var(--highlight);
+  border-left: 3px solid var(--highlight-b);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.85rem 0;
+  font-size: 14px;
+}
+.info-box {
+  background: var(--info-bg);
+  border-left: 3px solid var(--accent3);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.85rem 0;
+  font-size: 14px;
+  color: var(--info-text);
+}
+.pharma-box {
+  background: var(--green-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.85rem 0;
+  font-size: 14px;
+  color: var(--green-text);
+}
+.pharma-box::before { content: '💊 '; }
+.mnemo {
+  background: var(--purple-bg);
+  border-left: 3px solid var(--accent4);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.85rem 0;
+  font-size: 14px;
+  color: var(--purple-text);
+}
+.mnemo::before { content: '🧠 '; }
+.danger-box {
+  background: var(--danger-bg);
+  border-left: 3px solid #c0392b;
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.85rem 0;
+  font-size: 14px;
+  color: var(--danger-text);
+}
+.warning-box {
+  background: #fff8e1;
+  border-left: 3px solid #f0c040;
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.85rem 0;
+  font-size: 14px;
+  color: #7a5c00;
+}
+.warning-box::before { content: '⚠️ '; }
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 0.75rem 0; }
+th {
+  background: var(--card2);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+td { padding: 8px 12px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(0,0,0,0.015); }
+
+/* ── CODE ── */
+.code-block {
+  background: #1a1714;
+  color: #e8e0d4;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.65;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  margin: 0.85rem 0;
+  overflow-x: auto;
+}
+.cg { color: #7ec897; }
+.ca { color: #f0c040; }
+.cr { color: #e07060; }
+.cb { color: #79b8f3; }
+.cm { color: #7a7265; }
+.cp { color: #c792ea; }
+
+/* ── STEPS ── */
+.steps { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.85rem 0; }
+.step { display: flex; gap: 0.85rem; align-items: flex-start; }
+.step-n {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  margin-top: 3px;
+}
+.step-n.green { background: var(--accent); }
+.step-n.red { background: var(--accent2); }
+.step-n.blue { background: var(--accent3); }
+.step-n.purple { background: var(--accent4); }
+.step-body { flex: 1; font-size: 14px; }
+
+/* ── GRID ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin: 0.85rem 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.9rem; margin: 0.85rem 0; }
+@media (max-width: 580px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+.mini-card {
+  background: var(--card2);
+  border-radius: 8px;
+  padding: 1rem;
+  border: 0.5px solid var(--border);
+}
+.mini-card h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 0.5rem; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 9px;
+  border-radius: 20px;
+  font-weight: 500;
+  margin: 2px;
+}
+.tg { background: var(--green-bg); color: var(--green-text); }
+.tr { background: var(--danger-bg); color: var(--danger-text); }
+.tb { background: var(--info-bg); color: var(--info-text); }
+.tp { background: var(--purple-bg); color: var(--purple-text); }
+.ta { background: var(--highlight); color: #7a5c00; }
+.to { background: #fff3e0; color: #7a3500; }
+
+/* ── FORMULA ── */
+.formula {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 0.65rem;
+  color: var(--accent2);
+}
+
+/* ── ENERGIA BADGE ── */
+.energia {
+  display: inline-block;
+  background: #1a1714;
+  color: #f0c040;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin: 2px;
+}
+
+/* ── FLASHCARDS ── */
+.fc-wrap { perspective: 1000px; margin: 1rem 0; }
+.fc {
+  width: 100%; min-height: 170px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.45s ease;
+  cursor: pointer;
+}
+.fc.flipped { transform: rotateY(180deg); }
+.fc-f, .fc-b {
+  position: absolute; width: 100%; min-height: 170px;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 1.75rem 2rem;
+  text-align: center;
+  border: 0.5px solid var(--border);
+}
+.fc-f { background: var(--card); }
+.fc-b { background: var(--text); color: #f5f2eb; transform: rotateY(180deg); }
+.fc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.4; margin-bottom: 0.75rem; font-weight: 500; }
+.fc-q { font-family: 'Crimson Pro', serif; font-size: 1.2rem; line-height: 1.4; }
+.fc-a { font-size: 13.5px; line-height: 1.6; }
+.fc-a strong { color: #7ec897; }
+.fc-hint { font-size: 11px; color: var(--muted); text-align: center; margin-top: 0.5rem; }
+.fc-nav { display: flex; gap: 0.75rem; align-items: center; justify-content: center; margin-top: 0.5rem; }
+.fc-nav button {
+  padding: 5px 16px;
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--card2);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text);
+  transition: border-color 0.15s;
+}
+.fc-nav button:hover { border-color: var(--accent); }
+.fc-counter { font-size: 12px; color: var(--muted); min-width: 50px; text-align: center; }
+.fc-module-switch { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
+.fc-module-switch button {
+  padding: 4px 14px;
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--card2);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Outfit', sans-serif;
+  color: var(--muted);
+}
+.fc-module-switch button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+/* ── QUIZ ── */
+.quiz-card { background: var(--card); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+.quiz-q { font-size: 14.5px; font-weight: 500; margin-bottom: 0.85rem; line-height: 1.5; }
+.quiz-q .qnum { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.3rem; }
+.quiz-opts { display: flex; flex-direction: column; gap: 0.45rem; }
+.quiz-opt {
+  padding: 0.6rem 1rem;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13.5px;
+  background: var(--card2);
+  text-align: left;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text);
+  transition: all 0.15s;
+}
+.quiz-opt:hover { border-color: var(--accent); background: #f0faf5; }
+.quiz-opt.correct { background: var(--green-bg); border-color: var(--accent); color: var(--green-text); }
+.quiz-opt.wrong { background: var(--danger-bg); border-color: #c0392b; color: var(--danger-text); }
+.quiz-fb { margin-top: 0.65rem; font-size: 13.5px; padding: 0.6rem 1rem; border-radius: 8px; display: none; line-height: 1.5; }
+.quiz-fb.show { display: block; }
+.quiz-fb.ok { background: var(--green-bg); color: var(--green-text); border-left: 3px solid var(--accent); }
+.quiz-fb.bad { background: var(--danger-bg); color: var(--danger-text); border-left: 3px solid #c0392b; }
+.quiz-reset { margin-top: 0.5rem; font-size: 12px; padding: 4px 14px; border: 0.5px solid var(--border); border-radius: 20px; background: transparent; cursor: pointer; color: var(--muted); font-family: 'Outfit', sans-serif; display: none; }
+.quiz-reset.show { display: inline-block; }
+.quiz-module-switch { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.quiz-module-switch button {
+  padding: 4px 14px;
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--card2);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Outfit', sans-serif;
+  color: var(--muted);
+}
+.quiz-module-switch button.active { background: var(--text); color: var(--bg); }
+
+/* ── MISC ── */
+p { margin-bottom: 0.7rem; }
+h3 { font-size: 1rem; font-weight: 600; margin: 1.2rem 0 0.5rem; }
+ul, ol { padding-left: 1.2rem; margin-bottom: 0.7rem; }
+li { margin-bottom: 0.3rem; font-size: 14px; }
+.divider { border: none; border-top: 0.5px solid var(--border); margin: 1.5rem 0; }
+.small { font-size: 12.5px; color: var(--muted); }
+strong { font-weight: 600; }
+
+/* PROGRESS BAR */
+.progress-bar { background: var(--card2); border-radius: 20px; height: 5px; margin: 0.5rem 0 1.5rem; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 20px; background: var(--accent2); transition: width 0.4s ease; }
+
+/* DISACCHARIDE TABLE */
+.disac-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 1rem 0; }
+.disac-table th { background: var(--text); color: var(--bg); padding: 9px 12px; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; }
+.disac-table td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+.disac-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+.disac-table tr:last-child td { border-bottom: none; }
+
+/* SIGNAL CASCADE */
+.cascade {
+  background: #1a1714;
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  margin: 0.85rem 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 2;
+}
+.cascade .arrow { color: #6b6358; }
+.cascade .molecule { color: #f0c040; font-weight: 500; }
+.cascade .enzyme { color: #79b8f3; }
+.cascade .effect { color: #7ec897; }
+.cascade .inhibit { color: #e07060; }
+
+@media print {
+  .module-nav, .fase-nav, .sub-nav, .fc-nav { display: none !important; }
+  .module-section, .fase-section, .sub-section { display: block !important; }
+  .card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="master-header">
+  <div class="header-eyebrow">Apuntes Compilados — Universidad de Antofagasta · Q&F 2026 · Matías</div>
+  <h1>Química & Farmacia<br><em>Apuntes Integrados — 2 Módulos</em></h1>
+  <div class="header-chips">
+    <span class="chip active">Módulo A: Carbohidratos</span>
+    <span class="chip active">Módulo B: Farmacodinámica PPT1</span>
+    <span class="chip active">Módulo C: Farmacodinámica PPT2</span>
+    <span class="chip">Prof. Carlos Fernández G.</span>
+  </div>
+</div>
+
+<!-- ══ MODULE NAVIGATION ══ -->
+<nav class="module-nav">
+  <button class="module-btn active" onclick="showModule('modA', this)">
+    <span class="mod-dot" style="background:#2d6a4f"></span>Carbohidratos
+  </button>
+  <button class="module-btn" onclick="showModule('modB', this)">
+    <span class="mod-dot" style="background:#b5451b"></span>Farmacodinámica I
+  </button>
+  <button class="module-btn" onclick="showModule('modC', this)">
+    <span class="mod-dot" style="background:#1b4d8a"></span>Farmacodinámica II
+  </button>
+  <button class="module-btn" onclick="showModule('modFC', this)">
+    ⚡ Flashcards
+  </button>
+  <button class="module-btn" onclick="showModule('modQZ', this)">
+    📝 Autoevaluación
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════
+     MÓDULO A: CARBOHIDRATOS
+══════════════════════════════════════ -->
+<div id="modA" class="module-section active">
+  <nav class="fase-nav">
+    <div class="fase-tabs">
+      <button class="fase-tab active" onclick="showFase('modA','f1',this)"><span class="badge-num">1</span>Monosacáridos</button>
+      <button class="fase-tab" onclick="showFase('modA','f2',this)"><span class="badge-num">2</span>Disacáridos & Poder Reductor</button>
+      <button class="fase-tab" onclick="showFase('modA','f3',this)"><span class="badge-num">3</span>Ejercitación</button>
+    </div>
+  </nav>
+  <div class="sub-nav" id="subA"></div>
+  <div class="content">
+
+    <!-- FASE 1 -->
+    <div id="A-f1" class="fase-section active">
+      <div id="A-f1-intro" class="sub-section active">
+        <div class="sec-header">
+          <span class="badge">Módulo A · Fase 1 · Sección 1</span>
+          <h2>Introducción y Clasificación</h2>
+          <p>Definición, fórmula general y taxonomía de los carbohidratos.</p>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+        <div class="card">
+          <div class="card-eyebrow">Concepto base</div>
+          <div class="card-title">¿Qué es un carbohidrato?</div>
+          <p>Los carbohidratos son la clase de compuesto orgánico <strong>más abundante en la biósfera</strong>. Son <strong>polihidroxialdehídos</strong> (aldosas) o <strong>polihidroxicetonas</strong> (cetosas) con 3–7 átomos de carbono.</p>
+          <div class="formula">C<sub>n</sub>H<sub>2n</sub>O<sub>n</sub></div>
+          <div class="pharma-box">Los excipientes más comunes en comprimidos —almidón y lactosa— son carbohidratos. Su estructura determina su comportamiento en formulaciones sólidas.</div>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Clasificación por unidades</div>
+          <div class="card-title">Mono · Di · Oligo · Poli</div>
+          <table><thead><tr><th>Tipo</th><th>Unidades</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Monosacárido</strong></td><td>1</td><td>Glucosa, fructosa</td></tr>
+            <tr><td><strong>Disacárido</strong></td><td>2</td><td>Sacarosa, lactosa, maltosa</td></tr>
+            <tr><td><strong>Oligosacárido</strong></td><td>3–10</td><td>Rafinosa</td></tr>
+            <tr><td><strong>Polisacárido</strong></td><td>>10</td><td>Almidón, celulosa, glucógeno</td></tr>
+          </tbody></table>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Por grupo funcional</div>
+          <div class="card-title">Aldosas vs. Cetosas</div>
+          <div class="grid-2">
+            <div class="mini-card" style="border-left:3px solid var(--accent3)">
+              <h4>Aldosa</h4>
+              <p>C=O en <strong>C1</strong> → aldehído</p>
+              <span class="tag tg">D-glucosa</span> <span class="tag tg">D-galactosa</span>
+            </div>
+            <div class="mini-card" style="border-left:3px solid var(--accent2)">
+              <h4>Cetosa</h4>
+              <p>C=O en <strong>C2</strong> → cetona</p>
+              <span class="tag tb">D-fructosa</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Por número de carbonos</div>
+          <div class="card-title">Triosa → Heptosa</div>
+          <table><thead><tr><th>N° C</th><th>Nombre</th><th>Aldosa ej.</th><th>Cetosa ej.</th></tr></thead>
+          <tbody>
+            <tr><td>3</td><td>Triosa</td><td>Gliceraldehído</td><td>Dihidroxiacetona</td></tr>
+            <tr><td>4</td><td>Tetrosa</td><td>D-eritrosa</td><td>—</td></tr>
+            <tr><td>5</td><td>Pentosa</td><td>D-ribosa</td><td>D-ribulosa</td></tr>
+            <tr><td><strong>6</strong></td><td><strong>Hexosa</strong></td><td><strong>D-glucosa</strong></td><td><strong>D-fructosa</strong></td></tr>
+            <tr><td>7</td><td>Heptosa</td><td>—</td><td>—</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div id="A-f1-fischer" class="sub-section">
+        <div class="sec-header"><span class="badge">Módulo A · Fase 1 · Sección 2</span><h2>Fischer y Configuración D/L</h2></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+        <div class="card">
+          <div class="card-eyebrow">Reglas</div>
+          <div class="card-title">Proyección de Fischer</div>
+          <div class="steps">
+            <div class="step"><div class="step-n">1</div><div class="step-body">Carbono más <strong>oxidado arriba</strong> (C1 = aldehído)</div></div>
+            <div class="step"><div class="step-n">2</div><div class="step-body">Horizontales → <strong>salen hacia ti</strong></div></div>
+            <div class="step"><div class="step-n">3</div><div class="step-body">Verticales → <strong>se alejan de ti</strong></div></div>
+            <div class="step"><div class="step-n">4</div><div class="step-body">El C quiral queda en la <strong>intersección de la cruz</strong></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Regla clave</div>
+          <div class="card-title">Configuración D y L</div>
+          <div class="grid-2">
+            <div class="mini-card" style="border-left:3px solid var(--accent3)">
+              <h4 style="color:var(--accent3)">Serie D</h4>
+              <p>–OH a la <strong>DERECHA</strong> en Fischer</p>
+              <p class="small">Casi todos los azúcares biológicos son D.</p>
+            </div>
+            <div class="mini-card" style="border-left:3px solid var(--accent2)">
+              <h4 style="color:var(--accent2)">Serie L</h4>
+              <p>–OH a la <strong>IZQUIERDA</strong> en Fischer</p>
+              <p class="small">Enantiómero de la serie D. Rara en biología.</p>
+            </div>
+          </div>
+          <div class="mnemo"><strong>D</strong>erecha = <strong>D</strong>-azúcar · <strong>L</strong>eft (izquierda) = <strong>L</strong>-azúcar</div>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Fórmula fundamental</div>
+          <div class="card-title">Número de Estereoisómeros</div>
+          <div class="formula">2<sup>n</sup> &nbsp;(n = centros asimétricos)</div>
+          <p>Para una <strong>aldosa de n carbonos</strong>: centros asimétricos = <strong>n – 2</strong></p>
+          <table><thead><tr><th>Azúcar</th><th>Centros (n)</th><th>Total</th><th>Serie D</th><th>Serie L</th></tr></thead>
+          <tbody>
+            <tr><td>Aldotetrosa</td><td>2</td><td>4</td><td>2</td><td>2</td></tr>
+            <tr><td>Aldopentosa</td><td>3</td><td>8</td><td>4</td><td>4</td></tr>
+            <tr><td><strong>Aldohexosa</strong></td><td><strong>4</strong></td><td><strong>16</strong></td><td><strong>8</strong></td><td><strong>8</strong></td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div id="A-f1-stereo" class="sub-section">
+        <div class="sec-header"><span class="badge">Módulo A · Fase 1 · Sección 3</span><h2>Estereoquímica</h2></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+        <div class="card">
+          <div class="card-eyebrow">Mapa conceptual</div>
+          <div class="card-title">Relaciones entre Estereoisómeros</div>
+          <table><thead><tr><th>Relación</th><th>Definición</th><th>Diferencia</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag tr">Enantiómeros</span></td><td>Imágenes especulares no superponibles</td><td>Todos los C* invertidos</td><td>D-gluc / L-gluc</td></tr>
+            <tr><td><span class="tag tb">Diasterómeros</span></td><td>Estereoisómeros no enantiómeros</td><td>≥1 C* diferente</td><td>D-gluc / D-galac</td></tr>
+            <tr><td><span class="tag tp">Epímeros</span></td><td>Diasterómeros que difieren en 1 C*</td><td>Exactamente 1 C*</td><td>D-gluc / D-manosa (C2)</td></tr>
+            <tr><td><span class="tag tg">Anómeros</span></td><td>Epímeros en el C anomérico</td><td>Solo C1 cíclico</td><td>α-D-gluc / β-D-gluc</td></tr>
+          </tbody></table>
+          <div class="highlight"><strong>Jerarquía:</strong> Anómero ⊂ Epímero ⊂ Diasterómero. Todo anómero es epímero, todo epímero es diasterómero.</div>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Pares clave</div>
+          <div class="card-title">Epímeros en Aldohexosas D</div>
+          <table><thead><tr><th>Par</th><th>C* diferente</th></tr></thead>
+          <tbody>
+            <tr><td>D-glucosa / D-manosa</td><td>C2</td></tr>
+            <tr><td>D-glucosa / D-galactosa</td><td>C4</td></tr>
+            <tr><td>D-ribosa / D-arabinosa</td><td>C2</td></tr>
+          </tbody></table>
+          <div class="danger-box">Si dos azúcares difieren en más de un carbono → son diasterómeros, pero <strong>NO epímeros</strong>.</div>
+        </div>
+      </div>
+
+      <div id="A-f1-haworth" class="sub-section">
+        <div class="sec-header"><span class="badge">Módulo A · Fase 1 · Sección 4</span><h2>Haworth y Anómeros</h2></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+        <div class="card">
+          <div class="card-eyebrow">Protocolo de conversión</div>
+          <div class="card-title">Fischer → Haworth en 5 Pasos</div>
+          <div class="code-block">
+<span class="ca">PASO 1</span>  ¿Aldosa o cetosa? → ubica el C=O
+<span class="ca">PASO 2</span>  ¿Serie D o L? → C de referencia
+<span class="ca">PASO 3</span>  ¿Qué anillo forma?
+<span class="cm">         6 miembros → PIRANOSA | 5 miembros → FURANOSA</span>
+<span class="ca">PASO 4</span>  Convierte sustituyentes:
+<span class="cg">         Derecha en Fischer  → ABAJO en Haworth</span>
+<span class="cr">         Izquierda en Fischer → ARRIBA en Haworth</span>
+<span class="ca">PASO 5</span>  Asigna el anómero:
+<span class="cg">         –OH abajo → α-anómero</span>
+<span class="cr">         –OH arriba → β-anómero</span>
+          </div>
+          <div class="mnemo"><strong>α = Abajo</strong> (ambas con A) · <strong>β = arriBa</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 2 -->
+    <div id="A-f2" class="fase-section">
+      <div id="A-f2-enlace" class="sub-section active">
+        <div class="sec-header"><span class="badge">Módulo A · Fase 2 · Sección 1</span><h2>Enlaces Glicosídicos y Disacáridos</h2></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+        <div class="card">
+          <div class="card-eyebrow">Disacáridos naturales</div>
+          <div class="card-title">Maltosa · Celobiosa · Lactosa · Sacarosa</div>
+          <table class="disac-table"><thead><tr><th>Disacárido</th><th>Componentes</th><th>Enlace</th><th>Reductor</th><th>Origen</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Maltosa</strong></td><td>Gluc + Gluc</td><td><span class="tag ta">α-1,4'</span></td><td><span class="tag tg">SÍ</span></td><td>Hidrólisis del almidón</td></tr>
+            <tr><td><strong>Celobiosa</strong></td><td>Gluc + Gluc</td><td><span class="tag tb">β-1,4'</span></td><td><span class="tag tg">SÍ</span></td><td>Hidrólisis de la celulosa</td></tr>
+            <tr><td><strong>Lactosa</strong></td><td>Galac + Gluc</td><td><span class="tag tb">β-1,4'</span></td><td><span class="tag tg">SÍ</span></td><td>Leche materna y animal</td></tr>
+            <tr><td><strong>Sacarosa</strong></td><td>Gluc + Fruc</td><td><span class="tag tp">α,β-1,2'</span></td><td><span class="tag tr">NO</span></td><td>Azúcar de mesa</td></tr>
+          </tbody></table>
+          <div class="highlight"><strong>Clave del examen:</strong> La sacarosa NO es reductora porque su enlace bloquea AMBOS carbonos anoméricos.</div>
+        </div>
+      </div>
+      <div id="A-f2-reductor" class="sub-section">
+        <div class="sec-header"><span class="badge">Módulo A · Fase 2 · Sección 2</span><h2>Poder Reductor</h2></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+        <div class="card">
+          <div class="card-eyebrow">Regla fundamental</div>
+          <div class="card-title">¿Cuándo un azúcar es reductor?</div>
+          <div class="code-block">
+<span class="cg">HEMIACETAL (–OH libre en C1)</span>  →  En equilibrio con cadena abierta  →  <span class="cg">REDUCTOR</span>
+<span class="cr">ACETAL     (–OR en C1)</span>         →  No puede abrir el anillo          →  <span class="cr">NO REDUCTOR</span>
+          </div>
+          <div class="grid-2">
+            <div class="mini-card" style="border-left:3px solid #8B4513">
+              <h4>Reacción de Fehling</h4>
+              <p>Reactivo: <strong>Cu²⁺</strong> (solución azul)</p>
+              <p>Positivo: precipitado <strong>rojo ladrillo</strong> de Cu₂O</p>
+            </div>
+            <div class="mini-card" style="border-left:3px solid #888">
+              <h4>Reacción de Tollens</h4>
+              <p>Reactivo: <strong>Ag⁺</strong> (complejo amoniacal)</p>
+              <p>Positivo: <strong>espejo de plata</strong> (Ag⁰)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="A-f2-poli" class="sub-section">
+        <div class="sec-header"><span class="badge">Módulo A · Fase 2 · Sección 3</span><h2>Polisacáridos</h2></div>
+        <div class="card">
+          <div class="card-eyebrow">Tabla comparativa</div>
+          <div class="card-title">Almidón · Glucógeno · Celulosa</div>
+          <table class="disac-table"><thead><tr><th>Polisacárido</th><th>Enlace principal</th><th>Ramif.</th><th>Función</th><th>Digerible</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Almidón</strong></td><td>α-1,4'</td><td>Sí (α-1,6')</td><td>Reserva vegetal</td><td><span class="tag tg">Sí</span></td></tr>
+            <tr><td><strong>Glucógeno</strong></td><td>α-1,4'</td><td>Sí, muy ramificado</td><td>Reserva animal</td><td><span class="tag tg">Sí</span></td></tr>
+            <tr><td><strong>Celulosa</strong></td><td>β-1,4'</td><td>No</td><td>Pared celular vegetal</td><td><span class="tag tr">No</span></td></tr>
+          </tbody></table>
+          <div class="highlight"><strong>El tipo de enlace lo cambia todo:</strong> α-1,4' → hélice → digerible. β-1,4' → fibra recta → indigerible.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 3 -->
+    <div id="A-f3" class="fase-section">
+      <div id="A-f3-mono" class="sub-section active">
+        <div class="sec-header"><span class="badge">Módulo A · Fase 3 · Ejercicios</span><h2>Ejercitación General</h2></div>
+        <div class="card">
+          <div class="card-eyebrow">Ejercicio 19 de la guía — definiciones</div>
+          <div class="card-title">Define y da un ejemplo</div>
+          <table><thead><tr><th>Término</th><th>Definición</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>Centro anomérico</td><td>C sp³ nuevo generado al ciclarse el azúcar (C1 en aldosas)</td><td>C1 de D-glucopiranosa</td></tr>
+            <tr><td>Glicósido</td><td>Acetal formado entre el C anomérico y un –OH</td><td>Metil-α-D-glucopiranósido</td></tr>
+            <tr><td>Azúcar reductor</td><td>Azúcar con C anomérico libre (hemiacetal)</td><td>D-glucosa, maltosa</td></tr>
+            <tr><td>Enlace 1,4'</td><td>C anomérico de azúcar 1 unido al O del C4 del azúcar 2</td><td>Maltosa, lactosa</td></tr>
+            <tr><td>D-azúcar</td><td>–OH del C de referencia a la derecha en Fischer</td><td>D-glucosa</td></tr>
+          </tbody></table>
+        </div>
+        <div class="card">
+          <div class="card-eyebrow">Nomenclatura sistemática</div>
+          <div class="card-title">Cómo leer el nombre de un disacárido</div>
+          <div class="code-block">
+<span class="ca">Ejemplo:</span>  4-O-(α-D-glucopiranosil)-β-D-glucopiranosa
+
+<span class="cg">4-O-(…)           </span> → el azúcar entre () está unido al O del C4
+<span class="cg">α-D-glucopiranosil </span> → azúcar DONANTE (sufijo "-osil") → su C anomérico participa
+<span class="cb">β-D-glucopiranosa  </span> → azúcar ACEPTOR (sufijo "-osa") → su C1 puede quedar LIBRE
+
+<span class="ca">Resultado:</span> Enlace α-1,4' · El aceptor β tiene C1 libre → <span class="cg">REDUCTOR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content modA -->
+</div><!-- /modA -->
+
+<!-- ══════════════════════════════════════
+     MÓDULO B: FARMACODINÁMICA PPT1
+══════════════════════════════════════ -->
+<div id="modB" class="module-section">
+  <nav class="fase-nav">
+    <div class="fase-tabs">
+      <button class="fase-tab active" onclick="showFase('modB','B-f1',this)"><span class="badge-num">1</span>Definiciones</button>
+      <button class="fase-tab" onclick="showFase('modB','B-f2',this)"><span class="badge-num">2</span>Receptores</button>
+      <button class="fase-tab" onclick="showFase('modB','B-f3',this)"><span class="badge-num">3</span>REA / SAR</button>
+      <button class="fase-tab" onclick="showFase('modB','B-f4',this)"><span class="badge-num">4</span>Preguntas PPT1</button>
+    </div>
+  </nav>
+  <div class="content">
+
+    <!-- B-F1: DEFINICIONES -->
+    <div id="B-f1" class="fase-section active">
+      <div class="sec-header">
+        <span class="badge">Módulo B · Farmacodinámica PPT1 · Sección 1</span>
+        <h2>Definiciones Fundamentales</h2>
+        <p>Droga, fármaco, medicamento, PK vs PD. Base de todo certamen.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Triada conceptual</div>
+        <div class="card-title">Droga · Fármaco · Medicamento</div>
+        <div class="grid-3">
+          <div class="mini-card" style="border-left:3px solid var(--accent2)">
+            <h4 style="color:var(--accent2)">Droga</h4>
+            <p>Compuesto con propiedades similares al fármaco pero <strong>sin aplicación clínica en medicina humana</strong>. Se usa como herramienta experimental.</p>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent6)">
+            <h4 style="color:var(--accent6)">Fármaco</h4>
+            <p>Sustancia con <strong>actividad terapéutica</strong> (principio activo). Natural, sintético o semisintético. Los compuestos endógenos administrados externamente <strong>SÍ son fármacos</strong>.</p>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent4)">
+            <h4 style="color:var(--accent4)">Medicamento</h4>
+            <p>Fármaco con <strong>formulación definida, dosis establecida</strong> y forma farmacéutica para administrar al paciente con fin terapéutico concreto.</p>
+          </div>
+        </div>
+        <div class="warning-box">Los <strong>excipientes NUNCA son fármacos</strong>. La Farmacia Galénica diseña la <em>forma farmacéutica</em>, no el principio activo.</div>
+        <div class="mnemo">Insulina inyectada, adrenalina administrada, dopamina exógena → <strong>TODOS SON FÁRMACOS</strong>. Esta distinción aparece siempre en certamen.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Trampa clásica del certamen</div>
+        <div class="card-title">Farmacocinética vs Farmacodinámica</div>
+        <div class="code-block">
+<span class="ca">FARMACOCINÉTICA (PK)</span>  →  Lo que el organismo le hace <span class="cg">AL FÁRMACO</span>
+<span class="cm">                     →  ADME: Absorción · Distribución · Metabolismo · Excreción</span>
+<span class="cm">                     →  Mnemónico: "CINÉTICA = MOVIMIENTO del fármaco dentro del cuerpo"</span>
+
+<span class="ca">FARMACODINÁMICA (PD)</span>  →  Lo que el fármaco le hace <span class="cg">AL ORGANISMO</span>
+<span class="cm">                     →  Mecanismo de acción · Efecto biológico · Potencia</span>
+<span class="cm">                     →  Mnemónico: "DINÁMICA = FUERZA/PODER del fármaco sobre el cuerpo"</span>
+
+<span class="cr">⚠ En el certamen: sentencias IV y V suelen estar INVERTIDAS → trampa clásica</span>
+        </div>
+        <div class="info-box">Desde 2003, la <strong>FDA exige análisis PK+PD combinados</strong> para nuevos medicamentos. La combinación permite entender todo: desde la dosis administrada hasta el efecto observado.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Definición precisa</div>
+        <div class="card-title">¿Qué es la Farmacodinámica?</div>
+        <p>Parte de la farmacología que estudia la <strong>interacción de los fármacos con los diferentes sistemas orgánicos</strong> y los efectos que producen. Estudia los mecanismos de acción sobre tejidos, órganos y sistemas, empleando metodologías funcionales, biofísicas, bioquímicas o moleculares. Permite <strong>cuantificar la acción</strong> para comparar fármacos y predecir efectos.</p>
+      </div>
+    </div>
+
+    <!-- B-F2: RECEPTORES -->
+    <div id="B-f2" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Módulo B · PPT1 · Sección 2</span>
+        <h2>Receptores Farmacológicos</h2>
+        <p>Definición, características, agonistas y antagonistas.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Definición del PPT</div>
+        <div class="card-title">¿Qué es un receptor?</div>
+        <p>Receptores son todas aquellas <strong>proteínas o macromoléculas</strong> que interaccionan con un ligando endógeno o exógeno y provocan una <strong>activación sobre una función biológica específica</strong> en la célula.</p>
+        <div class="code-block">
+<span class="ca">FÁRMACO + RECEPTOR</span>  →  <span class="cg">CAMBIO CONFORMACIONAL</span>  →  <span class="molecule">EFECTO (Mecanismo de Acción)</span>
+
+Dos funciones fundamentales del receptor:
+  1. <span class="cg">Unir al ligando específico</span>
+  2. <span class="cg">Promover la respuesta efectora</span>
+
+Condición para actividad: <span class="ca">AFINIDAD</span> hacia el receptor es la primera condición
+        </div>
+        <div class="grid-2">
+          <div class="mini-card" style="border-left:3px solid var(--accent)">
+            <h4>Regla General → REVERSIBLE</h4>
+            <p>La gran mayoría de fármacos generan <strong>uniones reversibles</strong>. Usan enlaces iónicos, puentes de H, fuerzas hidrofóbicas.</p>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent2)">
+            <h4>Excepción → IRREVERSIBLE</h4>
+            <p>Enlace <strong>covalente = irreversible</strong>. Ejemplo clásico: β-lactámicos inactivando transpeptidasas bacterianas.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Terminología del receptor</div>
+        <div class="card-title">Receptor · Ligando · Diana Farmacológica</div>
+        <table><thead><tr><th>Término</th><th>Definición</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Receptor</strong></td><td>Proteína que recibe señales químicas e inicia respuesta celular</td><td>Receptor adrenérgico β₂</td></tr>
+          <tr><td><strong>Ligando</strong></td><td>Molécula que se une al receptor (natural o sintético)</td><td>Salbutamol (agonista β₂)</td></tr>
+          <tr><td><strong>Diana farmacológica</strong></td><td>Término más amplio: receptores + enzimas + canales + transportadores</td><td>Enzima COX (diana del ibuprofeno)</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Concepto agonista y antagonista</div>
+        <div class="card-title">Agonista vs Antagonista</div>
+        <div class="grid-2">
+          <div class="mini-card" style="border-left:3px solid var(--accent)">
+            <h4 style="color:var(--accent)">Agonista</h4>
+            <p>Ligando que se une al receptor y <strong>activa / produce una respuesta</strong>. Mimetiza al ligando endógeno.</p>
+            <span class="tag tg">Salbutamol → β₂ (asma)</span>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent2)">
+            <h4 style="color:var(--accent2)">Antagonista</h4>
+            <p>Ligando que se une al receptor e <strong>impide que el agonista se una</strong>, bloqueando la respuesta. No activa por sí mismo.</p>
+            <span class="tag tr">Bloquea al agonista endógeno</span>
+          </div>
+        </div>
+        <div class="mnemo"><strong>A</strong>gonista = <strong>A</strong>ctiva · <strong>A</strong>ntagonista = <strong>A</strong>nula</div>
+      </div>
+    </div>
+
+    <!-- B-F3: REA -->
+    <div id="B-f3" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Módulo B · PPT1 · Sección 3</span>
+        <h2>Relación Estructura-Actividad (REA / SAR)</h2>
+        <p>Farmacóforo, estrategias de modificación y diseño racional de fármacos.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Concepto crítico</div>
+        <div class="card-title">Farmacóforo</div>
+        <p>Conjunto <strong>mínimo de elementos estructurales</strong> que debe conservarse para que exista actividad biológica. Todo análogo sintético válido debe contenerlo intacto.</p>
+        <div class="grid-2">
+          <div class="mini-card" style="border-left:3px solid var(--accent6)">
+            <h4>β-Lactámicos</h4>
+            <p>Farmacóforo = <strong>anillo β-lactámico</strong>. Modificarlo → pérdida total de actividad antibacteriana.</p>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent4)">
+            <h4>Morfina</h4>
+            <p>El núcleo pentacíclico es el farmacóforo. Las modificaciones en grupos periféricos generan la familia de opioides.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Estrategias de modificación</div>
+        <div class="card-title">5 Estrategias Estructurales</div>
+        <div class="steps">
+          <div class="step"><div class="step-n blue">1</div><div class="step-body"><strong>Variación de sustituyentes alquílicos:</strong> Cambiar metilo → etilo → isopropilo modifica la interacción hidrofóbica con la cavidad del receptor. Mayor volumen → mayor interacción → mayor selectividad.</div></div>
+          <div class="step"><div class="step-n blue">2</div><div class="step-body"><strong>Extensión de la estructura:</strong> Agregar un nuevo grupo funcional para ocupar zonas vacantes del receptor que el fármaco original no aprovecha.</div></div>
+          <div class="step"><div class="step-n blue">3</div><div class="step-body"><strong>Extensión/Contracción de cadena lateral:</strong> Ajustar la longitud de la cadena para optimizar la distancia entre los grupos de unión A y B con el receptor.</div></div>
+          <div class="step"><div class="step-n blue">4</div><div class="step-body"><strong>Expansión/Contracción de anillo:</strong> Variar el tamaño del anillo para ajustar mejor las regiones hidrofóbicas. Ej: desarrollo del Cilazaprilato (inhibidor ECA).</div></div>
+          <div class="step"><div class="step-n blue">5</div><div class="step-body"><strong>Sustituciones aromáticas:</strong> La posición del sustituyente en el anillo cambia basicidad y fuerza del enlace de H. Posición <em>para</em>: efecto resonancia (base más débil). Posición <em>meta</em>: solo efecto inductivo.</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Caso emblemático</div>
+        <div class="card-title">Adrenalina → Isoprenalina</div>
+        <p>Se reemplazó el grupo <strong>metilo → isopropilo</strong> en la amina de la adrenalina.</p>
+        <div class="code-block">
+Adrenalina:    N–CH₃    → Selectividad mixta α y β
+Isoprenalina:  N–CH(CH₃)₂ → Mayor volumen → <span class="cg">MAYOR SELECTIVIDAD β sobre α</span>
+
+<span class="cm">¿Por qué? El isopropilo llena mejor la cavidad hidrofóbica del receptor β</span>
+<span class="cr">OJO: El isopropilo es APOLAR/hidrofóbico. NO aumenta la polaridad.</span>
+<span class="ca">Isoprenalina = broncodilatador β-selectivo clásico</span>
+        </div>
+        <div class="danger-box">Error frecuente de certamen: atribuir polaridad al isopropilo. El isopropilo es <strong>APOLAR</strong> → genera selectividad <strong>β</strong>, no α.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">4 Objetivos del diseño de análogos</div>
+        <div class="card-title">¿Por qué sintetizar análogos?</div>
+        <div class="grid-2">
+          <div class="mini-card"><p>⚗️ <strong>Aumentar actividad</strong> farmacológica</p></div>
+          <div class="mini-card"><p>🛡️ <strong>Reducir efectos adversos</strong></p></div>
+          <div class="mini-card"><p>💊 <strong>Mejorar administración</strong> (vía, biodisponibilidad)</p></div>
+          <div class="mini-card"><p>🔬 <strong>Simplificar síntesis</strong> (menos pasos, menor costo)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B-F4: PREGUNTAS PPT1 -->
+    <div id="B-f4" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Módulo B · PPT1 · Preguntas del Capítulo</span>
+        <h2>Preguntas Certamen — PPT 1</h2>
+        <p>Preguntas extraídas directamente del material de curso con respuestas.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 1</div>
+        <div class="card-title">Sentencias incorrectas sobre fármaco</div>
+        <p><em>I. Fármaco incluye los excipientes · II. Compuestos endógenos administrados externamente son fármacos · III. Farmacia Galénica diseña el principio activo</em></p>
+        <div class="info-box">Respuesta correcta: <strong>c) I y III</strong> son INCORRECTAS.<br>II es CORRECTA (los compuestos endógenos externos SÍ son fármacos). IV y V son correctas.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 2</div>
+        <div class="card-title">Estudios PK/PD</div>
+        <p><em>I. PK = farmacocinético · II. PD = farmacodinámico · III. Combinación da información de dosis y efectos · IV. PK es lo que el fármaco hace al organismo · V. PD es lo que el organismo hace al fármaco</em></p>
+        <div class="info-box">Respuesta correcta: <strong>a) I, II y III</strong>.<br>IV y V están INVERTIDAS (trampa clásica). PK = organismo→fármaco. PD = fármaco→organismo.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 6 — Receptores opioides</div>
+        <div class="card-title">Mu, Kappa y Delta son receptores para:</div>
+        <div class="info-box">Respuesta: <strong>d) Opioides</strong>. Los receptores μ (Mu), κ (Kappa) y δ (Delta) son los tres subtipos clásicos de receptores opioides.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 10</div>
+        <div class="card-title">Seleccione la alternativa INCORRECTA</div>
+        <div class="info-box">Respuesta: <strong>d) "El efecto conformacional no implica mayor importancia en la unión al receptor"</strong> → INCORRECTA. El cambio conformacional es <strong>fundamental</strong> para el mecanismo de acción.</div>
+      </div>
+    </div>
+
+  </div><!-- /content modB -->
+</div><!-- /modB -->
+
+<!-- ══════════════════════════════════════
+     MÓDULO C: FARMACODINÁMICA PPT2
+══════════════════════════════════════ -->
+<div id="modC" class="module-section">
+  <nav class="fase-nav">
+    <div class="fase-tabs">
+      <button class="fase-tab active" onclick="showFase('modC','C-f1',this)"><span class="badge-num">1</span>Mecanismos Inespecíficos</button>
+      <button class="fase-tab" onclick="showFase('modC','C-f2',this)"><span class="badge-num">2</span>Tipos de Enlace</button>
+      <button class="fase-tab" onclick="showFase('modC','C-f3',this)"><span class="badge-num">3</span>Tipos de Receptores</button>
+      <button class="fase-tab" onclick="showFase('modC','C-f4',this)"><span class="badge-num">4</span>Preguntas PPT2</button>
+    </div>
+  </nav>
+  <div class="content">
+
+    <!-- C-F1: MECANISMOS INESPECÍFICOS -->
+    <div id="C-f1" class="fase-section active">
+      <div class="sec-header">
+        <span class="badge">Módulo C · PPT2 · Sección 1</span>
+        <h2>Mecanismos de Acción Inespecíficos</h2>
+        <p>Fármacos que actúan sin receptores específicos — 6 mecanismos.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Concepto clave</div>
+        <div class="card-title">¿Por qué "inespecíficos"?</div>
+        <p>La mayoría de los fármacos actúan uniéndose a receptores específicos. Sin embargo, existen fármacos que ejercen sus efectos actuando sobre <strong>sitios de unión no específicos</strong> o dianas que no son receptores proteicos.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Los 6 mecanismos inespecíficos</div>
+        <div class="card-title">Mecanismos Sobre Componentes No Receptores</div>
+        <div class="steps">
+          <div class="step"><div class="step-n" style="background:var(--accent5)">1</div><div class="step-body"><strong>Sobre el Agua Corporal:</strong> Sustancias osmóticamente activas. Absorben agua y modifican su distribución en el organismo.<br><span class="tag tb">Manitol</span> (diurético osmótico) · <span class="tag tb">Sulfato de Mg</span> (laxante) · <span class="tag tb">Dextrano</span> (expansor plasmático)</div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent6)">2</div><div class="step-body"><strong>Sobre el pH:</strong> Interaccionan con H⁺ u OH⁻, variando el grado de acidez o alcalinidad.<br><span class="tag ta">Hidróxido de Al/Mg</span> (antiácidos gástricos) · <span class="tag ta">Cloruro de amonio</span> (acidifica orina)</div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent4)">3</div><div class="step-body"><strong>Sobre Iones Metálicos (quelantes):</strong> Forman uniones fuertes con iones metálicos para su eliminación.<br><span class="tag tp">Dimercaptol (BAL)</span> → arsénico, mercurio, plomo · <span class="tag tp">EDTA</span> → intoxicación por plomo</div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent)">4</div><div class="step-body"><strong>Sobre Lípidos de Membrana:</strong> Se unen al ergosterol de la membrana fúngica, alterando la permeabilidad.<br><span class="tag tg">Anfotericina B</span> → fungicida clásico</div></div>
+          <div class="step"><div class="step-n" style="background:var(--muted)">5</div><div class="step-body"><strong>Sobre la Membrana Celular:</strong> Se distribuyen sobre la membrana y alteran sus funciones específicas.<br><span class="tag tr">Anestésicos generales gaseosos</span> → óxido nitroso, halotano</div></div>
+          <div class="step"><div class="step-n" style="background:#8b1a1a">6</div><div class="step-body"><strong>Sobre los Ácidos Nucleicos:</strong> Interactúan con el ADN provocando enlaces cruzados o rupturas.<br><span class="tag tr">Agentes alquilantes</span>: Ciclofosfamida, Ifosfamida → enlaces covalentes con ADN<br><span class="tag tr">Compuestos de platino</span>: Cisplatino, Carboplatino → cross-links ADN<br><span class="tag tr">Intercalantes</span>: Doxorrubicina, Daunorrubicina → se insertan entre bases</div></div>
+        </div>
+        <div class="highlight"><strong>Trampa de certamen:</strong> La alternativa incorrecta en preguntas de mecanismos inespecíficos es afirmar que "los efectos farmacológicos se producen ÚNICAMENTE de la unión a receptores específicos" → FALSO, existen estos 6 mecanismos inespecíficos.</div>
+      </div>
+    </div>
+
+    <!-- C-F2: TIPOS DE ENLACE -->
+    <div id="C-f2" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Módulo C · PPT2 · Sección 2</span>
+        <h2>Tipos de Enlace Fármaco-Receptor</h2>
+        <p>Energías (kJ/mol) y características de cada tipo de unión.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Tabla maestra de enlaces</div>
+        <div class="card-title">Fuerza · Reversibilidad · Energía</div>
+        <table><thead><tr><th>Tipo de Enlace</th><th>Energía</th><th>Reversibilidad</th><th>Ejemplo farmacológico</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Covalente</strong></td><td><span class="energia">350–400+ kJ/mol</span></td><td><span class="tag tr">IRREVERSIBLE</span></td><td>β-lactámicos → transpeptidasas</td></tr>
+          <tr><td><strong>Iónico</strong></td><td><span class="energia">20–40 kJ/mol</span></td><td><span class="tag tg">Reversible</span></td><td>Grupos amonio cuaternario, carboxilato</td></tr>
+          <tr><td><strong>Dipolo-Dipolo / Ión-Dipolo</strong></td><td><span class="energia">~débil</span></td><td><span class="tag tg">Reversible</span></td><td>Fenoles, carbonilos, sulfóxidos</td></tr>
+          <tr><td><strong>Puentes de Hidrógeno</strong></td><td><span class="energia">~moderado</span></td><td><span class="tag tg">Reversible</span></td><td>Grupos –OH, –NH, –SH del fármaco</td></tr>
+          <tr><td><strong>Van der Waals</strong></td><td><span class="energia">~muy débil</span></td><td><span class="tag tg">Reversible</span></td><td>Grupos arilos, anillos aromáticos</td></tr>
+          <tr><td><strong>Hidrofóbicas</strong></td><td><span class="energia">entropía ↑</span></td><td><span class="tag tg">Reversible</span></td><td>Agrupamiento de residuos apolares</td></tr>
+        </tbody></table>
+        <div class="danger-box">Los <strong>β-lactámicos</strong> son el ejemplo canónico de enlace covalente irreversible en certamen: se unen covalentemente a la transpeptidasa bacteriana inactivándola. La recuperación solo es posible por <strong>biosíntesis de novo</strong> de la enzima.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Detalle de cada enlace</div>
+        <div class="card-title">Características por Tipo</div>
+        <div class="steps">
+          <div class="step"><div class="step-n red">CV</div><div class="step-body"><strong>Covalente:</strong> Mayor fuerza en la escala. Puede considerarse unión irreversible. Muy útil para inhibición enzimática irreversible y quimioterapéuticos. El componente diana resulta profundamente afectado → recuperación solo por biosíntesis de novo.</div></div>
+          <div class="step"><div class="step-n blue">I</div><div class="step-body"><strong>Iónico:</strong> Reversible. Puede ser desplazado por moléculas de agua. La macromolécula receptora puede tener aniones (restos ácidos de aminoácidos) o cationes (protonación del resto básico N). Hasta 40 kJ/mol si hay puentes H adicionales.</div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent6)">D</div><div class="step-body"><strong>Dipolar:</strong> Distribución no homogénea de densidad electrónica. Muy frecuentes por abundancia de enlaces polarizados. Fenoles, carbonilos, aminas, sulfóxidos. Dipolo-dipolo o ión-dipolo.</div></div>
+          <div class="step"><div class="step-n green">H</div><div class="step-body"><strong>Puentes de H:</strong> Muy importante en sistemas biológicos. H débilmente ácido unido a átomo electronegativo ↔ base dadora. Grupos dadores: –OH, –NH, –SH. Grupos aceptores: carboxilatos, fosfatos, aminas con pares libres.</div></div>
+          <div class="step"><div class="step-n purple">Hφ</div><div class="step-body"><strong>Hidrofóbicas:</strong> No son una fuerza atractiva en sí misma. Son la tendencia de moléculas no polares a agruparse en medio acuoso para minimizar la perturbación del agua estructurada → <strong>aumento de entropía del agua</strong>. Ejemplo: plegamiento de proteínas (residuos apolares en el interior).</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C-F3: TIPOS DE RECEPTORES -->
+    <div id="C-f3" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Módulo C · PPT2 · Sección 3</span>
+        <h2>Tipos de Receptores Farmacológicos</h2>
+        <p>Los 5 grandes grupos. Dominio absoluto requerido en certamen.</p>
+      </div>
+
+      <!-- RAPG -->
+      <div class="card">
+        <div class="card-eyebrow">Tipo 1 — El más abundante</div>
+        <div class="card-title">Receptores Acoplados a Proteína G (RAPG / GPCR)</div>
+        <div class="info-box">~810 genes en humanos codifican para RAPG (4% del proteoma). <strong>Principal target farmacológico.</strong> Estructura: <strong>7 dominios transmembrana hidrofóbicos</strong>, 3 loops intracelulares (ICL) y 3 loops extracelulares (ECL). Es un solo polipéptido con sitio N-terminal extracelular y C-terminal intracelular.</div>
+
+        <h3>Mecanismo de activación</h3>
+        <div class="cascade">
+<span class="molecule">Ligando</span> se une al RAPG (dominio transmembrana V-VI para ligandos pequeños)
+  <span class="arrow">↓</span>
+<span class="effect">Cambio conformacional</span> en el receptor
+  <span class="arrow">↓</span>
+Activación de <span class="enzyme">Proteína G heterotrimérica</span> (α + βɣ)
+  <span class="arrow">↓</span>
+GDP → <span class="molecule">GTP</span> en subunidad α → subunidad α se <span class="effect">SEPARA del dímero βɣ</span>
+  <span class="arrow">↓</span>
+Cascada de señalización intracelular
+  <span class="arrow">↓</span>
+Actividad GTPasa intrínseca: α pierde un fosfato → <span class="inhibit">GTP → GDP</span> → se inactiva
+  <span class="arrow">↓</span>
+Reunificación de α + βɣ → <span class="inhibit">receptor inactivo nuevamente</span>
+        </div>
+
+        <h3>Las 3 subunidades α más importantes para certamen</h3>
+        <table><thead><tr><th>Subunidad</th><th>Efecto sobre enzima efectora</th><th>Segundo mensajero</th><th>Efecto neto</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Gαs</strong> (estimuladora)</td>
+            <td><span class="tag tg">ACTIVA</span> Adenilato Ciclasa (AC)</td>
+            <td>↑ <strong>AMPc</strong> (cAMP) → activa PKA → fosforila Ser/Thr</td>
+            <td>Estimulación</td>
+          </tr>
+          <tr>
+            <td><strong>Gαi/o</strong> (inhibidora)</td>
+            <td><span class="tag tr">INHIBE</span> Adenilato Ciclasa (AC)</td>
+            <td>↓ <strong>AMPc</strong></td>
+            <td>Inhibición</td>
+          </tr>
+          <tr>
+            <td><strong>Gαq</strong></td>
+            <td><span class="tag tg">ACTIVA</span> Fosfolipasa C (PLC)</td>
+            <td>↑ <strong>IP₃</strong> + ↑ <strong>DAG</strong> → ↑ Ca²⁺ → activa PKC → activa NOS → NO → GMPc</td>
+            <td>Señal calcio</td>
+          </tr>
+        </tbody></table>
+
+        <h3>Cascada de Gαq en detalle</h3>
+        <div class="cascade">
+<span class="enzyme">Fosfolipasa C (PLC)</span> activa
+  <span class="arrow">↓</span>
+PIP₂ → <span class="molecule">IP₃</span> + <span class="molecule">DAG</span>
+  <span class="arrow">↓  ↓</span>
+<span class="molecule">IP₃</span> → liberación de <span class="molecule">Ca²⁺</span> del RE | <span class="molecule">DAG</span> → activa <span class="enzyme">PKC</span>
+  <span class="arrow">↓</span>
+Ca²⁺ → activa <span class="enzyme">NOS</span> (óxido nítrico sintasa)
+  <span class="arrow">↓</span>
+<span class="molecule">Óxido Nítrico (NO)</span> → activa <span class="enzyme">Guanilato Ciclasa (GC)</span>
+  <span class="arrow">↓</span>
+<span class="molecule">GMPc</span> (guanosin monofosfato cíclico)
+        </div>
+        <div class="mnemo"><strong>Gαs = Stimulates = ↑AMPc | Gαi = Inhibits = ↓AMPc | Gαq = se Queda con el calcio → ↑Ca²⁺</strong></div>
+      </div>
+
+      <!-- SIMULADOR RAPG -->
+      <div class="card" style="padding:1.25rem;">
+        <div class="card-eyebrow">Simulador interactivo</div>
+        <div class="card-title">Visualiza las Cascadas RAPG en Tiempo Real</div>
+        <div id="rapg-sim" style="width:100%;border-radius:10px;overflow:hidden;background:var(--surface2);padding:.75rem;">
+          <style>
+            #rapg-sim .rtabs{display:flex;gap:6px;margin-bottom:.6rem;flex-wrap:wrap}
+            #rapg-sim .rtab{padding:6px 14px;border-radius:20px;border:1.5px solid;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s;background:transparent;font-family:'Outfit',sans-serif}
+            #rapg-sim .rtab.rgs{border-color:#378ADD;color:#378ADD}#rapg-sim .rtab.rgs.active{background:#378ADD;color:#fff}
+            #rapg-sim .rtab.rgi{border-color:#D4537E;color:#D4537E}#rapg-sim .rtab.rgi.active{background:#D4537E;color:#fff}
+            #rapg-sim .rtab.rgq{border-color:#BA7517;color:#BA7517}#rapg-sim .rtab.rgq.active{background:#BA7517;color:#fff}
+            #rapg-sim .rtab.rrst{border-color:#6b6358;color:#6b6358}#rapg-sim .rtab.rrst:hover{background:rgba(107,99,88,.1)}
+            #rapg-sim .rctrl{display:flex;gap:8px;margin-bottom:.6rem;align-items:center;flex-wrap:wrap}
+            #rapg-sim .rbtn{padding:7px 16px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600;color:#fff;transition:opacity .2s;font-family:'Outfit',sans-serif}
+            #rapg-sim .rbtn:hover{opacity:.85}
+            #rapg-sim .rbtn.rsec{background:rgba(0,0,0,.07)!important;color:#1a1714;border:1px solid rgba(0,0,0,.12)}
+            #rapg-sim .rspd{display:flex;align-items:center;gap:6px;flex:1;min-width:140px}
+            #rapg-sim .rspd label{font-size:11px;color:#6b6358;white-space:nowrap;font-family:'Outfit',sans-serif}
+            #rapg-sim .rspd span{font-size:11px;font-weight:600;min-width:55px;color:#6b6358;font-family:'Outfit',sans-serif}
+            #rapg-sim .rstage{width:100%;height:420px;border-radius:10px;background:rgba(0,0,0,.03);overflow:hidden;margin-bottom:.6rem;border:0.5px solid rgba(0,0,0,.08)}
+            #rapg-sim canvas{width:100%;height:100%;display:block}
+            #rapg-sim .rinfo{background:#fffdf8;border:0.5px solid rgba(0,0,0,.08);border-radius:8px;padding:.8rem 1rem}
+            #rapg-sim .rititle{font-size:13px;font-weight:600;margin-bottom:.3rem;font-family:'Outfit',sans-serif;color:#1a1714}
+            #rapg-sim .ritext{font-size:12px;color:#6b6358;line-height:1.6;font-family:'Outfit',sans-serif}
+          </style>
+          <div class="rtabs">
+            <div class="rtab rgs active" onclick="rSetCascade('gs',this)">Gαs — ↑ AMPc</div>
+            <div class="rtab rgi" onclick="rSetCascade('gi',this)">Gαi/o — ↓ AMPc</div>
+            <div class="rtab rgq" onclick="rSetCascade('gq',this)">Gαq — ↑ Ca²⁺</div>
+            <div class="rtab rrst" onclick="rDoReset()">↺ Reiniciar</div>
+          </div>
+          <div class="rctrl">
+            <button class="rbtn" id="rStepBtn" onclick="rDoStep()">▶ Paso a paso</button>
+            <button class="rbtn rsec" id="rAutoBtn" onclick="rToggleAuto()">⏵ Automático</button>
+            <div class="rspd">
+              <label>Velocidad:</label>
+              <input type="range" id="rSld" min="0" max="4" step="1" value="1" oninput="rChangeSpeed(this.value)" style="flex:1">
+              <span id="rSldLbl">Normal</span>
+            </div>
+          </div>
+          <div class="rstage"><canvas id="rcv"></canvas></div>
+          <div class="rinfo">
+            <div class="rititle" id="rItitle">Selecciona una cascada y presiona un botón</div>
+            <div class="ritext" id="rItext">Elige Gαs, Gαi/o o Gαq. "Paso a paso" avanza manualmente. "Automático" corre solo en bucle con la velocidad elegida.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IONOTRÓPICOS -->
+      <div class="card">
+        <div class="card-eyebrow">Tipo 2 — Respuesta rápida</div>
+        <div class="card-title">Receptores Ionotrópicos (Canales Iónicos Ligando-Dependientes)</div>
+        <p>Proteínas constituidas por <strong>múltiples subunidades</strong>. La activación por ligando produce un cambio conformacional y favorece la <strong>apertura del canal iónico</strong>.</p>
+        <table><thead><tr><th>Receptor</th><th>Estructura</th><th>Ion que entra</th><th>Efecto</th></tr></thead>
+        <tbody>
+          <tr><td><strong>NMDA</strong></td><td>Tetrámero</td><td>Na⁺, Ca²⁺</td><td>Despolarización, plasticidad sináptica</td></tr>
+          <tr><td><strong>nAChR</strong> (nicotínico)</td><td>Pentámero</td><td>Na⁺, Ca²⁺</td><td>Despolarización muscular / ganglionar</td></tr>
+          <tr><td><strong>5-HT₃</strong></td><td>Pentámero</td><td>Na⁺, Ca²⁺</td><td>Depolarización (serotonina)</td></tr>
+          <tr><td><strong>GABA-A</strong></td><td>Pentámero</td><td><strong>Cl⁻</strong></td><td>Hiperpolarización → inhibición</td></tr>
+        </tbody></table>
+        <div class="mnemo">NMDA, nAChR y 5-HT₃ → entran cationes (Na⁺/Ca²⁺) → excitación. GABA → entra Cl⁻ → inhibición.</div>
+      </div>
+
+      <!-- RTK -->
+      <div class="card">
+        <div class="card-eyebrow">Tipo 3</div>
+        <div class="card-title">Receptores Tirosina Kinasa (RTK)</div>
+        <p>Insulina, hormona de crecimiento y prolactina se unen a este tipo. La unión del ligando provoca una <strong>cascada de fosforilaciones</strong>. La inactivación se produce por desfosforilaciones (fosfatasas). A nivel intracelular pueden activar <strong>proteínas G pequeñas</strong> y fosfoinositol 3-kinasa (PI3K).</p>
+      </div>
+
+      <!-- INTRACELULARES -->
+      <div class="card">
+        <div class="card-eyebrow">Tipo 4</div>
+        <div class="card-title">Receptores Intracelulares / Nucleares</div>
+        <p>Se encuentran en el <strong>espacio intracelular</strong>, unidos a proteínas chaperonas (que mantienen el plegamiento específico). Pueden homo o heterodimerizar. Se unen a elementos de respuesta en el <strong>genoma (núcleo)</strong> → activación o represión de la <strong>transcripción génica</strong> → síntesis de proteínas.</p>
+        <div class="pharma-box">Dihidrotestosterona, cortisol y hormonas tiroideas actúan por receptores intracelulares. Las proteínas chaperonas son clave: mantienen el plegamiento que permite el reconocimiento del ligando.</div>
+      </div>
+
+      <!-- DREADDs -->
+      <div class="card">
+        <div class="card-eyebrow">Tipo 5 — Diseño biotecnológico</div>
+        <div class="card-title">DREADDs — Receptores de Diseño</div>
+        <p><strong>Designer Receptors Exclusively Activated by Designer Drugs</strong>. Desarrollados en 2007 por el Dr. Bryan Roth. Son RAPG a medida que <strong>solo pueden ser activados por ligandos exógenos sintéticos</strong> que no tienen actividad sobre receptores endógenos.</p>
+        <div class="grid-2">
+          <div class="mini-card" style="border-left:3px solid var(--accent3)">
+            <h4>Ventajas</h4>
+            <ul>
+              <li>Mayor especificidad</li>
+              <li>Menos efectos adversos</li>
+              <li>Control preciso: activar o inhibir neuronas</li>
+              <li>Acoplados a Gq o Gi/0</li>
+            </ul>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent4)">
+            <h4>Aplicaciones</h4>
+            <ul>
+              <li>Neurociencia y neurofarmacología</li>
+              <li>Investigación de circuitos neuronales</li>
+              <li>Estudio de comportamientos</li>
+              <li>Desarrollo de terapias diana</li>
+            </ul>
+          </div>
+        </div>
+        <div class="highlight"><strong>Para certamen:</strong> DREADDs son activados EXCLUSIVAMENTE por ligandos exógenos (de diseño). No tienen actividad sobre receptores endógenos → herramienta de investigación muy precisa.</div>
+      </div>
+    </div>
+
+    <!-- C-F4: PREGUNTAS PPT2 -->
+    <div id="C-f4" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Módulo C · PPT2 · Preguntas del Capítulo</span>
+        <h2>Preguntas Certamen — PPT 2</h2>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 1 — Receptores metabotrópicos</div>
+        <div class="card-title">¿Cuáles sentencias son correctas?</div>
+        <p><em>I. Proteína Gs participa indirectamente en formación de cAMP · II. cAMP disminuye cuando interactúa con Gi/0 · III. Gq está relacionada con aumento de Ca²⁺ · IV. AC produce cAMP y activa PKA · V. NOS participa en producción de NO</em></p>
+        <div class="info-box">Respuesta: <strong>e) Todas</strong> son correctas. Todas las afirmaciones sobre las cascadas de señalización son correctas.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 2 — Ionotrópicos</div>
+        <div class="card-title">¿Qué son los receptores ionotrópicos?</div>
+        <div class="info-box">Respuesta: <strong>d) Receptores de membrana asociado a canales iónicos</strong>. Son canales iónicos ligando-dependientes (no dependientes de voltaje).</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 3 — Dihidrotestosterona</div>
+        <div class="card-title">¿Por qué tipo de receptor actúa la dihidrotestosterona?</div>
+        <div class="info-box">Respuesta: <strong>a) Intracelular</strong>. Las hormonas esteroidales (como andrógenos) actúan por receptores intracelulares/nucleares que son factores transcripcionales.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 5 — GTPasa intrínseca</div>
+        <div class="card-title">Actividad GTPasa intrínseca:</div>
+        <div class="info-box">Respuesta: <strong>d) Apaga la actividad de las proteínas G</strong>. La GTPasa intrínseca de la subunidad α hidroliza GTP → GDP, inactivando la proteína G y terminando la señalización.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 6 — Tipos de unión (INCORRECTA)</div>
+        <div class="card-title">Seleccione la alternativa INCORRECTA</div>
+        <div class="info-box">Respuesta: <strong>c) "Los efectos farmacológicos se producen únicamente de la unión entre fármacos y sus sitios de unión específicos (receptores)"</strong> → INCORRECTA. Existen mecanismos inespecíficos (sobre agua, pH, iones, lípidos, membranas y ácidos nucleicos).</div>
+      </div>
+    </div>
+
+  </div><!-- /content modC -->
+</div><!-- /modC -->
+
+<!-- ══════════════════════════════════════
+     MÓDULO FLASHCARDS INTEGRADO
+══════════════════════════════════════ -->
+<div id="modFC" class="module-section">
+  <div class="content">
+    <div class="sec-header">
+      <span class="badge">Repaso Rápido Integrado</span>
+      <h2>Flashcards — Todos los Módulos</h2>
+    </div>
+    <div class="fc-module-switch">
+      <button class="active" onclick="switchFC('carbohidratos',this)">Carbohidratos</button>
+      <button onclick="switchFC('farma1',this)">Farmacodinámica PPT1</button>
+      <button onclick="switchFC('farma2',this)">Farmacodinámica PPT2</button>
+    </div>
+    <div class="fc-wrap">
+      <div class="fc" id="fc-card" onclick="flipFC()">
+        <div class="fc-f"><div class="fc-label">Pregunta</div><div class="fc-q" id="fc-q-text">Cargando...</div></div>
+        <div class="fc-b"><div class="fc-label" style="color:rgba(255,255,255,0.35)">Respuesta</div><div class="fc-a" id="fc-a-text"></div></div>
+      </div>
+    </div>
+    <p class="fc-hint">Haz clic en la tarjeta para voltear</p>
+    <div class="fc-nav">
+      <button onclick="prevFC()">← Anterior</button>
+      <span class="fc-counter" id="fc-cnt">1 / 1</span>
+      <button onclick="nextFC()">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MÓDULO AUTOEVALUACIÓN INTEGRADO
+══════════════════════════════════════ -->
+<div id="modQZ" class="module-section">
+  <div class="content">
+    <div class="sec-header">
+      <span class="badge">Autoevaluación Integrada</span>
+      <h2>Quiz — Todos los Módulos</h2>
+    </div>
+    <div class="quiz-module-switch">
+      <button class="active" onclick="buildQuiz('carbohidratos',this)">Carbohidratos</button>
+      <button onclick="buildQuiz('farma1',this)">Farmacodinámica PPT1</button>
+      <button onclick="buildQuiz('farma2',this)">Farmacodinámica PPT2</button>
+    </div>
+    <div id="quiz-container"></div>
+    <div style="text-align:center;margin-top:1.5rem;">
+      <button onclick="buildQuiz(currentQuizModule)" style="padding:8px 24px;border:0.5px solid var(--border);border-radius:20px;background:var(--card2);cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;color:var(--muted);">Reiniciar quiz</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ DATOS ══
+
+const flashcardSets = {
+  carbohidratos: [
+    { q:'¿Cuál es la diferencia entre una aldosa y una cetosa?', a:'<strong>Aldosa:</strong> C=O en C1 (aldehído). <strong>Cetosa:</strong> C=O en C2 (cetona). Ej: glucosa = aldosa · fructosa = cetosa' },
+    { q:'¿Cómo se determina si un azúcar es de serie D o L?', a:'Se mira el –OH del C asimétrico más alejado del carbonilo. <strong>Derecha → D · Izquierda → L</strong>' },
+    { q:'¿Cuántos estereoisómeros tiene una aldohexosa?', a:'2⁴ = <strong>16</strong> (4 centros asimétricos). 8 de serie D + 8 de serie L' },
+    { q:'¿Qué son los epímeros?', a:'Diasterómeros que difieren en la configuración de <strong>exactamente un carbono asimétrico</strong>. D-glucosa / D-manosa → epímeros en C2' },
+    { q:'Regla α / β en Haworth (serie D)', a:'<strong>α = –OH abajo</strong> del plano. <strong>β = –OH arriba</strong>. Mnemotecnia: α = Abajo (ambas con A)' },
+    { q:'¿Por qué la sacarosa NO es un azúcar reductor?', a:'El enlace α,β-1,2\' <strong>bloquea ambos carbonos anoméricos</strong>. No puede abrir el anillo ni exponer el carbonilo.' },
+    { q:'¿Qué diferencia a maltosa de celobiosa?', a:'Ambas: glucosa+glucosa, enlace 1,4\', reductoras. <strong>Maltosa: α-1,4\'</strong> (digerible). <strong>Celobiosa: β-1,4\'</strong> (NO digerible).' },
+    { q:'¿Por qué la celulosa no es digerible?', a:'Enlace <strong>β-1,4\'</strong> entre glucosas. Humanos no tenemos β-glucosidasa para hidrolizarlos.' },
+    { q:'Fischer → Haworth: ¿cómo se convierte un sustituyente?', a:'<strong>Derecha en Fischer → Abajo en Haworth</strong>. Izquierda → Arriba. –CH₂OH: Arriba si es D.' }
+  ],
+  farma1: [
+    { q:'¿Cuál es la diferencia entre fármaco, droga y medicamento?', a:'<strong>Fármaco:</strong> sustancia con actividad terapéutica (principio activo). <strong>Droga:</strong> sin aplicación clínica, uso experimental. <strong>Medicamento:</strong> fármaco con formulación y dosis definidas.' },
+    { q:'¿Los compuestos endógenos administrados externamente son fármacos?', a:'<strong>SÍ.</strong> Insulina inyectada, adrenalina administrada → son fármacos. Esta es la trampa más frecuente de certamen.' },
+    { q:'PK vs PD — ¿cuál es cuál?', a:'<strong>PK (Farmacocinética)</strong> = lo que el organismo le hace al fármaco → ADME. <strong>PD (Farmacodinámica)</strong> = lo que el fármaco le hace al organismo → mecanismo de acción.' },
+    { q:'¿Cuándo la interacción fármaco-receptor es irreversible?', a:'Cuando hay <strong>enlace covalente</strong>. Regla general = reversible. Excepción = covalente (ej: β-lactámicos + transpeptidasas).' },
+    { q:'¿Qué es el farmacóforo?', a:'Conjunto <strong>mínimo de elementos estructurales</strong> que debe conservarse para mantener actividad biológica. En β-lactámicos = el anillo β-lactámico.' },
+    { q:'Adrenalina → Isoprenalina: ¿qué cambió y cuál fue el resultado?', a:'Metilo → <strong>isopropilo</strong> (mayor volumen). Resultado: mayor selectividad <strong>β sobre α</strong>. El isopropilo es <strong>APOLAR</strong> (NO aumenta polaridad).' },
+    { q:'¿Cuáles son los 4 objetivos del diseño de análogos?', a:'1. Aumentar actividad. 2. Reducir efectos adversos. 3. Mejorar administración. 4. Simplificar síntesis.' },
+    { q:'¿Qué es la diana farmacológica?', a:'Término más amplio que receptor. Incluye: <strong>receptores, enzimas, canales iónicos y transportadores</strong>. Ej: COX = diana del ibuprofeno.' }
+  ],
+  farma2: [
+    { q:'¿Cuáles son los 6 mecanismos inespecíficos de los fármacos?', a:'1. Agua corporal (manitol). 2. pH (antiácidos). 3. Iones metálicos (EDTA). 4. Lípidos de membrana (anfotericina B). 5. Membrana celular (anestésicos). 6. Ácidos nucleicos (cisplatino).' },
+    { q:'¿Cuál es el enlace más fuerte entre fármaco y receptor?', a:'Enlace <strong>covalente</strong>: 350–400+ kJ/mol. Irreversible. Recuperación solo por biosíntesis de novo. Ej: β-lactámicos.' },
+    { q:'Enlace iónico: características', a:'<strong>Reversible</strong>. 20–40 kJ/mol. Puede ser desplazado por agua. Entre grupos cargados del fármaco y la macromolécula receptora (aminoácidos ácidos o básicos).' },
+    { q:'¿Por qué las interacciones hidrofóbicas aumentan la entropía del agua?', a:'No son fuerzas atractivas. Son la tendencia de moléculas apolares a agruparse para <strong>minimizar la perturbación del agua estructurada</strong> → el agua queda más desordenada (mayor entropía).' },
+    { q:'RAPG: ¿qué ocurre cuando se activa la subunidad Gαs?', a:'<strong>Activa Adenilato Ciclasa (AC)</strong> → ↑ AMPc → activa PKA → fosforila Ser/Thr.' },
+    { q:'RAPG: ¿qué ocurre cuando se activa la subunidad Gαq?', a:'<strong>Activa Fosfolipasa C (PLC)</strong> → ↑IP₃ + ↑DAG → ↑Ca²⁺ → activa PKC + NOS → NO → GMPc.' },
+    { q:'¿Qué es la actividad GTPasa intrínseca?', a:'Capacidad de la subunidad α de hidrolizar GTP → GDP. Esto <strong>apaga la actividad de la proteína G</strong> y termina la señalización.' },
+    { q:'¿Cuál es la diferencia entre receptores NMDA y GABA en cuanto a iones?', a:'<strong>NMDA</strong>: entra Na⁺ y Ca²⁺ → despolarización (excitación). <strong>GABA-A</strong>: entra Cl⁻ → hiperpolarización (inhibición).' },
+    { q:'¿Qué son los DREADDs y por qué son útiles?', a:'<strong>Designer Receptors Exclusively Activated by Designer Drugs</strong>. RAPG activados SOLO por ligandos exógenos sintéticos. Más específicos, menos efectos adversos. Usados en neurociencia para activar/inhibir neuronas.' },
+    { q:'¿Por qué actúan los β-lactámicos de forma irreversible?', a:'Forman <strong>enlace covalente</strong> con la transpeptidasa bacteriana (enzima necesaria para la pared celular). El mecanismo se basa en el carácter electrófilo del anillo β-lactámico reaccionando con grupos nucleófilos de la enzima.' }
+  ]
+};
+
+const quizSets = {
+  carbohidratos: [
+    { q:'¿Cuál de los siguientes es una cetohexosa?', opts:['D-glucosa','D-galactosa','D-fructosa','D-ribosa'], ans:2, ok:'D-fructosa tiene C=O en C2 (cetona) y 6 carbonos.', bad:'D-fructosa (C) es la cetohexosa. D-glucosa y D-galactosa son aldohexosas.' },
+    { q:'¿Cuántos estereoisómeros totales tiene una aldohexosa?', opts:['8','12','16','32'], ans:2, ok:'2⁴ = 16 (4 centros asimétricos).', bad:'Aldohexosa tiene 4 centros: 2⁴ = 16.' },
+    { q:'α-anómero significa que el –OH del carbono anomérico está:', opts:['Arriba del plano','Unido a otro azúcar','Abajo del plano','Ausente'], ans:2, ok:'Correcto. α = Abajo (en azúcares D).', bad:'α = Abajo del plano. β = arriba. Recuerda: α = Abajo.' },
+    { q:'La sacarosa NO es reductora porque:', opts:['Es un polisacárido','Su enlace 1,2\' bloquea AMBOS C anoméricos','Solo tiene un C anomérico','Es una cetosa'], ans:1, ok:'El enlace α,β-1,2\' une ambos C anoméricos → ninguno queda libre.', bad:'La clave es que el enlace 1,2\' bloquea los C anoméricos de AMBOS azúcares.' },
+    { q:'D-glucosa y D-manosa son:', opts:['Enantiómeros','Isómeros constitucionales','Epímeros en C2','Anómeros'], ans:2, ok:'Solo difieren en C2 → epímeros en C2.', bad:'D-glucosa y D-manosa solo difieren en C2 → EPÍMEROS en C2.' }
+  ],
+  farma1: [
+    { q:'¿Los compuestos endógenos administrados externamente son fármacos?', opts:['No, son drogas','No, son xenobióticos','Sí, son fármacos','Depende de la dosis'], ans:2, ok:'Correcto. Insulina inyectada, adrenalina administrada → SÍ son fármacos.', bad:'Los compuestos endógenos administrados externamente SÍ son fármacos. Trampa clásica.' },
+    { q:'Farmacocinética (PK) estudia:', opts:['Lo que el fármaco hace al organismo','El mecanismo de acción','Lo que el organismo hace al fármaco','La síntesis de nuevos fármacos'], ans:2, ok:'PK = lo que el organismo hace al fármaco (ADME).', bad:'PK = el organismo actúa sobre el fármaco. PD = el fármaco actúa sobre el organismo.' },
+    { q:'¿Qué es el farmacóforo en los β-lactámicos?', opts:['La cadena lateral','El grupo amino','El anillo β-lactámico','El grupo carboxilo'], ans:2, ok:'El anillo β-lactámico es el farmacóforo. Modificarlo = pérdida total de actividad.', bad:'El farmacóforo de los β-lactámicos es el anillo β-lactámico.' },
+    { q:'La isoprenalina tiene mayor selectividad β sobre α porque:', opts:['Tiene mayor polaridad','El isopropilo es apolar y ocupa mejor la cavidad hidrofóbica β','Tiene menos grupos funcionales','Es más soluble en agua'], ans:1, ok:'El isopropilo (apolar) ocupa mejor la cavidad hidrofóbica del receptor β.', bad:'El isopropilo es APOLAR → mayor interacción hidrofóbica con cavidad β → mayor selectividad β.' },
+    { q:'¿Cuál NO es un objetivo del diseño de análogos?', opts:['Aumentar actividad','Eliminar el farmacóforo','Reducir efectos adversos','Simplificar síntesis'], ans:1, ok:'El farmacóforo NUNCA se elimina. Es lo que debe conservarse.', bad:'Eliminar el farmacóforo destruiría la actividad. Los otros 3 SÍ son objetivos válidos.' }
+  ],
+  farma2: [
+    { q:'¿Cuál de los siguientes fármacos actúa sobre lípidos de membrana?', opts:['Manitol','EDTA','Anfotericina B','Cisplatino'], ans:2, ok:'Anfotericina B se une al ergosterol de la membrana fúngica.', bad:'Anfotericina B actúa sobre lípidos de membrana (ergosterol). Manitol = agua. EDTA = iones. Cisplatino = ADN.' },
+    { q:'¿Qué tipo de enlace genera la inhibición irreversible de las transpeptidasas por β-lactámicos?', opts:['Iónico','Puente de H','Covalente','Hidrofóbico'], ans:2, ok:'Enlace covalente = irreversible. Los β-lactámicos son el ejemplo clásico.', bad:'El enlace covalente (350-400+ kJ/mol) genera la unión irreversible.' },
+    { q:'Cuando se activa Gαs, el efecto neto es:', opts:['↓ AMPc','↑ Ca²⁺','↑ AMPc','Apertura de canales Cl⁻'], ans:2, ok:'Gαs → activa Adenilato Ciclasa → ↑ AMPc → activa PKA.', bad:'Gαs = Stimulates = activa AC = ↑ AMPc.' },
+    { q:'Los receptores GABA-A son ionotrópicos y producen:', opts:['Entrada de Na⁺ → excitación','Entrada de Ca²⁺ → señal','Entrada de Cl⁻ → inhibición','Salida de K⁺ → excitación'], ans:2, ok:'GABA-A → entra Cl⁻ → hiperpolarización → inhibición.', bad:'GABA-A: entra Cl⁻ → hiperpolarización → inhibición. NMDA/nAChR entran cationes.' },
+    { q:'Los DREADDs son:', opts:['Receptores acoplados a tirosina kinasa','RAPG activados solo por ligandos exógenos de diseño','Canales iónicos sintéticos','Receptores nucleares modificados'], ans:1, ok:'DREADDs = Designer Receptors Exclusively Activated by Designer Drugs. Son RAPG modificados.', bad:'DREADDs son RAPG (receptores acoplados a proteína G) que solo responden a ligandos exógenos de diseño.' },
+    { q:'La actividad GTPasa intrínseca de la proteína G:', opts:['Produce energía celular','Sintetiza GMPc','Apaga la actividad de la proteína G','Activa la Fosfolipasa C'], ans:2, ok:'La GTPasa hidroliza GTP → GDP, inactivando la subunidad α y terminando la señalización.', bad:'La GTPasa intrínseca apaga la proteína G: GTP → GDP → inactivación de la subunidad α.' }
+  ]
+};
+
+// ══ ESTADO ══
+let currentModule = 'modA';
+let currentFases = { modA: 'A-f1', modB: 'B-f1', modC: 'C-f1' };
+let fcDeck = 'carbohidratos';
+let fcIdx = 0, fcFlipped = false;
+let currentQuizModule = 'carbohidratos';
+
+// ══ MÓDULO NAV ══
+function showModule(id, btn) {
+  document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.module-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  currentModule = id;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══ FASE NAV ══
+function showFase(modId, faseId, btn) {
+  const mod = document.getElementById(modId);
+  mod.querySelectorAll('.fase-section').forEach(s => s.classList.remove('active'));
+  mod.querySelectorAll('.fase-tab').forEach(b => b.classList.remove('active'));
+  const target = document.getElementById(faseId);
+  if (target) { target.classList.add('active'); currentFases[modId] = faseId; }
+  if (btn) btn.classList.add('active');
+  const firstSub = target ? target.querySelector('.sub-section') : null;
+  if (firstSub) { target.querySelectorAll('.sub-section').forEach(s => s.classList.remove('active')); firstSub.classList.add('active'); }
+  window.scrollTo({ top: 90, behavior: 'smooth' });
+}
+
+// ══ FLASHCARDS ══
+function switchFC(deck, btn) {
+  fcDeck = deck; fcIdx = 0; fcFlipped = false;
+  document.querySelectorAll('.fc-module-switch button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFC();
+}
+
+function renderFC() {
+  const cards = flashcardSets[fcDeck];
+  const c = cards[fcIdx % cards.length];
+  document.getElementById('fc-q-text').textContent = c.q;
+  document.getElementById('fc-a-text').innerHTML = c.a;
+  document.getElementById('fc-cnt').textContent = (fcIdx % cards.length + 1) + ' / ' + cards.length;
+  const el = document.getElementById('fc-card');
+  el.classList.remove('flipped'); fcFlipped = false;
+}
+
+function flipFC() { fcFlipped = !fcFlipped; document.getElementById('fc-card').classList.toggle('flipped', fcFlipped); }
+function nextFC() { fcIdx = (fcIdx + 1) % flashcardSets[fcDeck].length; renderFC(); }
+function prevFC() { fcIdx = (fcIdx - 1 + flashcardSets[fcDeck].length) % flashcardSets[fcDeck].length; renderFC(); }
+
+// ══ QUIZ ══
+function buildQuiz(deck, btn) {
+  currentQuizModule = deck || currentQuizModule;
+  if (btn) {
+    document.querySelectorAll('.quiz-module-switch button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  const data = quizSets[currentQuizModule];
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  data.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-card';
+    div.innerHTML = `
+      <div class="quiz-q"><span class="qnum">Pregunta ${i+1} de ${data.length}</span>${q.q}</div>
+      <div class="quiz-opts">${q.opts.map((opt,j) => `<button class="quiz-opt" onclick="checkQ(${i},${j},this)">${String.fromCharCode(65+j)}. ${opt}</button>`).join('')}</div>
+      <div class="quiz-fb" id="fb-${i}"></div>
+      <button class="quiz-reset" id="rst-${i}" onclick="resetQ(${i})">Reintentar</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function checkQ(qi, ai, btn) {
+  const q = quizSets[currentQuizModule][qi];
+  const card = btn.closest('.quiz-card');
+  card.querySelectorAll('.quiz-opt').forEach(o => o.disabled = true);
+  const fb = document.getElementById('fb-'+qi);
+  const rst = document.getElementById('rst-'+qi);
+  if (ai === q.ans) {
+    btn.classList.add('correct');
+    fb.textContent = '✓ ' + q.ok;
+    fb.className = 'quiz-fb show ok';
+  } else {
+    btn.classList.add('wrong');
+    card.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct');
+    fb.textContent = '✗ ' + q.bad;
+    fb.className = 'quiz-fb show bad';
+    rst.className = 'quiz-reset show';
+  }
+}
+
+function resetQ(qi) {
+  const card = document.querySelectorAll('.quiz-card')[qi];
+  card.querySelectorAll('.quiz-opt').forEach(o => { o.disabled = false; o.classList.remove('correct','wrong'); });
+  document.getElementById('fb-'+qi).className = 'quiz-fb';
+  document.getElementById('rst-'+qi).className = 'quiz-reset';
+}
+
+// ══ INIT ══
+renderFC();
+buildQuiz('carbohidratos');
+</script>
+
+<!-- ══ RAPG SIMULATOR SCRIPT ══ -->
+<script>
+(function(){
+const rcv=document.getElementById('rcv');
+if(!rcv)return;
+const rctx=rcv.getContext('2d');
+let rW,rH,rDpr;
+
+const RCOL={gs:'#378ADD',gi:'#D4537E',gq:'#BA7517',gdp:'#888780',gtp:'#3B6D11',lig:'#7F77DD',plc:'#D85A30',ac:'#185FA5'};
+const RSPEEDS=[3200,2200,1500,900,500];
+const RSLBLS=['Lento','Normal','Rápido','Muy rápido','Veloz'];
+
+const RSTEPS={
+  gs:[
+    {t:'Paso 1 — Ligando llega al RAPG',d:'El fármaco se une al receptor RAPG en los dominios transmembrana V-VI. Primer reconocimiento molecular.'},
+    {t:'Paso 2 — Cambio conformacional',d:'La unión provoca un cambio conformacional. El receptor activa la proteína G heterotrimérica (Gα + βɣ).'},
+    {t:'Paso 3 — GDP → GTP en Gαs',d:'La subunidad Gαs intercambia GDP por GTP. Este cambio la activa. La proteína G está lista para disociarse.'},
+    {t:'Paso 4 — Gαs se separa del dímero βɣ',d:'Gαs-GTP se disocia del dímero βɣ. Ambas subunidades quedan libres para actuar sobre sus efectores.'},
+    {t:'Paso 5 — Gαs ACTIVA la Adenilato Ciclasa (AC)',d:'Gαs activa la AC. La enzima convierte ATP → AMPc (adenosín monofosfato cíclico), el segundo mensajero.'},
+    {t:'Paso 6 — ↑ AMPc → PKA → Respuesta estimulante',d:'AMPc activa PKA → fosforila Ser/Thr → RESPUESTA ESTIMULANTE. La GTPasa intrínseca de Gαs apaga la señal (GTP→GDP).'},
+  ],
+  gi:[
+    {t:'Paso 1 — Ligando llega al RAPG',d:'Un agonista (ej: morfina, acetilcolina M₂) se une al receptor acoplado a Gi/o.'},
+    {t:'Paso 2 — Cambio conformacional',d:'El cambio conformacional activa la proteína G. La subunidad es Gαi/o (inhibidora), no Gαs.'},
+    {t:'Paso 3 — GDP → GTP en Gαi/o',d:'La subunidad Gαi/o intercambia GDP por GTP y se activa. Su efecto sobre la AC será INHIBIDOR.'},
+    {t:'Paso 4 — Gαi/o se separa del dímero βɣ',d:'Gαi/o-GTP se disocia y se dirige hacia la Adenilato Ciclasa para INHIBIRLA.'},
+    {t:'Paso 5 — Gαi/o INHIBE la Adenilato Ciclasa',d:'¡Diferencia crítica con Gαs! Gαi/o INHIBE la AC → se produce MENOS AMPc.'},
+    {t:'Paso 6 — ↓ AMPc → Respuesta inhibitoria',d:'Menos AMPc → PKA menos activa → RESPUESTA INHIBITORIA. Ej: ↓ FC cardíaca, analgesia opioide. GTPasa apaga la señal.'},
+  ],
+  gq:[
+    {t:'Paso 1 — Ligando llega al RAPG',d:'Un agonista (ej: ACh M₁, adrenalina α₁) se une al receptor acoplado a Gq. Vía intracelular totalmente diferente.'},
+    {t:'Paso 2 — Cambio conformacional',d:'El cambio conformacional activa Gαq. Su efector es la Fosfolipasa C (PLC), NO la Adenilato Ciclasa.'},
+    {t:'Paso 3 — GDP → GTP en Gαq',d:'La subunidad Gαq intercambia GDP por GTP. Su efector NO es la AC: usará la PLC para una vía distinta.'},
+    {t:'Paso 4 — Gαq se separa del dímero βɣ',d:'Gαq-GTP se disocia y se dirige hacia la Fosfolipasa C (PLC). Vía completamente diferente a Gs y Gi.'},
+    {t:'Paso 5 — Gαq ACTIVA la Fosfolipasa C (PLC)',d:'Gαq activa la PLC. La PLC hidroliza PIP₂ → genera IP₃ + DAG. Dos segundos mensajeros distintos al AMPc.'},
+    {t:'Paso 6 — IP₃ + DAG → Ca²⁺ + PKC + NOS → GMPc',d:'IP₃ libera Ca²⁺ del RE. DAG activa PKC. Ca²⁺ activa NOS → NO → Guanilato Ciclasa → ↑ GMPc. GTPasa apaga la señal.'},
+  ]
+};
+
+let rCas='gs',rStep=-1,rAuto=false,rAutoTimer=null,rRaf=null;
+let rParts=[],rFrame=0,rStepFrame=0,rSpd=1;
+
+function rResize(){
+  rDpr=window.devicePixelRatio||1;
+  const r=rcv.parentElement.getBoundingClientRect();
+  rW=r.width; rH=r.height;
+  rcv.width=rW*rDpr; rcv.height=rH*rDpr;
+  rctx.setTransform(rDpr,0,0,rDpr,0,0);
+  rDraw();
+}
+
+window.rSetCascade=function(c,el){
+  rCas=c;
+  document.querySelectorAll('#rapg-sim .rtab[onclick^="rSetCascade"]').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('rStepBtn').style.background=RCOL[c];
+  rDoReset();
+};
+
+window.rDoReset=function(){
+  rStopAuto();
+  if(rRaf){cancelAnimationFrame(rRaf);rRaf=null;}
+  rStep=-1;rParts=[];rFrame=0;rStepFrame=0;
+  document.getElementById('rItitle').textContent='Selecciona una cascada y presiona un botón';
+  document.getElementById('rItext').textContent='Elige Gαs, Gαi/o o Gαq. "Paso a paso" avanza manualmente. "Automático" corre solo en bucle.';
+  rDraw();
+};
+
+function rStopAuto(){
+  rAuto=false;clearTimeout(rAutoTimer);
+  document.getElementById('rAutoBtn').textContent='⏵ Automático';
+  document.getElementById('rAutoBtn').className='rbtn rsec';
+}
+
+window.rToggleAuto=function(){
+  if(rAuto){rStopAuto();return;}
+  rAuto=true;
+  const btn=document.getElementById('rAutoBtn');
+  btn.textContent='⏸ Pausar';btn.style.background=RCOL[rCas];btn.className='rbtn';
+  rScheduleNext();
+  if(!rRaf) rLoop();
+};
+
+function rScheduleNext(){
+  clearTimeout(rAutoTimer);
+  rAutoTimer=setTimeout(()=>{if(!rAuto)return;rDoStep();rScheduleNext();},RSPEEDS[rSpd]);
+}
+
+window.rChangeSpeed=function(v){
+  rSpd=parseInt(v);
+  document.getElementById('rSldLbl').textContent=RSLBLS[rSpd];
+  if(rAuto){clearTimeout(rAutoTimer);rScheduleNext();}
+};
+
+window.rDoStep=function(){
+  const total=RSTEPS[rCas].length;
+  rStep=(rStep+1)%total;
+  rStepFrame=0;
+  const s=RSTEPS[rCas][rStep];
+  document.getElementById('rItitle').textContent=s.t;
+  document.getElementById('rItext').textContent=s.d;
+  rSpawnParts(rStep);
+  if(!rRaf) rLoop();
+};
+
+function rSpawnParts(s){
+  rParts=[];
+  const c=RCOL[rCas],mid=rW/2;
+  if(s===0){
+    for(let i=0;i<20;i++) rParts.push({x:mid-60+Math.random()*50,y:-(10+Math.random()*40),vx:(Math.random()-.5)*.4,vy:2.5+Math.random()*1.5,color:RCOL.lig,r:5+Math.random()*3,alpha:1,label:i<3?'FA':null,mode:'fall',ttl:180});
+  } else if(s===1){
+    for(let i=0;i<24;i++){const a=(Math.PI*2/24)*i;rParts.push({x:mid,y:rH*.22,vx:Math.cos(a)*3,vy:Math.sin(a)*3,color:c,r:4,alpha:1,mode:'wave',ttl:80});}
+  } else if(s===2){
+    rParts.push({x:mid-30,y:rH*.48,vx:-2,vy:-1.5,color:RCOL.gdp,r:11,alpha:1,label:'GDP',mode:'fly',ttl:120});
+    rParts.push({x:mid+80,y:rH*.35,vx:-1.8,vy:1.2,color:RCOL.gtp,r:11,alpha:1,label:'GTP',mode:'fly',ttl:120});
+  } else if(s===3){
+    rParts.push({x:mid,y:rH*.48,vx:-2.2,vy:.8,color:c,r:16,alpha:1,label:'Gα',mode:'fly',ttl:160});
+    rParts.push({x:mid+10,y:rH*.5,vx:2,vy:1,color:RCOL.gdp,r:13,alpha:1,label:'βɣ',mode:'fly',ttl:160});
+  } else if(s===4){
+    for(let i=0;i<18;i++) rParts.push({x:mid-90+Math.random()*20,y:rH*.65+Math.random()*20,vx:2+Math.random()*1.5,vy:(Math.random()-.5),color:c,r:3+Math.random()*4,alpha:1,mode:'flow',ttl:100});
+    rParts.push({x:mid-100,y:rH*.67,vx:2.2,vy:0,color:c,r:16,alpha:1,label:'Gα',mode:'fly',ttl:140});
+  } else if(s===5){
+    const mc=rCas==='gs'?'#185FA5':rCas==='gi'?'#993556':'#D85A30';
+    for(let i=0;i<40;i++){const a=Math.random()*Math.PI*2,sp=2+Math.random()*4;const lbls=['↑AMPc','↓AMPc','IP₃','DAG','Ca²⁺','NO'];const lbl=i<6?(rCas==='gs'?'↑AMPc':rCas==='gi'?'↓AMPc':lbls[2+Math.floor(Math.random()*3)]):null;rParts.push({x:mid+60,y:rH*.78,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,color:mc,r:4+Math.random()*8,alpha:1,label:lbl,mode:'burst',ttl:130+Math.random()*60});}
+  }
+}
+
+function rLoop(){
+  rRaf=requestAnimationFrame(rLoop);
+  rFrame++;rStepFrame++;
+  rParts.forEach(p=>{
+    p.ttl--;
+    if(p.mode==='fall'){p.x+=p.vx;p.y+=p.vy;}
+    else if(p.mode==='wave'){p.x+=p.vx;p.y+=p.vy;p.vx*=.97;p.vy*=.97;p.r+=.12;}
+    else if(p.mode==='fly'){p.x+=p.vx;p.y+=p.vy;p.vx*=.93;p.vy*=.93;}
+    else if(p.mode==='flow'){p.x+=p.vx;p.y+=p.vy;p.vx*=.98;}
+    else if(p.mode==='burst'){p.x+=p.vx;p.y+=p.vy;p.vx*=.93;p.vy*=.93;}
+    p.alpha=Math.max(0,p.ttl/80);
+  });
+  rParts=rParts.filter(p=>p.ttl>0);
+  rDraw();
+}
+
+function rDraw(){
+  rctx.clearRect(0,0,rW,rH);
+  const c=RCOL[rCas],mid=rW/2;
+  // membrane
+  rctx.fillStyle='rgba(55,138,221,0.07)';rctx.fillRect(0,rH*.2,rW,rH*.15);
+  rctx.fillStyle='rgba(55,138,221,0.14)';rctx.fillRect(0,rH*.2,rW,rH*.025);rctx.fillRect(0,rH*.33,rW,rH*.025);
+  rctx.fillStyle='rgba(80,130,180,0.45)';rctx.font='9px Outfit,sans-serif';rctx.textAlign='left';
+  rctx.fillText('Membrana plasmática',8,rH*.21+10);
+  rctx.fillStyle='rgba(80,130,180,0.4)';rctx.font='8px Outfit,sans-serif';
+  rctx.fillText('Exterior',8,rH*.16);rctx.fillText('Interior celular',8,rH*.42);
+  // helices
+  for(let i=0;i<7;i++){
+    const hx=mid-84+i*26;
+    rctx.fillStyle=rStep>=0?c:'#B5D4F4';rctx.globalAlpha=rStep>=0?.75:.35;
+    rctx.beginPath();rctx.roundRect(hx,rH*.21,18,rH*.12,3);rctx.fill();rctx.globalAlpha=1;
+  }
+  rctx.fillStyle=c;rctx.font='bold 11px Outfit,sans-serif';rctx.textAlign='center';
+  rctx.fillText('RAPG',mid,rH*.18);
+  rctx.fillStyle='rgba(80,130,180,0.55)';rctx.font='8px Outfit,sans-serif';
+  rctx.fillText('7 dominios transmembrana',mid,rH*.155);
+  rctx.fillStyle='rgba(80,130,180,0.4)';rctx.font='8px Outfit,sans-serif';
+  rctx.fillText('N-terminal',mid,rH*.09);rctx.fillText('C-terminal',mid,rH*.38);
+  // inactive G
+  if(rStep<0){
+    rCirc(mid-30,rH*.52,11,RCOL.gdp,'GDP');rCirc(mid+25,rH*.51,13,RCOL.gdp,'βɣ');
+    rctx.fillStyle='rgba(136,135,128,0.5)';rctx.font='8px Outfit,sans-serif';rctx.textAlign='center';
+    rctx.fillText('Proteína G inactiva',mid,rH*.59);
+  }
+  // effector
+  if(rStep>=4){
+    const eN=rCas==='gq'?'PLC':'AC',eC=rCas==='gq'?RCOL.plc:RCOL.ac;
+    const pulse=.7+Math.sin(rFrame*.12)*.3;
+    rctx.globalAlpha=Math.min(1,(rStepFrame-5)/30)*pulse;
+    rCirc(mid+60,rH*.78,22,eC,eN);
+    rctx.fillStyle=eC;rctx.font='8px Outfit,sans-serif';rctx.textAlign='center';
+    rctx.fillText(rCas==='gs'?'↑ Adenilato Ciclasa':rCas==='gi'?'⊣ Adenilato Ciclasa':'↑ Fosfolipasa C',mid+60,rH*.87);
+    rctx.globalAlpha=1;
+  }
+  // messengers
+  if(rStep===5){
+    const msgs=rCas==='gs'
+      ?[{l:'AMPc↑',c:'#185FA5',x:mid-80,y:rH*.9},{l:'PKA',c:'#0C447C',x:mid-10,y:rH*.94},{l:'Resp.+',c:'#3B6D11',x:mid+65,y:rH*.9}]
+      :rCas==='gi'
+      ?[{l:'AMPc↓',c:'#993556',x:mid-80,y:rH*.9},{l:'PKA↓',c:'#D4537E',x:mid-10,y:rH*.94},{l:'Inhib.',c:'#8b1a1a',x:mid+65,y:rH*.9}]
+      :[{l:'IP₃',c:'#D85A30',x:mid-100,y:rH*.9},{l:'DAG',c:'#BA7517',x:mid-40,y:rH*.94},{l:'Ca²⁺',c:'#E24B4A',x:mid+20,y:rH*.9},{l:'PKC',c:'#993C1D',x:mid+80,y:rH*.94},{l:'NOS→NO',c:'#3B6D11',x:mid+145,y:rH*.9}];
+    msgs.forEach((m,i)=>{const a=Math.min(1,(rStepFrame-8-i*15)/25);if(a<=0)return;rctx.globalAlpha=Math.max(0,a);rCirc(m.x,m.y,9+m.l.length*1.2,m.c,m.l);rctx.globalAlpha=1;});
+    const blink=Math.abs(Math.sin(rFrame*.07));
+    rctx.globalAlpha=blink*.7;rctx.fillStyle='#3B6D11';rctx.font='9px Outfit,sans-serif';rctx.textAlign='center';
+    rctx.fillText('GTPasa: GTP→GDP → señal apagada',mid,rH*.97);rctx.globalAlpha=1;
+  }
+  // dots
+  const total=RSTEPS[rCas].length;
+  for(let i=0;i<total;i++){
+    const sx=mid-(total-1)*14+i*28;
+    rctx.fillStyle=i<=rStep?c:'rgba(160,160,160,.3)';
+    rctx.beginPath();rctx.arc(sx,rH-.012*rH,i===rStep?7:4,0,Math.PI*2);rctx.fill();
+  }
+  // particles
+  rParts.forEach(p=>{
+    rctx.globalAlpha=Math.max(0,Math.min(1,p.alpha));
+    rctx.fillStyle=p.color;rctx.beginPath();rctx.arc(p.x,p.y,p.r,0,Math.PI*2);rctx.fill();
+    if(p.label){rctx.fillStyle='#fff';rctx.font=`bold ${Math.max(7,Math.floor(p.r*.62))}px Outfit,sans-serif`;rctx.textAlign='center';rctx.fillText(p.label,p.x,p.y+p.r*.35);}
+    rctx.globalAlpha=1;
+  });
+}
+
+function rCirc(x,y,r,color,label){
+  rctx.fillStyle=color;rctx.beginPath();rctx.arc(x,y,r,0,Math.PI*2);rctx.fill();
+  if(label){rctx.fillStyle='#fff';rctx.font=`bold ${Math.max(7,Math.floor(r*.62))}px Outfit,sans-serif`;rctx.textAlign='center';rctx.fillText(label,x,y+r*.35);}
+}
+
+const rResizeObs=new ResizeObserver(()=>rResize());
+rResizeObs.observe(rcv.parentElement);
+document.getElementById('rStepBtn').style.background=RCOL[rCas];
+rResize();
+})();
+</script>
+</body>
+</html>
