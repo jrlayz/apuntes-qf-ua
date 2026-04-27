@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apuntes Q&F UA 2026 | Carbohidratos + Farmacodinámica</title>
+<title>Apuntes Q&F UA 2026</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
 
@@ -100,7 +100,7 @@ body {
   border-color: rgba(255,255,255,0.25);
 }
 
-/* ── TOP MODULE NAV ── */
+/* ── TOP ASIGNATURA NAV ── */
 .module-nav {
   background: #111;
   display: flex;
@@ -137,13 +137,100 @@ body {
   vertical-align: middle;
 }
 
-/* ── FASE NAV ── */
+/* ── LAYOUT CON SIDEBAR ── */
+.page-layout {
+  display: flex;
+  min-height: calc(100vh - 120px);
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--card);
+  border-right: 0.5px solid var(--border);
+  position: sticky;
+  top: 41px;
+  height: calc(100vh - 41px);
+  overflow-y: auto;
+  padding: 1.25rem 0;
+  scrollbar-width: thin;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.sidebar-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 0 1.1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.sidebar-label:first-child { margin-top: 0; }
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.55rem 1.1rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+  line-height: 1.3;
+}
+.sidebar-item:hover { color: var(--text); background: rgba(0,0,0,0.03); }
+.sidebar-item.active { color: var(--text); background: var(--card2); border-left-color: var(--accent2); font-weight: 600; }
+.sidebar-item .s-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  flex-shrink: 0; background: var(--border);
+  transition: background 0.15s;
+}
+.sidebar-item.active .s-dot { background: var(--accent2); }
+
+.sidebar-sub {
+  padding: 0.4rem 1.1rem 0.4rem 2rem;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+  display: flex; align-items: center; gap: 6px;
+}
+.sidebar-sub:hover { color: var(--text); }
+.sidebar-sub.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+
+.sidebar-divider { height: 0.5px; background: var(--border); margin: 0.75rem 0; }
+
+/* ── MAIN CONTENT AREA ── */
+.main-area {
+  flex: 1;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+/* ── FASE NAV (top of main area) ── */
 .fase-nav {
   background: var(--card2);
   border-bottom: 0.5px solid var(--border);
-  position: sticky;
-  top: 41px;
-  z-index: 200;
+  display: none; /* hidden — replaced by sidebar */
 }
 .fase-tabs {
   display: flex;
@@ -182,42 +269,33 @@ body {
 }
 
 /* ── SUB NAV ── */
-.sub-nav {
-  background: var(--card);
-  border-bottom: 0.5px solid var(--border);
-  padding: 0 1rem;
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.sub-nav::-webkit-scrollbar { display: none; }
-.sub-btn {
-  padding: 0.55rem 1rem;
-  font-size: 12px;
-  color: var(--muted);
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  border-bottom: 1.5px solid transparent;
-  transition: all 0.15s;
-  white-space: nowrap;
-  font-family: 'Outfit', sans-serif;
-}
-.sub-btn:hover { color: var(--text); }
-.sub-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.sub-nav { display: none; }
 
 /* ── MODULE SECTIONS ── */
 .module-section { display: none; }
-.module-section.active { display: block; }
+.module-section.active { display: flex; }
+
+/* ── MAIN AREA CENTERING ── */
+.main-area { flex: 1; min-width: 0; overflow-x: hidden; display: flex; justify-content: center; }
+.main-area .module-section { width: 100%; max-width: 900px; }
 
 /* ── CONTENT ── */
-.content { max-width: 840px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+.content { width: 100%; padding: 2rem 3rem 5rem; }
 .fase-section { display: none; animation: fadeUp 0.3s ease; }
 .fase-section.active { display: block; }
-.sub-section { display: none; }
+.sub-section { display: block; }
 .sub-section.active { display: block; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── SPECIAL FULL-WIDTH MODULES (FC, QZ) ── */
+.module-section.fullwidth { display: none; }
+.module-section.fullwidth.active { display: block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .sidebar { display: none; }
+  .module-section.active { display: block; }
+}
 
 /* ── CARDS ── */
 .card {
@@ -551,8 +629,9 @@ strong { font-weight: 600; }
 .cascade .inhibit { color: #e07060; }
 
 @media print {
-  .module-nav, .fase-nav, .sub-nav, .fc-nav { display: none !important; }
-  .module-section, .fase-section, .sub-section { display: block !important; }
+  .module-nav, .sidebar, .fc-nav { display: none !important; }
+  .module-section, .module-section.fullwidth, .fase-section, .sub-section { display: block !important; }
+  .page-layout { display: block !important; }
   .card { break-inside: avoid; }
 }
 </style>
@@ -561,45 +640,54 @@ strong { font-weight: 600; }
 
 <div class="master-header">
   <div class="header-eyebrow">Apuntes Compilados — Universidad de Antofagasta · Q&F 2026</div>
-  <h1>Química & Farmacia<br><em>Apuntes Integrados — 2 Módulos</em></h1>
+  <h1>Química & Farmacia<br><em>Apuntes Integrados</em></h1>
   <div class="header-chips">
-    <span class="chip active">Módulo A: Carbohidratos</span>
-    <span class="chip active">Módulo B: Farmacodinámica PPT1</span>
-    <span class="chip active">Módulo C: Farmacodinámica PPT2</span>
+    <span class="chip active">Química Orgánica II</span>
+    <span class="chip active">Farmacodinámica</span>
     <span class="chip">I Semestre 2026</span>
   </div>
 </div>
 
-<!-- ══ MODULE NAVIGATION ══ -->
+<!-- ══ MODULE NAVIGATION (Asignaturas) ══ -->
 <nav class="module-nav">
-  <button class="module-btn active" onclick="showModule('modA', this)">
-    <span class="mod-dot" style="background:#2d6a4f"></span>Carbohidratos
+  <button class="module-btn active" onclick="showAsignatura('asigA', this)">
+    <span class="mod-dot" style="background:#2d6a4f"></span>Química Orgánica II
   </button>
-  <button class="module-btn" onclick="showModule('modB', this)">
-    <span class="mod-dot" style="background:#b5451b"></span>Farmacodinámica I
-  </button>
-  <button class="module-btn" onclick="showModule('modC', this)">
-    <span class="mod-dot" style="background:#1b4d8a"></span>Farmacodinámica II
-  </button>
-  <button class="module-btn" onclick="showModule('modFC', this)">
-    ⚡ Flashcards
-  </button>
-  <button class="module-btn" onclick="showModule('modQZ', this)">
-    📝 Autoevaluación
+  <button class="module-btn" onclick="showAsignatura('asigB', this)">
+    <span class="mod-dot" style="background:#b5451b"></span>Farmacodinámica
   </button>
 </nav>
 
 <!-- ══════════════════════════════════════
-     MÓDULO A: CARBOHIDRATOS
+     ASIGNATURA A: QUÍMICA ORGÁNICA II
 ══════════════════════════════════════ -->
+<div id="asigA" class="module-section active">
+  <div class="page-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebarA">
+      <div class="sidebar-label">Unidades</div>
+      <button class="sidebar-item active" onclick="showUnidad('asigA','modA',this)">
+        <span class="s-dot"></span>Carbohidratos
+      </button>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-label">Secciones</div>
+      <div id="subsA"></div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-label">Herramientas</div>
+      <button class="sidebar-item" onclick="showUnidad('asigA','modA-fc',this)">
+        <span class="s-dot"></span>⚡ Flashcards
+      </button>
+      <button class="sidebar-item" onclick="showUnidad('asigA','modA-qz',this)">
+        <span class="s-dot"></span>📝 Autoevaluación
+      </button>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main-area">
+
+<!-- ══ MÓDULO A: CARBOHIDRATOS ══ -->
 <div id="modA" class="module-section active">
-  <nav class="fase-nav">
-    <div class="fase-tabs">
-      <button class="fase-tab active" onclick="showFase('modA','f1',this)"><span class="badge-num">1</span>Monosacáridos</button>
-      <button class="fase-tab" onclick="showFase('modA','f2',this)"><span class="badge-num">2</span>Disacáridos & Poder Reductor</button>
-      <button class="fase-tab" onclick="showFase('modA','f3',this)"><span class="badge-num">3</span>Ejercitación</button>
-    </div>
-  </nav>
   <div class="sub-nav" id="subA"></div>
   <div class="content">
 
@@ -738,17 +826,12 @@ strong { font-weight: 600; }
         <div class="card">
           <div class="card-eyebrow">Protocolo de conversión</div>
           <div class="card-title">Fischer → Haworth en 5 Pasos</div>
-          <div class="code-block">
-<span class="ca">PASO 1</span>  ¿Aldosa o cetosa? → ubica el C=O
-<span class="ca">PASO 2</span>  ¿Serie D o L? → C de referencia
-<span class="ca">PASO 3</span>  ¿Qué anillo forma?
-<span class="cm">         6 miembros → PIRANOSA | 5 miembros → FURANOSA</span>
-<span class="ca">PASO 4</span>  Convierte sustituyentes:
-<span class="cg">         Derecha en Fischer  → ABAJO en Haworth</span>
-<span class="cr">         Izquierda en Fischer → ARRIBA en Haworth</span>
-<span class="ca">PASO 5</span>  Asigna el anómero:
-<span class="cg">         –OH abajo → α-anómero</span>
-<span class="cr">         –OH arriba → β-anómero</span>
+          <div class="steps">
+            <div class="step"><div class="step-n blue">1</div><div class="step-body">¿Aldosa o cetosa? → ubica el <strong>C=O</strong> (aldosa: C1 | cetosa: C2)</div></div>
+            <div class="step"><div class="step-n blue">2</div><div class="step-body">¿Serie D o L? → mira el <strong>C de referencia</strong> (–OH derecha = D | izquierda = L)</div></div>
+            <div class="step"><div class="step-n blue">3</div><div class="step-body">¿Qué anillo forma? → <strong>6 miembros = Piranosa</strong> (C5 ataca C1) | <strong>5 miembros = Furanosa</strong> (C4 ataca C1)</div></div>
+            <div class="step"><div class="step-n green">4</div><div class="step-body">Convierte sustituyentes: <strong style="color:var(--accent)">Derecha en Fischer → Abajo en Haworth</strong> · <strong style="color:var(--accent2)">Izquierda en Fischer → Arriba en Haworth</strong> · –CH₂OH: Arriba si es D</div></div>
+            <div class="step"><div class="step-n green">5</div><div class="step-body">Asigna el anómero: <strong style="color:var(--accent)">–OH abajo → α</strong> · <strong style="color:var(--accent2)">–OH arriba → β</strong></div></div>
           </div>
           <div class="mnemo"><strong>α = Abajo</strong> (ambas con A) · <strong>β = arriBa</strong></div>
         </div>
@@ -760,6 +843,21 @@ strong { font-weight: 600; }
       <div id="A-f2-enlace" class="sub-section active">
         <div class="sec-header"><span class="badge">Módulo A · Fase 2 · Sección 1</span><h2>Enlaces Glicosídicos y Disacáridos</h2></div>
         <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+        <div class="card">
+          <div class="card-eyebrow">Concepto fundamental</div>
+          <div class="card-title">¿Qué es un Enlace Glicosídico?</div>
+          <p>El carbono anomérico de un hemiacetal puede reaccionar con el <strong>–OH de un alcohol</strong> (o de otro azúcar) para formar un <strong>acetal</strong> llamado <strong>glicósido</strong>. Cuando el –OH proviene de otro azúcar, se forma un <strong>disacárido</strong>.</p>
+          <div class="formula">Monosacárido + Monosacárido → Disacárido + H₂O</div>
+          <div class="info-box">Esta reacción es una <strong>condensación</strong> (pierde agua). La inversa es la <strong>hidrólisis</strong> (gana agua → regenera los monosacáridos).</div>
+          <div class="card-eyebrow" style="margin-top:1rem">Los 3 tipos de enlace glicosídico</div>
+          <table><thead><tr><th>Tipo</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tag tb">1,4'</span></td><td>C anomérico (C1) del azúcar 1 → O en C4 del azúcar 2</td><td>Maltosa (α), Celobiosa (β), Lactosa (β)</td></tr>
+            <tr><td><span class="tag tg">1,6'</span></td><td>C anomérico (C1) del azúcar 1 → O en C6 del azúcar 2</td><td>Isomaltosa (α), ramificaciones glucógeno</td></tr>
+            <tr><td><span class="tag tp">1,1' (1,2')</span></td><td>C anomérico del azúcar 1 → C anomérico del azúcar 2</td><td>Sacarosa (α,β)</td></tr>
+          </tbody></table>
+          <div class="highlight"><strong>Regla clave:</strong> Si el enlace involucra AMBOS C anoméricos (1,1' o 1,2') → <strong>NO reductor</strong>. Si solo uno está comprometido → <strong>Reductor</strong>.</div>
+        </div>
         <div class="card">
           <div class="card-eyebrow">Disacáridos naturales</div>
           <div class="card-title">Maltosa · Celobiosa · Lactosa · Sacarosa</div>
@@ -779,10 +877,11 @@ strong { font-weight: 600; }
         <div class="card">
           <div class="card-eyebrow">Regla fundamental</div>
           <div class="card-title">¿Cuándo un azúcar es reductor?</div>
-          <div class="code-block">
-<span class="cg">HEMIACETAL (–OH libre en C1)</span>  →  En equilibrio con cadena abierta  →  <span class="cg">REDUCTOR</span>
-<span class="cr">ACETAL     (–OR en C1)</span>         →  No puede abrir el anillo          →  <span class="cr">NO REDUCTOR</span>
-          </div>
+          <table><thead><tr><th>Tipo de C anomérico</th><th>Estado</th><th>Poder Reductor</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Hemiacetal</strong> (–OH libre en C1)</td><td>En equilibrio con cadena abierta → carbonilo libre</td><td><span class="tag tg">✓ REDUCTOR</span></td></tr>
+            <tr><td><strong>Acetal</strong> (–OR en C1)</td><td>No puede abrir el anillo → carbonilo bloqueado</td><td><span class="tag tr">✗ NO REDUCTOR</span></td></tr>
+          </tbody></table>
           <div class="grid-2">
             <div class="mini-card" style="border-left:3px solid #8B4513">
               <h4>Reacción de Fehling</h4>
@@ -832,15 +931,14 @@ strong { font-weight: 600; }
         <div class="card">
           <div class="card-eyebrow">Nomenclatura sistemática</div>
           <div class="card-title">Cómo leer el nombre de un disacárido</div>
-          <div class="code-block">
-<span class="ca">Ejemplo:</span>  4-O-(α-D-glucopiranosil)-β-D-glucopiranosa
-
-<span class="cg">4-O-(…)           </span> → el azúcar entre () está unido al O del C4
-<span class="cg">α-D-glucopiranosil </span> → azúcar DONANTE (sufijo "-osil") → su C anomérico participa
-<span class="cb">β-D-glucopiranosa  </span> → azúcar ACEPTOR (sufijo "-osa") → su C1 puede quedar LIBRE
-
-<span class="ca">Resultado:</span> Enlace α-1,4' · El aceptor β tiene C1 libre → <span class="cg">REDUCTOR</span>
-          </div>
+          <div class="highlight" style="margin-bottom:.5rem"><strong>Ejemplo:</strong> 4-O-(α-D-glucopiranosil)-β-D-glucopiranosa</div>
+          <table><thead><tr><th>Fragmento del nombre</th><th>Significado</th></tr></thead>
+          <tbody>
+            <tr><td><strong>4-O-(…)</strong></td><td>El azúcar entre paréntesis está unido al oxígeno del C4</td></tr>
+            <tr><td><strong>α-D-glucopiranosil</strong></td><td>Azúcar <span class="tag tg">DONANTE</span> — sufijo "-osil" → su C anomérico participa en el enlace</td></tr>
+            <tr><td><strong>β-D-glucopiranosa</strong></td><td>Azúcar <span class="tag tb">ACEPTOR</span> — sufijo "-osa" → su C1 puede quedar libre (reductor)</td></tr>
+            <tr><td><strong>Resultado</strong></td><td>Enlace α-1,4' · El aceptor β tiene C1 libre → <span class="tag tg">REDUCTOR</span></td></tr>
+          </tbody></table>
         </div>
       </div>
     </div>
@@ -848,18 +946,82 @@ strong { font-weight: 600; }
   </div><!-- /content modA -->
 </div><!-- /modA -->
 
-<!-- ══════════════════════════════════════
-     MÓDULO B: FARMACODINÁMICA PPT1
-══════════════════════════════════════ -->
-<div id="modB" class="module-section">
-  <nav class="fase-nav">
-    <div class="fase-tabs">
-      <button class="fase-tab active" onclick="showFase('modB','B-f1',this)"><span class="badge-num">1</span>Definiciones</button>
-      <button class="fase-tab" onclick="showFase('modB','B-f2',this)"><span class="badge-num">2</span>Receptores</button>
-      <button class="fase-tab" onclick="showFase('modB','B-f3',this)"><span class="badge-num">3</span>REA / SAR</button>
-      <button class="fase-tab" onclick="showFase('modB','B-f4',this)"><span class="badge-num">4</span>Preguntas PPT1</button>
+<!-- ══ FLASHCARDS QUÍMICA ORGÁNICA II ══ -->
+<div id="modA-fc" class="module-section">
+  <div class="content">
+    <div class="sec-header">
+      <span class="badge">Química Orgánica II · Herramientas</span>
+      <h2>Flashcards — Carbohidratos</h2>
     </div>
-  </nav>
+    <div class="fc-wrap">
+      <div class="fc" id="fc-card-a" onclick="flipFCA()">
+        <div class="fc-f"><div class="fc-label">Pregunta</div><div class="fc-q" id="fc-q-a">Cargando...</div></div>
+        <div class="fc-b"><div class="fc-label" style="color:rgba(255,255,255,0.35)">Respuesta</div><div class="fc-a" id="fc-ans-a"></div></div>
+      </div>
+    </div>
+    <p class="fc-hint">Haz clic en la tarjeta para voltear</p>
+    <div class="fc-nav">
+      <button onclick="prevFCA()">← Anterior</button>
+      <span class="fc-counter" id="fc-cnt-a">1 / 1</span>
+      <button onclick="nextFCA()">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QUIZ QUÍMICA ORGÁNICA II ══ -->
+<div id="modA-qz" class="module-section">
+  <div class="content">
+    <div class="sec-header">
+      <span class="badge">Química Orgánica II · Herramientas</span>
+      <h2>Autoevaluación — Carbohidratos</h2>
+    </div>
+    <div id="quiz-container-a"></div>
+    <div style="text-align:center;margin-top:1.5rem;">
+      <button onclick="buildQuizA()" style="padding:8px 24px;border:0.5px solid var(--border);border-radius:20px;background:var(--card2);cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;color:var(--muted);">Reiniciar quiz</button>
+    </div>
+  </div>
+</div>
+
+    </div><!-- /main-area asigA -->
+  </div><!-- /page-layout asigA -->
+</div><!-- /asigA -->
+
+<!-- ══════════════════════════════════════
+     ASIGNATURA B: FARMACODINÁMICA
+══════════════════════════════════════ -->
+<div id="asigB" class="module-section">
+  <div class="page-layout">
+
+    <!-- SIDEBAR FARMACODINÁMICA -->
+    <aside class="sidebar" id="sidebarB">
+      <div class="sidebar-label">Unidades</div>
+      <button class="sidebar-item active" onclick="showUnidad('asigB','modB',this)">
+        <span class="s-dot"></span>Introducción a la Farmacodinámica
+      </button>
+      <button class="sidebar-item" onclick="showUnidad('asigB','modC',this)">
+        <span class="s-dot"></span>Mecanismo de Acción y Receptores
+      </button>
+      <button class="sidebar-item" onclick="showUnidad('asigB','modD',this)">
+        <span class="s-dot"></span>Interacción Fármaco-Receptor
+      </button>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-label">Secciones</div>
+      <div id="subsB"></div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-label">Herramientas</div>
+      <button class="sidebar-item" onclick="showUnidad('asigB','modB-fc',this)">
+        <span class="s-dot"></span>⚡ Flashcards
+      </button>
+      <button class="sidebar-item" onclick="showUnidad('asigB','modB-qz',this)">
+        <span class="s-dot"></span>📝 Autoevaluación
+      </button>
+    </aside>
+
+    <!-- MAIN FARMACODINÁMICA -->
+    <div class="main-area">
+
+<!-- ══ MÓDULO B: FARMACODINÁMICA PPT1 ══ -->
+<div id="modB" class="module-section active">
   <div class="content">
 
     <!-- B-F1: DEFINICIONES -->
@@ -893,17 +1055,22 @@ strong { font-weight: 600; }
       <div class="card">
         <div class="card-eyebrow">Trampa clásica del certamen</div>
         <div class="card-title">Farmacocinética vs Farmacodinámica</div>
-        <div class="code-block">
-<span class="ca">FARMACOCINÉTICA (PK)</span>  →  Lo que el organismo le hace <span class="cg">AL FÁRMACO</span>
-<span class="cm">                     →  ADME: Absorción · Distribución · Metabolismo · Excreción</span>
-<span class="cm">                     →  Mnemónico: "CINÉTICA = MOVIMIENTO del fármaco dentro del cuerpo"</span>
-
-<span class="ca">FARMACODINÁMICA (PD)</span>  →  Lo que el fármaco le hace <span class="cg">AL ORGANISMO</span>
-<span class="cm">                     →  Mecanismo de acción · Efecto biológico · Potencia</span>
-<span class="cm">                     →  Mnemónico: "DINÁMICA = FUERZA/PODER del fármaco sobre el cuerpo"</span>
-
-<span class="cr">⚠ En el certamen: sentencias IV y V suelen estar INVERTIDAS → trampa clásica</span>
-        </div>
+          <table><thead><tr><th>Concepto</th><th>Definición</th><th>Estudia</th><th>Mnemónico</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Farmacocinética (PK)</strong></td>
+              <td>Lo que el organismo le hace <strong>al fármaco</strong></td>
+              <td>ADME: Absorción · Distribución · Metabolismo · Excreción</td>
+              <td>"Cinética = movimiento del fármaco dentro del cuerpo"</td>
+            </tr>
+            <tr>
+              <td><strong>Farmacodinámica (PD)</strong></td>
+              <td>Lo que el fármaco le hace <strong>al organismo</strong></td>
+              <td>Mecanismo de acción · Efecto biológico · Potencia</td>
+              <td>"Dinámica = fuerza/poder del fármaco sobre el cuerpo"</td>
+            </tr>
+          </tbody></table>
+          <div class="danger-box">⚠️ <strong>Trampa clásica de certamen:</strong> Las sentencias IV y V suelen aparecer INVERTIDAS. PK ≠ lo que el fármaco hace. PD ≠ lo que el organismo hace. Verifica siempre.</div>
         <div class="info-box">Desde 2003, la <strong>FDA exige análisis PK+PD combinados</strong> para nuevos medicamentos. La combinación permite entender todo: desde la dosis administrada hasta el efecto observado.</div>
       </div>
 
@@ -925,15 +1092,12 @@ strong { font-weight: 600; }
         <div class="card-eyebrow">Definición del PPT</div>
         <div class="card-title">¿Qué es un receptor?</div>
         <p>Receptores son todas aquellas <strong>proteínas o macromoléculas</strong> que interaccionan con un ligando endógeno o exógeno y provocan una <strong>activación sobre una función biológica específica</strong> en la célula.</p>
-        <div class="code-block">
-<span class="ca">FÁRMACO + RECEPTOR</span>  →  <span class="cg">CAMBIO CONFORMACIONAL</span>  →  <span class="molecule">EFECTO (Mecanismo de Acción)</span>
-
-Dos funciones fundamentales del receptor:
-  1. <span class="cg">Unir al ligando específico</span>
-  2. <span class="cg">Promover la respuesta efectora</span>
-
-Condición para actividad: <span class="ca">AFINIDAD</span> hacia el receptor es la primera condición
+        <div class="steps">
+          <div class="step"><div class="step-n blue">1</div><div class="step-body"><strong>Fármaco + Receptor</strong> → reconocimiento molecular basado en <strong>afinidad</strong> (primera condición para actividad)</div></div>
+          <div class="step"><div class="step-n blue">2</div><div class="step-body"><strong>Cambio conformacional</strong> → la unión altera la estructura tridimensional del receptor</div></div>
+          <div class="step"><div class="step-n green">3</div><div class="step-body"><strong>Efecto biológico</strong> (Mecanismo de Acción) → respuesta celular o tisular</div></div>
         </div>
+        <div class="info-box">Dos funciones fundamentales del receptor: <strong>(1)</strong> Unir al ligando específico · <strong>(2)</strong> Promover la respuesta efectora</div>
         <div class="grid-2">
           <div class="mini-card" style="border-left:3px solid var(--accent)">
             <h4>Regla General → REVERSIBLE</h4>
@@ -1015,14 +1179,12 @@ Condición para actividad: <span class="ca">AFINIDAD</span> hacia el receptor es
         <div class="card-eyebrow">Caso emblemático</div>
         <div class="card-title">Adrenalina → Isoprenalina</div>
         <p>Se reemplazó el grupo <strong>metilo → isopropilo</strong> en la amina de la adrenalina.</p>
-        <div class="code-block">
-Adrenalina:    N–CH₃    → Selectividad mixta α y β
-Isoprenalina:  N–CH(CH₃)₂ → Mayor volumen → <span class="cg">MAYOR SELECTIVIDAD β sobre α</span>
-
-<span class="cm">¿Por qué? El isopropilo llena mejor la cavidad hidrofóbica del receptor β</span>
-<span class="cr">OJO: El isopropilo es APOLAR/hidrofóbico. NO aumenta la polaridad.</span>
-<span class="ca">Isoprenalina = broncodilatador β-selectivo clásico</span>
-        </div>
+        <table><thead><tr><th>Fármaco</th><th>Sustituyente en N</th><th>Selectividad</th><th>Motivo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Adrenalina</strong></td><td>–CH₃ (metilo)</td><td>Mixta α y β</td><td>Volumen pequeño, no discrimina receptor</td></tr>
+          <tr><td><strong>Isoprenalina</strong></td><td>–CH(CH₃)₂ (isopropilo)</td><td><span class="tag tg">Mayor selectividad β</span></td><td>Mayor volumen ocupa mejor la cavidad hidrofóbica del receptor β</td></tr>
+        </tbody></table>
+        <div class="warning-box"><strong>El isopropilo es APOLAR/hidrofóbico</strong> — no aumenta la polaridad. La mayor selectividad β se debe a interacciones hidrofóbicas, no a polaridad.</div>
         <div class="danger-box">Error frecuente de certamen: atribuir polaridad al isopropilo. El isopropilo es <strong>APOLAR</strong> → genera selectividad <strong>β</strong>, no α.</div>
       </div>
 
@@ -1072,18 +1234,8 @@ Isoprenalina:  N–CH(CH₃)₂ → Mayor volumen → <span class="cg">MAYOR SEL
   </div><!-- /content modB -->
 </div><!-- /modB -->
 
-<!-- ══════════════════════════════════════
-     MÓDULO C: FARMACODINÁMICA PPT2
-══════════════════════════════════════ -->
+<!-- ══ MÓDULO C: MECANISMO ACCIÓN Y RECEPTORES ══ -->
 <div id="modC" class="module-section">
-  <nav class="fase-nav">
-    <div class="fase-tabs">
-      <button class="fase-tab active" onclick="showFase('modC','C-f1',this)"><span class="badge-num">1</span>Mecanismos Inespecíficos</button>
-      <button class="fase-tab" onclick="showFase('modC','C-f2',this)"><span class="badge-num">2</span>Tipos de Enlace</button>
-      <button class="fase-tab" onclick="showFase('modC','C-f3',this)"><span class="badge-num">3</span>Tipos de Receptores</button>
-      <button class="fase-tab" onclick="showFase('modC','C-f4',this)"><span class="badge-num">4</span>Preguntas PPT2</button>
-    </div>
-  </nav>
   <div class="content">
 
     <!-- C-F1: MECANISMOS INESPECÍFICOS -->
@@ -1163,20 +1315,13 @@ Isoprenalina:  N–CH(CH₃)₂ → Mayor volumen → <span class="cg">MAYOR SEL
         <div class="info-box">~810 genes en humanos codifican para RAPG (4% del proteoma). <strong>Principal target farmacológico.</strong> Estructura: <strong>7 dominios transmembrana hidrofóbicos</strong>, 3 loops intracelulares (ICL) y 3 loops extracelulares (ECL). Es un solo polipéptido con sitio N-terminal extracelular y C-terminal intracelular.</div>
 
         <h3>Mecanismo de activación</h3>
-        <div class="cascade">
-<span class="molecule">Ligando</span> se une al RAPG (dominio transmembrana V-VI para ligandos pequeños)
-  <span class="arrow">↓</span>
-<span class="effect">Cambio conformacional</span> en el receptor
-  <span class="arrow">↓</span>
-Activación de <span class="enzyme">Proteína G heterotrimérica</span> (α + βɣ)
-  <span class="arrow">↓</span>
-GDP → <span class="molecule">GTP</span> en subunidad α → subunidad α se <span class="effect">SEPARA del dímero βɣ</span>
-  <span class="arrow">↓</span>
-Cascada de señalización intracelular
-  <span class="arrow">↓</span>
-Actividad GTPasa intrínseca: α pierde un fosfato → <span class="inhibit">GTP → GDP</span> → se inactiva
-  <span class="arrow">↓</span>
-Reunificación de α + βɣ → <span class="inhibit">receptor inactivo nuevamente</span>
+        <div class="steps">
+          <div class="step"><div class="step-n blue">1</div><div class="step-body"><strong>Ligando</strong> se une al RAPG en el dominio transmembrana V-VI (para ligandos pequeños)</div></div>
+          <div class="step"><div class="step-n blue">2</div><div class="step-body"><strong>Cambio conformacional</strong> en el receptor → activa la proteína G heterotrimérica (α + βɣ)</div></div>
+          <div class="step"><div class="step-n blue">3</div><div class="step-body">GDP → <strong>GTP</strong> en subunidad α → la subunidad α se <strong>separa del dímero βɣ</strong></div></div>
+          <div class="step"><div class="step-n blue">4</div><div class="step-body">Subunidad α activa actúa sobre su <strong>efector específico</strong> (AC o PLC según el tipo de Gα)</div></div>
+          <div class="step"><div class="step-n green">5</div><div class="step-body"><strong>Cascada de señalización intracelular</strong> → segundo mensajero → respuesta celular</div></div>
+          <div class="step"><div class="step-n red">6</div><div class="step-body"><strong>GTPasa intrínseca</strong>: α hidroliza GTP → GDP → se inactiva → reunificación con βɣ → receptor inactivo nuevamente</div></div>
         </div>
 
         <h3>Las 3 subunidades α más importantes para certamen</h3>
@@ -1203,18 +1348,13 @@ Reunificación de α + βɣ → <span class="inhibit">receptor inactivo nuevamen
         </tbody></table>
 
         <h3>Cascada de Gαq en detalle</h3>
-        <div class="cascade">
-<span class="enzyme">Fosfolipasa C (PLC)</span> activa
-  <span class="arrow">↓</span>
-PIP₂ → <span class="molecule">IP₃</span> + <span class="molecule">DAG</span>
-  <span class="arrow">↓  ↓</span>
-<span class="molecule">IP₃</span> → liberación de <span class="molecule">Ca²⁺</span> del RE | <span class="molecule">DAG</span> → activa <span class="enzyme">PKC</span>
-  <span class="arrow">↓</span>
-Ca²⁺ → activa <span class="enzyme">NOS</span> (óxido nítrico sintasa)
-  <span class="arrow">↓</span>
-<span class="molecule">Óxido Nítrico (NO)</span> → activa <span class="enzyme">Guanilato Ciclasa (GC)</span>
-  <span class="arrow">↓</span>
-<span class="molecule">GMPc</span> (guanosin monofosfato cíclico)
+        <div class="steps">
+          <div class="step"><div class="step-n purple">1</div><div class="step-body"><strong>Gαq</strong> activa la <strong>Fosfolipasa C (PLC)</strong></div></div>
+          <div class="step"><div class="step-n purple">2</div><div class="step-body">PLC hidroliza <strong>PIP₂</strong> → genera <strong>IP₃</strong> + <strong>DAG</strong> (dos segundos mensajeros)</div></div>
+          <div class="step"><div class="step-n purple">3</div><div class="step-body"><strong>IP₃</strong> → libera <strong>Ca²⁺</strong> del retículo endoplasmático (RE)</div></div>
+          <div class="step"><div class="step-n purple">4</div><div class="step-body"><strong>DAG</strong> → activa <strong>PKC</strong> (Proteína Kinasa C)</div></div>
+          <div class="step"><div class="step-n green">5</div><div class="step-body"><strong>Ca²⁺</strong> → activa <strong>NOS</strong> (óxido nítrico sintasa) → produce <strong>Óxido Nítrico (NO)</strong></div></div>
+          <div class="step"><div class="step-n green">6</div><div class="step-body">NO → activa <strong>Guanilato Ciclasa (GC)</strong> → produce <strong>GMPc</strong> (guanosin monofosfato cíclico)</div></div>
         </div>
         <div class="mnemo"><strong>Gαs = Stimulates = ↑AMPc | Gαi = Inhibits = ↓AMPc | Gαq = se Queda con el calcio → ↑Ca²⁺</strong></div>
       </div>
@@ -1363,55 +1503,288 @@ Ca²⁺ → activa <span class="enzyme">NOS</span> (óxido nítrico sintasa)
   </div><!-- /content modC -->
 </div><!-- /modC -->
 
-<!-- ══════════════════════════════════════
-     MÓDULO FLASHCARDS INTEGRADO
-══════════════════════════════════════ -->
-<div id="modFC" class="module-section">
+<!-- ══ MÓDULO D: INTERACCIÓN FÁRMACO-RECEPTOR ══ -->
+<div id="modD" class="module-section">
+  <div class="content">
+
+    <!-- D-F1: INTRODUCCIÓN -->
+    <div id="D-f1" class="fase-section active">
+      <div class="sec-header">
+        <span class="badge">Farmacodinámica · PPT3 · Sección 1</span>
+        <h2>Introducción — Las 5 Teorías</h2>
+        <p>La respuesta farmacológica es el resultado de la interacción fármaco-receptor.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Contexto</div>
+        <div class="card-title">¿Por qué estudiar estas teorías?</div>
+        <p>Los receptores permiten el <strong>diseño de nuevos fármacos más eficaces y selectivos</strong>. La respuesta farmacológica es el resultado de la interacción fármaco-receptor, que induce una serie de procesos bioquímicos en la célula.</p>
+        <div class="info-box">Esta unidad aborda la interacción fármaco-receptor desde <strong>5 teorías complementarias</strong>, cada una con un enfoque distinto sobre cómo el fármaco genera su efecto.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Mapa general</div>
+        <div class="card-title">Las 5 Teorías de la Interacción Fármaco-Receptor</div>
+        <div class="steps">
+          <div class="step"><div class="step-n" style="background:var(--accent3)">1</div><div class="step-body"><strong>Teoría de la Ocupación</strong> (Clark) — El efecto es proporcional a los receptores ocupados. Aproximación Michaelis-Menten.</div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent3)">2</div><div class="step-body"><strong>Teoría de la Velocidad</strong> (Furchgott) — El efecto depende de la velocidad de asociación al receptor. Receptores de reserva.</div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent6)">3</div><div class="step-body"><strong>Teoría de la Inactivación</strong> — Receptor inactivo (Rᵢ) que el ligando convierte en forma activa (R). Actividad asincrónica.</div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent6)">4</div><div class="step-body"><strong>Teoría de los 2 Estados</strong> — Receptor activo (R*) y receptor inactivo (R) coexisten según el ligando. Actividad asincrónica.</div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent6)">5</div><div class="step-body"><strong>Teoría de la Adaptación Inducida</strong> — El fármaco induce activamente el cambio conformacional del receptor. Actividad asincrónica.</div></div>
+        </div>
+        <div class="mnemo"><strong>OCupación · VElocidad · INactivación · 2 Estados · ADaptación</strong> → <strong>OVE-IN-2-AD</strong></div>
+      </div>
+    </div>
+
+    <!-- D-F2: TEORÍA CLARK -->
+    <div id="D-f2" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Farmacodinámica · PPT3 · Sección 2</span>
+        <h2>Teoría 1 — Ocupación de Receptores (Clark)</h2>
+        <p>Formulada por A. J. Clark. Modelo cuantitativo de la interacción fármaco-receptor.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Postulados fundamentales</div>
+        <div class="card-title">¿Qué plantea Clark?</div>
+        <div class="steps">
+          <div class="step"><div class="step-n blue">1</div><div class="step-body">La interacción F+R se analiza como <strong>Michaelis-Menten</strong> (similar a sustrato-enzima → producto)</div></div>
+          <div class="step"><div class="step-n blue">2</div><div class="step-body">La unión es <strong>bimolecular y reversible</strong></div></div>
+          <div class="step"><div class="step-n blue">3</div><div class="step-body">El <strong>efecto es proporcional</strong> al número de receptores ocupados (complejo DR)</div></div>
+          <div class="step"><div class="step-n green">4</div><div class="step-body">El <strong>efecto máximo (Emax)</strong> ocurre cuando <strong>todos los receptores están ocupados</strong></div></div>
+          <div class="step"><div class="step-n green">5</div><div class="step-body">Considera tanto <strong>agonistas</strong> como <strong>antagonistas</strong></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Representación matemática</div>
+        <div class="card-title">Ecuación de Clark y Constantes</div>
+        <div class="info-box" style="font-size:1.1rem; text-align:center; font-family:'Crimson Pro',serif; font-style:italic;">
+          D + R ⇌<sup>k₁</sup><sub>k₂</sub> [DR] ⇌<sup>k₃</sup><sub>k₄</sub> [ED] &nbsp;&nbsp; (respuesta biológica)
+        </div>
+        <table><thead><tr><th>Constante</th><th>Significado</th><th>Relación</th></tr></thead>
+        <tbody>
+          <tr><td><strong>k₁</strong></td><td>Velocidad de asociación del complejo DR</td><td rowspan="2">—</td></tr>
+          <tr><td><strong>k₂</strong></td><td>Velocidad de disociación del complejo DR</td></tr>
+          <tr><td><strong>kD = k₂/k₁</strong></td><td>Constante de disociación</td><td>Mayor kD = menor afinidad</td></tr>
+          <tr><td><strong>kₐ = 1/kD</strong></td><td>Constante de afinidad</td><td>Mayor kₐ = mayor afinidad</td></tr>
+        </tbody></table>
+        <div class="highlight">La fracción de receptores ocupados depende de la <strong>concentración del fármaco</strong> y de la <strong>constante de disociación (kD)</strong> del complejo.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Concepto clave del certamen</div>
+        <div class="card-title">Actividad Intrínseca (α) — Eficacia Intrínseca</div>
+        <p>La <strong>actividad intrínseca (α)</strong> es la propiedad que tiene un agonista de producir un efecto por unidad del complejo fármaco-receptor (DR).</p>
+        <table><thead><tr><th>Valor de α</th><th>Tipo de ligando</th><th>Efecto</th></tr></thead>
+        <tbody>
+          <tr><td><strong>α = 1</strong></td><td><span class="tag tg">Agonista completo</span></td><td>Efecto máximo posible</td></tr>
+          <tr><td><strong>0 &lt; α &lt; 1</strong></td><td><span class="tag ta">Agonista parcial</span></td><td>Efecto parcial aunque ocupe todos los receptores</td></tr>
+          <tr><td><strong>α = 0</strong></td><td><span class="tag tr">Antagonista</span></td><td>Sin efecto propio, bloquea al agonista</td></tr>
+        </tbody></table>
+        <div class="danger-box">⚠️ Trampa de certamen: α=1 NO es antagonista total. <strong>α=1 = agonista completo · α=0 = antagonista</strong>.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Curva dosis-respuesta</div>
+        <div class="card-title">Representación Semilogarítmica y E₅₀</div>
+        <p>La curva fármaco-receptor se representa en forma <strong>semilogarítmica</strong> (log de concentración vs efecto). Tiene forma sigmoide y permite estimar:</p>
+        <div class="grid-2">
+          <div class="mini-card" style="border-left:3px solid var(--accent3)">
+            <h4>Emax</h4>
+            <p>Efecto máximo. Se alcanza cuando <strong>todos los receptores están ocupados</strong>.</p>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent2)">
+            <h4>E₅₀ (EC₅₀)</h4>
+            <p>Concentración que ocupa el <strong>50% de los receptores</strong>. Indica la <strong>potencia</strong> del fármaco.</p>
+          </div>
+        </div>
+        <div class="mnemo">Menor EC₅₀ = mayor potencia. El fármaco necesita menos concentración para lograr la mitad de su efecto.</div>
+      </div>
+    </div>
+
+    <!-- D-F3: TEORÍA FURCHGOTT -->
+    <div id="D-f3" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Farmacodinámica · PPT3 · Sección 3</span>
+        <h2>Teoría 2 — Velocidad de Combinación (Furchgott)</h2>
+        <p>Formulada por R. F. Furchgott (1964). Premio Nobel de Fisiología 1998.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Descubrimiento clave</div>
+        <div class="card-title">Receptores de Reserva</div>
+        <p>Furchgott demostró que con solo el <strong>1% de los receptores presentes</strong> en un tejido se podía obtener la <strong>respuesta máxima (Emax)</strong>. Esto llevó al concepto de <strong>"Receptores de Reserva"</strong>: hay más receptores de los necesarios para el efecto máximo.</p>
+        <div class="info-box">Los receptores de reserva son un mecanismo de <strong>amplificación de la señal</strong>. La célula puede responder al máximo incluso cuando la mayoría de sus receptores están bloqueados.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Postulados</div>
+        <div class="card-title">¿Qué plantea Furchgott?</div>
+        <div class="steps">
+          <div class="step"><div class="step-n blue">1</div><div class="step-body">La <strong>intensidad de la respuesta</strong> depende de la <strong>combinación/asociación</strong> entre moléculas de fármaco y receptores</div></div>
+          <div class="step"><div class="step-n blue">2</div><div class="step-body">La acción farmacológica está en relación con la <strong>velocidad de asociación</strong> con sus receptores (no solo con la ocupación)</div></div>
+          <div class="step"><div class="step-n red">3</div><div class="step-body">El efecto más potente de un fármaco depende de la <strong>velocidad de disociación del complejo fármaco-receptor (ED)</strong></div></div>
+          <div class="step"><div class="step-n green">4</div><div class="step-body">Un fármaco al <strong>disociarse</strong> de su receptor puede <strong>volver a interactuar</strong> con el mismo receptor</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Comparación crítica para certamen</div>
+        <div class="card-title">Clark vs Furchgott — Diferencias Clave</div>
+        <table><thead><tr><th>Aspecto</th><th>Clark (Ocupación)</th><th>Furchgott (Velocidad)</th></tr></thead>
+        <tbody>
+          <tr><td>El efecto depende de...</td><td>Número de receptores <strong>ocupados</strong></td><td><strong>Velocidad de asociación</strong> al receptor</td></tr>
+          <tr><td>Tipo de unión</td><td>Reversible</td><td>Reversible (fármaco puede volver)</td></tr>
+          <tr><td>Emax</td><td>Al ocupar <strong>todos</strong> los receptores</td><td>Con solo el <strong>1%</strong> de receptores</td></tr>
+          <tr><td>Concepto nuevo</td><td>Actividad intrínseca (α)</td><td><strong>Receptores de reserva</strong></td></tr>
+          <tr><td>Premio</td><td>—</td><td>Nobel Fisiología 1998</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <!-- D-F4: TEORÍAS 3, 4 Y 5 -->
+    <div id="D-f4" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Farmacodinámica · PPT3 · Sección 4</span>
+        <h2>Teorías 3, 4 y 5</h2>
+        <p>Inactivación · 2 Estados · Adaptación Inducida — Material complementario.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Teoría 3</div>
+        <div class="card-title">Teoría de la Inactivación de Receptores</div>
+        <p>Se fundamenta en ambas teorías anteriores (Clark + Furchgott). Propone la existencia de un <strong>receptor inactivo (Rᵢ)</strong> que puede ser activado por un ligando.</p>
+        <div class="steps">
+          <div class="step"><div class="step-n" style="background:var(--accent6)">→</div><div class="step-body">El ligando convierte Rᵢ → R (forma activa) mediante la constante de velocidad <strong>K₄</strong></div></div>
+          <div class="step"><div class="step-n" style="background:var(--accent6)">→</div><div class="step-body">El paso R → Rᵢ usa la constante <strong>K₃</strong></div></div>
+        </div>
+        <table><thead><tr><th>Tipo de ligando</th><th>Relación K₃ / K₄</th><th>Efecto</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tg">Agonista completo</span></td><td>K₄ &gt; K₃</td><td>Favorece la forma activa R</td></tr>
+          <tr><td><span class="tag ta">Agonista parcial</span></td><td>K₄ moderado &gt; K₃</td><td>Efecto parcial</td></tr>
+          <tr><td><span class="tag tr">Antagonista</span></td><td>K₄ = K₃ = 0</td><td>No activa ni inactiva — bloquea</td></tr>
+        </tbody></table>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Teoría 4</div>
+        <div class="card-title">Teoría de los 2 Estados</div>
+        <p>Propone que el receptor existe en <strong>dos conformaciones en equilibrio</strong>: una activa (R*) y una inactiva (R), que coexisten según la naturaleza del ligando.</p>
+        <div class="grid-3">
+          <div class="mini-card" style="border-left:3px solid var(--accent)">
+            <h4 style="color:var(--accent)">Agonista</h4>
+            <p>Estabiliza la forma <strong>activa (R*)</strong> → ↑ efecto</p>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--muted)">
+            <h4>Antagonista</h4>
+            <p>No altera el equilibrio R/R* pero <strong>bloquea</strong> el sitio de unión</p>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent2)">
+            <h4 style="color:var(--accent2)">Agonista Inverso</h4>
+            <p>Estabiliza la forma <strong>inactiva (R)</strong> → reduce actividad por debajo del nivel basal</p>
+          </div>
+        </div>
+        <div class="highlight"><strong>Concepto nuevo respecto a Clark:</strong> Existe <em>actividad constitutiva</em> — el receptor puede estar activo incluso sin ligando. El agonista inverso puede reducirla.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Teoría 5</div>
+        <div class="card-title">Teoría de la Adaptación Inducida</div>
+        <p>A diferencia de la Teoría de los 2 Estados (donde las conformaciones R y R* preexisten), en esta teoría la unión del fármaco <strong>induce activamente</strong> el cambio conformacional del receptor. El fármaco "moldea" al receptor hacia una conformación específica.</p>
+        <div class="grid-2">
+          <div class="mini-card" style="border-left:3px solid var(--accent4)">
+            <h4>Teoría 2 Estados</h4>
+            <p>R y R* <strong>preexisten</strong> en equilibrio. El ligando solo desplaza el equilibrio.</p>
+          </div>
+          <div class="mini-card" style="border-left:3px solid var(--accent3)">
+            <h4>Adaptación Inducida</h4>
+            <p>El ligando <strong>induce</strong> el cambio conformacional. No hay conformaciones preexistentes fijas.</p>
+          </div>
+        </div>
+        <div class="mnemo">Adaptación Inducida = el fármaco es el "arquitecto" del cambio conformacional, no solo un selector de conformaciones.</div>
+      </div>
+    </div>
+
+    <!-- D-F5: PREGUNTAS PPT3 -->
+    <div id="D-f5" class="fase-section">
+      <div class="sec-header">
+        <span class="badge">Farmacodinámica · PPT3 · Preguntas del Capítulo</span>
+        <h2>Preguntas Certamen — PPT 3</h2>
+        <p>5 preguntas directamente del material de curso con respuestas y análisis.</p>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 1 — INCORRECTA</div>
+        <div class="card-title">¿Cuál enunciado es INCORRECTO?</div>
+        <p><em>a) Interacción F-R se estudia con diferentes teorías · b) Teoría de ocupación es similar a enzima-sustrato · c) α = propiedad del agonista de producir efecto por unidad de DR · d) α=0 = antagonista · e) α=1 = antagonista total</em></p>
+        <div class="info-box">Respuesta: <strong>e) INCORRECTA.</strong> α=1 corresponde al <strong>agonista completo</strong>, NO al antagonista total. El antagonista tiene α=0.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 2 — INCORRECTA sobre fórmula Clark</div>
+        <div class="card-title">¿Cuál INCORRECTA sobre D+R ⇌ [DR] ⇌ [ED]?</div>
+        <p><em>a) Unión bimolecular · b) Interacción reversible · c) Efecto máximo al 50% de receptores · d) K₂ = velocidad de disociación · e) ED proporcional a concentración de DR</em></p>
+        <div class="info-box">Respuesta: <strong>c) INCORRECTA.</strong> El efecto máximo ocurre cuando el <strong>100% de los receptores está ocupado</strong>, no el 50%. El E₅₀ es solo la concentración efectiva media (no el efecto máximo).</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 3 — CORRECTA</div>
+        <div class="card-title">¿Cuál enunciado es CORRECTO?</div>
+        <p><em>a) Receptores de reserva = Teoría de Clark · b) Velocidad de interacción ligando-receptor = clave de Clark · c) Teoría de ocupación: fármaco disociado puede volver · d) Irreversibilidad es propia de la Teoría de Furchgott · e) Un receptor puede activarse "parcialmente"</em></p>
+        <div class="info-box">Respuesta: <strong>e) CORRECTA.</strong> Un receptor puede activarse parcialmente → esto corresponde al concepto de <strong>agonista parcial</strong> (α entre 0 y 1).</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 4 — INCORRECTA sobre Teoría Inactivación</div>
+        <div class="card-title">¿Cuál INCORRECTA sobre la Teoría de Inactivación?</div>
+        <p><em>a) Se fundamenta en Clark y Furchgott · b) Hay Rᵢ que se convierte en R activo · c) Rᵢ→R usa K₄ · d) Agonista completo: K₄ menor que K₃ · e) Antagonista: K₄ = K₃ = 0</em></p>
+        <div class="info-box">Respuesta: <strong>d) INCORRECTA.</strong> El agonista completo tiene K₄ <strong>MAYOR</strong> que K₃ (no menor). K₄ representa la conversión hacia la forma activa → debe ser mayor en agonistas.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Pregunta 5 — Identifica la teoría</div>
+        <div class="card-title">"Un receptor activo y otro inactivo que coexisten según el ligando" → ¿Qué teoría?</div>
+        <p><em>a) Teoría de los 2 estados · b) Adaptación inducida · c) Receptores sincrónicos · d) Ocupación de receptores · e) Velocidad de combinación</em></p>
+        <div class="info-box">Respuesta: <strong>a) Teoría de los 2 estados.</strong> Propone la coexistencia de R (inactivo) y R* (activo) en equilibrio, determinado por la naturaleza del ligando.</div>
+      </div>
+    </div>
+
+  </div><!-- /content modD -->
+</div><!-- /modD -->
+
+<!-- ══ FLASHCARDS FARMACODINÁMICA ══ -->
+<div id="modB-fc" class="module-section">
   <div class="content">
     <div class="sec-header">
-      <span class="badge">Repaso Rápido Integrado</span>
-      <h2>Flashcards — Todos los Módulos</h2>
+      <span class="badge">Farmacodinámica · Herramientas</span>
+      <h2>Flashcards — Farmacodinámica</h2>
     </div>
     <div class="fc-module-switch">
-      <button class="active" onclick="switchFC('carbohidratos',this)">Carbohidratos</button>
-      <button onclick="switchFC('farma1',this)">Farmacodinámica PPT1</button>
-      <button onclick="switchFC('farma2',this)">Farmacodinámica PPT2</button>
+      <button class="active" onclick="switchFCB('farma1',this)">Introducción</button>
+      <button onclick="switchFCB('farma2',this)">Mecanismo y Receptores</button>
+      <button onclick="switchFCB('farma3',this)">Interacción F-R</button>
     </div>
     <div class="fc-wrap">
-      <div class="fc" id="fc-card" onclick="flipFC()">
-        <div class="fc-f"><div class="fc-label">Pregunta</div><div class="fc-q" id="fc-q-text">Cargando...</div></div>
-        <div class="fc-b"><div class="fc-label" style="color:rgba(255,255,255,0.35)">Respuesta</div><div class="fc-a" id="fc-a-text"></div></div>
+      <div class="fc" id="fc-card-b" onclick="flipFCB()">
+        <div class="fc-f"><div class="fc-label">Pregunta</div><div class="fc-q" id="fc-q-b">Cargando...</div></div>
+        <div class="fc-b"><div class="fc-label" style="color:rgba(255,255,255,0.35)">Respuesta</div><div class="fc-a" id="fc-ans-b"></div></div>
       </div>
     </div>
     <p class="fc-hint">Haz clic en la tarjeta para voltear</p>
     <div class="fc-nav">
-      <button onclick="prevFC()">← Anterior</button>
-      <span class="fc-counter" id="fc-cnt">1 / 1</span>
-      <button onclick="nextFC()">Siguiente →</button>
+      <button onclick="prevFCB()">← Anterior</button>
+      <span class="fc-counter" id="fc-cnt-b">1 / 1</span>
+      <button onclick="nextFCB()">Siguiente →</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     MÓDULO AUTOEVALUACIÓN INTEGRADO
-══════════════════════════════════════ -->
-<div id="modQZ" class="module-section">
+<!-- ══ QUIZ FARMACODINÁMICA ══ -->
+<div id="modB-qz" class="module-section">
   <div class="content">
     <div class="sec-header">
-      <span class="badge">Autoevaluación Integrada</span>
-      <h2>Quiz — Todos los Módulos</h2>
+      <span class="badge">Farmacodinámica · Herramientas</span>
+      <h2>Autoevaluación — Farmacodinámica</h2>
     </div>
     <div class="quiz-module-switch">
-      <button class="active" onclick="buildQuiz('carbohidratos',this)">Carbohidratos</button>
-      <button onclick="buildQuiz('farma1',this)">Farmacodinámica PPT1</button>
-      <button onclick="buildQuiz('farma2',this)">Farmacodinámica PPT2</button>
+      <button class="active" onclick="buildQuizB('farma1',this)">Introducción</button>
+      <button onclick="buildQuizB('farma2',this)">Mecanismo y Receptores</button>
+      <button onclick="buildQuizB('farma3',this)">Interacción F-R</button>
     </div>
-    <div id="quiz-container"></div>
+    <div id="quiz-container-b"></div>
     <div style="text-align:center;margin-top:1.5rem;">
-      <button onclick="buildQuiz(currentQuizModule)" style="padding:8px 24px;border:0.5px solid var(--border);border-radius:20px;background:var(--card2);cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;color:var(--muted);">Reiniciar quiz</button>
+      <button onclick="buildQuizB(currentQuizB)" style="padding:8px 24px;border:0.5px solid var(--border);border-radius:20px;background:var(--card2);cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;color:var(--muted);">Reiniciar quiz</button>
     </div>
   </div>
 </div>
+
+    </div><!-- /main-area asigB -->
+  </div><!-- /page-layout asigB -->
+</div><!-- /asigB -->
 
 <script>
 // ══ DATOS ══
@@ -1449,6 +1822,18 @@ const flashcardSets = {
     { q:'¿Cuál es la diferencia entre receptores NMDA y GABA en cuanto a iones?', a:'<strong>NMDA</strong>: entra Na⁺ y Ca²⁺ → despolarización (excitación). <strong>GABA-A</strong>: entra Cl⁻ → hiperpolarización (inhibición).' },
     { q:'¿Qué son los DREADDs y por qué son útiles?', a:'<strong>Designer Receptors Exclusively Activated by Designer Drugs</strong>. RAPG activados SOLO por ligandos exógenos sintéticos. Más específicos, menos efectos adversos. Usados en neurociencia para activar/inhibir neuronas.' },
     { q:'¿Por qué actúan los β-lactámicos de forma irreversible?', a:'Forman <strong>enlace covalente</strong> con la transpeptidasa bacteriana (enzima necesaria para la pared celular). El mecanismo se basa en el carácter electrófilo del anillo β-lactámico reaccionando con grupos nucleófilos de la enzima.' }
+  ],
+  farma3: [
+    { q:'¿Quién formuló la Teoría de la Ocupación de Receptores?', a:'<strong>A. J. Clark</strong>. Usa una aproximación tipo <strong>Michaelis-Menten</strong> (similar a unión sustrato-enzima). La unión es bimolecular y reversible.' },
+    { q:'¿Qué es la Actividad Intrínseca (α) según Clark?', a:'La propiedad que tiene un agonista de producir un efecto por unidad del complejo DR. <strong>α = 1</strong> para agonistas completos. <strong>α = 0</strong> para antagonistas.' },
+    { q:'En la Teoría de Clark: ¿qué ocurre cuando todos los receptores están ocupados?', a:'Se alcanza el <strong>efecto máximo (Emax)</strong>. El efecto es proporcional al número de receptores ocupados por el complejo fármaco-receptor (DR).' },
+    { q:'¿Qué es la constante de disociación kD en la Teoría de Clark?', a:'kD = k₂/k₁. Representa la relación entre la velocidad de disociación y la de asociación del complejo DR. Su inversa es la <strong>constante de afinidad (kₐ = 1/kD)</strong>.' },
+    { q:'¿Quién formuló la Teoría de la Velocidad de Combinación? ¿Qué demostró?', a:'<strong>Robert F. Furchgott (1964)</strong>, Premio Nobel Fisiología 1998. Demostró que con solo el <strong>1% de los receptores</strong> se obtiene la respuesta máxima → existencia de <strong>Receptores de Reserva</strong>.' },
+    { q:'¿En qué se diferencia la Teoría de Furchgott de la de Clark?', a:'Clark: efecto proporcional al <strong>número de receptores ocupados</strong>. Furchgott: efecto proporcional a la <strong>velocidad de asociación</strong> fármaco-receptor. El efecto más potente depende de la <strong>velocidad de disociación del complejo ED</strong>.' },
+    { q:'¿Qué son los receptores de reserva?', a:'Receptores que no necesitan ser todos ocupados para obtener la respuesta máxima. Descubiertos por Furchgott: <strong>con solo el 1% de receptores ocupados se puede lograr el Emax</strong>.' },
+    { q:'Teoría de la Inactivación de Receptores: ¿qué propone?', a:'Propone la existencia de un <strong>receptor inactivo (Rᵢ)</strong> que puede ser activado por un ligando → forma activa (R). El paso Rᵢ→R usa la constante K₄. Agonista completo: K₄ > K₃. Antagonista: K₄ = K₃ = 0.' },
+    { q:'Teoría de los 2 Estados: ¿qué propone?', a:'Coexistencia de un <strong>receptor activo (R*)</strong> y un <strong>receptor inactivo (R)</strong> en equilibrio. Un agonista estabiliza R*. Un antagonista estabiliza R. Un agonista inverso estabiliza R por debajo del nivel basal.' },
+    { q:'Teoría de la Adaptación Inducida: ¿en qué se diferencia de la de 2 estados?', a:'En la de 2 estados el receptor existe en 2 conformaciones preexistentes. En la adaptación inducida, la unión del fármaco <strong>induce activamente</strong> el cambio conformacional en el receptor. El fármaco "moldea" al receptor.' }
   ]
 };
 
@@ -1474,37 +1859,130 @@ const quizSets = {
     { q:'Los receptores GABA-A son ionotrópicos y producen:', opts:['Entrada de Na⁺ → excitación','Entrada de Ca²⁺ → señal','Entrada de Cl⁻ → inhibición','Salida de K⁺ → excitación'], ans:2, ok:'GABA-A → entra Cl⁻ → hiperpolarización → inhibición.', bad:'GABA-A: entra Cl⁻ → hiperpolarización → inhibición. NMDA/nAChR entran cationes.' },
     { q:'Los DREADDs son:', opts:['Receptores acoplados a tirosina kinasa','RAPG activados solo por ligandos exógenos de diseño','Canales iónicos sintéticos','Receptores nucleares modificados'], ans:1, ok:'DREADDs = Designer Receptors Exclusively Activated by Designer Drugs. Son RAPG modificados.', bad:'DREADDs son RAPG (receptores acoplados a proteína G) que solo responden a ligandos exógenos de diseño.' },
     { q:'La actividad GTPasa intrínseca de la proteína G:', opts:['Produce energía celular','Sintetiza GMPc','Apaga la actividad de la proteína G','Activa la Fosfolipasa C'], ans:2, ok:'La GTPasa hidroliza GTP → GDP, inactivando la subunidad α y terminando la señalización.', bad:'La GTPasa intrínseca apaga la proteína G: GTP → GDP → inactivación de la subunidad α.' }
+  ],
+  farma3: [
+    { q:'¿Cuál es INCORRECTA sobre la Teoría de Clark?', opts:['La unión F+R es bimolecular y reversible','El efecto es proporcional a los receptores ocupados','α=1 es propiedad de un antagonista total','El efecto máximo ocurre cuando todos los receptores están ocupados'], ans:2, ok:'α=1 corresponde al AGONISTA COMPLETO, no al antagonista. El antagonista tiene α=0.', bad:'α=1 = agonista completo. α=0 = antagonista. Esta es la trampa clásica de certamen en este PPT.' },
+    { q:'La constante de afinidad (kₐ) es:', opts:['k₂/k₁','k₁/k₂','1/kD','kD × k₃'], ans:2, ok:'kₐ = 1/kD. La afinidad es la inversa de la constante de disociación.', bad:'kD = k₂/k₁ (disociación). kₐ = 1/kD (afinidad = inversa de disociación).' },
+    { q:'¿Cuál INCORRECTA sobre la fórmula de Clark? D+R ⇌ [DR] ⇌ [ED]', opts:['La unión F-R es bimolecular','Es una interacción reversible','El efecto máximo ocurre cuando el 50% de receptores está ocupado','K₂ es la velocidad de disociación de DR'], ans:2, ok:'El efecto máximo ocurre cuando el 100% de receptores está ocupado, NO el 50%. E₅₀ es la dosis que ocupa el 50%.', bad:'El efecto máximo requiere ocupar TODOS los receptores (100%). El E₅₀ es solo la concentración media efectiva.' },
+    { q:'Los receptores de reserva fueron demostrados por:', opts:['A.J. Clark (1920)','R.F. Furchgott (1964)','B. Katz (1960)','H. Dale (1914)'], ans:1, ok:'Furchgott (1964), Premio Nobel 1998. Demostró que con solo 1% de receptores se logra el Emax.', bad:'Los receptores de reserva son de Furchgott (1964), no de Clark. Clark propuso la Teoría de Ocupación.' },
+    { q:'En la Teoría de los 2 Estados, un agonista inverso:', opts:['Activa el receptor igual que un agonista','Estabiliza la forma activa R*','Estabiliza la forma inactiva R por debajo del nivel basal','No tiene efecto sobre el receptor'], ans:2, ok:'El agonista inverso estabiliza la forma inactiva R, reduciendo la actividad por debajo del nivel basal (actividad constitutiva).', bad:'Agonista = estabiliza R*. Antagonista = no altera equilibrio R/R*. Agonista inverso = estabiliza R, reduce actividad basal.' }
   ]
 };
 
 // ══ ESTADO ══
-let currentModule = 'modA';
-let currentFases = { modA: 'A-f1', modB: 'B-f1', modC: 'C-f1' };
+let currentAsig = 'asigA';
+let currentUnidad = { asigA: 'modA', asigB: 'modB' };
+let currentFases = { modA: 'A-f1', modB: 'B-f1', modC: 'C-f1', modD: 'D-f1' };
 let fcDeck = 'carbohidratos';
 let fcIdx = 0, fcFlipped = false;
 let currentQuizModule = 'carbohidratos';
 
-// ══ MÓDULO NAV ══
-function showModule(id, btn) {
+// Sidebar section configs
+const sidebarSections = {
+  modA: [
+    { id:'A-f1', label:'Monosacáridos' },
+    { id:'A-f2', label:'Disacáridos & Poder Reductor' },
+    { id:'A-f3', label:'Ejercitación General' }
+  ],
+  modB: [
+    { id:'B-f1', label:'Definiciones Fundamentales' },
+    { id:'B-f2', label:'Receptores' },
+    { id:'B-f3', label:'REA / SAR' },
+    { id:'B-f4', label:'Preguntas PPT1' }
+  ],
+  modC: [
+    { id:'C-f1', label:'Mecanismos Inespecíficos' },
+    { id:'C-f2', label:'Tipos de Enlace' },
+    { id:'C-f3', label:'Tipos de Receptores' },
+    { id:'C-f4', label:'Preguntas PPT2' }
+  ],
+  modD: [
+    { id:'D-f1', label:'Introducción — 5 Teorías' },
+    { id:'D-f2', label:'Teoría 1 — Ocupación (Clark)' },
+    { id:'D-f3', label:'Teoría 2 — Velocidad (Furchgott)' },
+    { id:'D-f4', label:'Teorías 3, 4 y 5' },
+    { id:'D-f5', label:'Preguntas PPT3' }
+  ]
+};
+
+// ══ ASIGNATURA NAV ══
+function showAsignatura(id, btn) {
   document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.module-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  currentModule = id;
+  currentAsig = id;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ══ FASE NAV ══
-function showFase(modId, faseId, btn) {
+// ══ UNIDAD NAV (sidebar) ══
+function showUnidad(asigId, modId, btn) {
+  const asig = document.getElementById(asigId);
+  // hide all modulos inside this asig
+  asig.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
+  // activate chosen
+  document.getElementById(modId).classList.add('active');
+  // update sidebar item styles
+  const sidebar = asig.querySelector('.sidebar');
+  sidebar.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentUnidad[asigId] = modId;
+  // update sections in sidebar
+  buildSidebarSections(asigId, modId);
+  // activate first section
+  const sections = sidebarSections[modId];
+  if (sections && sections.length > 0) {
+    showSeccion(modId, sections[0].id, null);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══ BUILD SIDEBAR SECTIONS ══
+function buildSidebarSections(asigId, modId) {
+  const containerId = asigId === 'asigA' ? 'subsA' : 'subsB';
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  const sections = sidebarSections[modId] || [];
+  sections.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'sidebar-sub' + (i === 0 ? ' active' : '');
+    btn.innerHTML = `<span style="width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;opacity:0.5"></span>${s.label}`;
+    btn.onclick = () => {
+      container.querySelectorAll('.sidebar-sub').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      showSeccion(modId, s.id, null);
+    };
+    container.appendChild(btn);
+  });
+}
+
+// ══ SECCIÓN NAV ══
+function showSeccion(modId, secId, btn) {
   const mod = document.getElementById(modId);
+  if (!mod) return;
   mod.querySelectorAll('.fase-section').forEach(s => s.classList.remove('active'));
-  mod.querySelectorAll('.fase-tab').forEach(b => b.classList.remove('active'));
-  const target = document.getElementById(faseId);
-  if (target) { target.classList.add('active'); currentFases[modId] = faseId; }
-  if (btn) btn.classList.add('active');
-  const firstSub = target ? target.querySelector('.sub-section') : null;
-  if (firstSub) { target.querySelectorAll('.sub-section').forEach(s => s.classList.remove('active')); firstSub.classList.add('active'); }
-  window.scrollTo({ top: 90, behavior: 'smooth' });
+  const target = document.getElementById(secId);
+  if (target) {
+    target.classList.add('active');
+    currentFases[modId] = secId;
+    const firstSub = target.querySelector('.sub-section');
+    if (firstSub) {
+      target.querySelectorAll('.sub-section').forEach(s => s.classList.remove('active'));
+      firstSub.classList.add('active');
+    }
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Legacy showFase (mantiene compatibilidad con onclick existentes)
+function showFase(modId, faseId, btn) {
+  showSeccion(modId, faseId, btn);
+}
+
+// Legacy showModule
+function showModule(id, btn) {
+  showAsignatura(id, btn);
 }
 
 // ══ FLASHCARDS ══
@@ -1578,9 +2056,118 @@ function resetQ(qi) {
   document.getElementById('rst-'+qi).className = 'quiz-reset';
 }
 
+// ══ FLASHCARDS QUÍMICA ORGÁNICA II ══
+let fcIdxA = 0, fcFlippedA = false;
+function renderFCA() {
+  const cards = flashcardSets['carbohidratos'];
+  const c = cards[fcIdxA % cards.length];
+  document.getElementById('fc-q-a').textContent = c.q;
+  document.getElementById('fc-ans-a').innerHTML = c.a;
+  document.getElementById('fc-cnt-a').textContent = (fcIdxA % cards.length + 1) + ' / ' + cards.length;
+  document.getElementById('fc-card-a').classList.remove('flipped');
+  fcFlippedA = false;
+}
+function flipFCA() { fcFlippedA = !fcFlippedA; document.getElementById('fc-card-a').classList.toggle('flipped', fcFlippedA); }
+function nextFCA() { fcIdxA = (fcIdxA + 1) % flashcardSets['carbohidratos'].length; renderFCA(); }
+function prevFCA() { fcIdxA = (fcIdxA - 1 + flashcardSets['carbohidratos'].length) % flashcardSets['carbohidratos'].length; renderFCA(); }
+
+// ══ QUIZ QUÍMICA ORGÁNICA II ══
+function buildQuizA() {
+  const data = quizSets['carbohidratos'];
+  const container = document.getElementById('quiz-container-a');
+  container.innerHTML = '';
+  data.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-card';
+    div.innerHTML = `
+      <div class="quiz-q"><span class="qnum">Pregunta ${i+1} de ${data.length}</span>${q.q}</div>
+      <div class="quiz-opts">${q.opts.map((opt,j) => `<button class="quiz-opt" onclick="checkQA(${i},${j},this)">${String.fromCharCode(65+j)}. ${opt}</button>`).join('')}</div>
+      <div class="quiz-fb" id="fba-${i}"></div>
+      <button class="quiz-reset" id="rsta-${i}" onclick="resetQA(${i})">Reintentar</button>
+    `;
+    container.appendChild(div);
+  });
+}
+function checkQA(qi, ai, btn) {
+  const q = quizSets['carbohidratos'][qi];
+  const card = btn.closest('.quiz-card');
+  card.querySelectorAll('.quiz-opt').forEach(o => o.disabled = true);
+  const fb = document.getElementById('fba-'+qi);
+  const rst = document.getElementById('rsta-'+qi);
+  if (ai === q.ans) { btn.classList.add('correct'); fb.textContent = '✓ ' + q.ok; fb.className = 'quiz-fb show ok'; }
+  else { btn.classList.add('wrong'); card.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct'); fb.textContent = '✗ ' + q.bad; fb.className = 'quiz-fb show bad'; rst.className = 'quiz-reset show'; }
+}
+function resetQA(qi) {
+  const card = document.querySelectorAll('#quiz-container-a .quiz-card')[qi];
+  card.querySelectorAll('.quiz-opt').forEach(o => { o.disabled = false; o.classList.remove('correct','wrong'); });
+  document.getElementById('fba-'+qi).className = 'quiz-fb';
+  document.getElementById('rsta-'+qi).className = 'quiz-reset';
+}
+
+// ══ FLASHCARDS FARMACODINÁMICA ══
+let fcIdxB = 0, fcFlippedB = false, fcDeckB = 'farma1';
+function switchFCB(deck, btn) {
+  fcDeckB = deck; fcIdxB = 0;
+  document.querySelectorAll('#modB-fc .fc-module-switch button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFCB();
+}
+function renderFCB() {
+  const cards = flashcardSets[fcDeckB];
+  const c = cards[fcIdxB % cards.length];
+  document.getElementById('fc-q-b').textContent = c.q;
+  document.getElementById('fc-ans-b').innerHTML = c.a;
+  document.getElementById('fc-cnt-b').textContent = (fcIdxB % cards.length + 1) + ' / ' + cards.length;
+  document.getElementById('fc-card-b').classList.remove('flipped');
+  fcFlippedB = false;
+}
+function flipFCB() { fcFlippedB = !fcFlippedB; document.getElementById('fc-card-b').classList.toggle('flipped', fcFlippedB); }
+function nextFCB() { fcIdxB = (fcIdxB + 1) % flashcardSets[fcDeckB].length; renderFCB(); }
+function prevFCB() { fcIdxB = (fcIdxB - 1 + flashcardSets[fcDeckB].length) % flashcardSets[fcDeckB].length; renderFCB(); }
+
+// ══ QUIZ FARMACODINÁMICA ══
+let currentQuizB = 'farma1';
+function buildQuizB(deck, btn) {
+  currentQuizB = deck || currentQuizB;
+  if (btn) { document.querySelectorAll('.quiz-module-switch button').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+  const data = quizSets[currentQuizB];
+  const container = document.getElementById('quiz-container-b');
+  container.innerHTML = '';
+  data.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-card';
+    div.innerHTML = `
+      <div class="quiz-q"><span class="qnum">Pregunta ${i+1} de ${data.length}</span>${q.q}</div>
+      <div class="quiz-opts">${q.opts.map((opt,j) => `<button class="quiz-opt" onclick="checkQB(${i},${j},this)">${String.fromCharCode(65+j)}. ${opt}</button>`).join('')}</div>
+      <div class="quiz-fb" id="fbb-${i}"></div>
+      <button class="quiz-reset" id="rstb-${i}" onclick="resetQB(${i})">Reintentar</button>
+    `;
+    container.appendChild(div);
+  });
+}
+function checkQB(qi, ai, btn) {
+  const q = quizSets[currentQuizB][qi];
+  const card = btn.closest('.quiz-card');
+  card.querySelectorAll('.quiz-opt').forEach(o => o.disabled = true);
+  const fb = document.getElementById('fbb-'+qi);
+  const rst = document.getElementById('rstb-'+qi);
+  if (ai === q.ans) { btn.classList.add('correct'); fb.textContent = '✓ ' + q.ok; fb.className = 'quiz-fb show ok'; }
+  else { btn.classList.add('wrong'); card.querySelectorAll('.quiz-opt')[q.ans].classList.add('correct'); fb.textContent = '✗ ' + q.bad; fb.className = 'quiz-fb show bad'; rst.className = 'quiz-reset show'; }
+}
+function resetQB(qi) {
+  const card = document.querySelectorAll('#quiz-container-b .quiz-card')[qi];
+  card.querySelectorAll('.quiz-opt').forEach(o => { o.disabled = false; o.classList.remove('correct','wrong'); });
+  document.getElementById('fbb-'+qi).className = 'quiz-fb';
+  document.getElementById('rstb-'+qi).className = 'quiz-reset';
+}
+
 // ══ INIT ══
-renderFC();
-buildQuiz('carbohidratos');
+renderFCA();
+renderFCB();
+buildQuizA();
+buildQuizB('farma1');
+buildSidebarSections('asigA', 'modA');
+buildSidebarSections('asigB', 'modB');
 </script>
 
 <!-- ══ RAPG SIMULATOR SCRIPT ══ -->
