@@ -1198,6 +1198,59 @@ strong { font-weight: 600; }
           <div class="mini-card"><p>🔬 <strong>Simplificar síntesis</strong> (menos pasos, menor costo)</p></div>
         </div>
       </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Simulador interactivo</div>
+        <div class="card-title">Modificación del Farmacóforo — REA / SAR</div>
+        <div id="sim-rea" style="width:100%;font-family:'Outfit',sans-serif">
+          <style>
+            #sim-rea *{box-sizing:border-box;margin:0;padding:0}
+            #sim-rea .sr-top{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+            @media(max-width:480px){#sim-rea .sr-top{grid-template-columns:1fr}}
+            #sim-rea .sr-cg{display:flex;flex-direction:column;gap:3px}
+            #sim-rea .sr-lbl{font-size:11px;color:var(--muted)}
+            #sim-rea select{font-family:'Outfit',sans-serif;font-size:12px}
+            #sim-rea .sr-stage{width:100%;height:280px;border:0.5px solid var(--border);border-radius:10px;background:var(--card2);margin-bottom:10px;overflow:hidden}
+            #sim-rea canvas{width:100%;height:100%;display:block}
+            #sim-rea .sr-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:10px}
+            #sim-rea .sr-stat{background:var(--card);border:0.5px solid var(--border);border-radius:8px;padding:8px 12px}
+            #sim-rea .sr-stat .sr-sl{font-size:10px;color:var(--muted);margin-bottom:4px}
+            #sim-rea .sr-stat .sr-bw{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:4px}
+            #sim-rea .sr-stat .sr-b{height:100%;border-radius:3px;transition:width .5s}
+            #sim-rea .sr-stat .sr-n{font-size:12px;font-weight:600}
+            #sim-rea .sr-note{background:var(--card);border:0.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--muted);line-height:1.6}
+            #sim-rea .sr-note b{color:var(--text)}
+          </style>
+          <div class="sr-top">
+            <div class="sr-cg"><span class="sr-lbl">R1 — sustituyente en la amina</span>
+              <select id="sr-r1" onchange="srUpdate()">
+                <option value="H">H (hidrógeno)</option>
+                <option value="Me" selected>–CH₃ (metilo)</option>
+                <option value="Et">–CH₂CH₃ (etilo)</option>
+                <option value="iPr">–CH(CH₃)₂ (isopropilo)</option>
+                <option value="tBu">–C(CH₃)₃ (tert-butilo)</option>
+              </select>
+            </div>
+            <div class="sr-cg"><span class="sr-lbl">R2 — sustitución aromática</span>
+              <select id="sr-r2" onchange="srUpdate()">
+                <option value="none" selected>Sin sustitución</option>
+                <option value="para-OH">para–OH</option>
+                <option value="meta-Cl">meta–Cl</option>
+                <option value="para-F">para–F</option>
+                <option value="orto-NO2">orto–NO₂</option>
+              </select>
+            </div>
+          </div>
+          <div class="sr-stage"><canvas id="srcv"></canvas></div>
+          <div class="sr-stats">
+            <div class="sr-stat"><div class="sr-sl">Actividad general</div><div class="sr-bw"><div class="sr-b" id="sr-bact" style="background:#2d6a4f"></div></div><div class="sr-n" id="sr-vact">—</div></div>
+            <div class="sr-stat"><div class="sr-sl">Selectividad β</div><div class="sr-bw"><div class="sr-b" id="sr-bsel" style="background:#1b4d8a"></div></div><div class="sr-n" id="sr-vsel">—</div></div>
+            <div class="sr-stat"><div class="sr-sl">Lipofilicidad</div><div class="sr-bw"><div class="sr-b" id="sr-blip" style="background:#c97200"></div></div><div class="sr-n" id="sr-vlip">—</div></div>
+            <div class="sr-stat"><div class="sr-sl">Volumen estérico</div><div class="sr-bw"><div class="sr-b" id="sr-bvol" style="background:#7b3fa0"></div></div><div class="sr-n" id="sr-vvol">—</div></div>
+          </div>
+          <div class="sr-note" id="sr-note">Selecciona modificaciones para ver el efecto sobre la actividad.</div>
+        </div>
+      </div>
     </div>
 
     <!-- B-F4: PREGUNTAS PPT1 -->
@@ -1296,6 +1349,53 @@ strong { font-weight: 600; }
           <div class="step"><div class="step-n" style="background:var(--accent6)">D</div><div class="step-body"><strong>Dipolar:</strong> Distribución no homogénea de densidad electrónica. Muy frecuentes por abundancia de enlaces polarizados. Fenoles, carbonilos, aminas, sulfóxidos. Dipolo-dipolo o ión-dipolo.</div></div>
           <div class="step"><div class="step-n green">H</div><div class="step-body"><strong>Puentes de H:</strong> Muy importante en sistemas biológicos. H débilmente ácido unido a átomo electronegativo ↔ base dadora. Grupos dadores: –OH, –NH, –SH. Grupos aceptores: carboxilatos, fosfatos, aminas con pares libres.</div></div>
           <div class="step"><div class="step-n purple">Hφ</div><div class="step-body"><strong>Hidrofóbicas:</strong> No son una fuerza atractiva en sí misma. Son la tendencia de moléculas no polares a agruparse en medio acuoso para minimizar la perturbación del agua estructurada → <strong>aumento de entropía del agua</strong>. Ejemplo: plegamiento de proteínas (residuos apolares en el interior).</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-eyebrow">Simulador interactivo</div>
+        <div class="card-title">Unión Fármaco-Receptor — Llave y Cerradura</div>
+        <div id="sim-llave" style="width:100%;font-family:'Outfit',sans-serif">
+          <style>
+            #sim-llave *{box-sizing:border-box;margin:0;padding:0}
+            #sim-llave .sl-ctrl{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:1rem;align-items:flex-end}
+            #sim-llave .sl-cg{display:flex;flex-direction:column;gap:3px}
+            #sim-llave .sl-lbl{font-size:11px;color:var(--muted)}
+            #sim-llave select,#sim-llave button{font-family:'Outfit',sans-serif;font-size:12px}
+            #sim-llave .sl-stage{width:100%;height:300px;border:0.5px solid var(--border);border-radius:10px;background:var(--card2);margin-bottom:10px;overflow:hidden}
+            #sim-llave canvas{width:100%;height:100%;display:block}
+            #sim-llave .sl-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+            #sim-llave .sl-ic{background:var(--card);border:0.5px solid var(--border);border-radius:8px;padding:8px 12px}
+            #sim-llave .sl-ic .sl-il{font-size:10px;color:var(--muted);margin-bottom:2px}
+            #sim-llave .sl-ic .sl-iv{font-size:13px;font-weight:600}
+            #sim-llave .sl-rev{color:#2d6a4f}#sim-llave .sl-irrev{color:#b5451b}
+          </style>
+          <div class="sl-ctrl">
+            <div class="sl-cg"><span class="sl-lbl">Tipo de enlace</span>
+              <select id="sl-bond" onchange="slChangeBond()">
+                <option value="cov">Covalente (irreversible)</option>
+                <option value="ion" selected>Iónico</option>
+                <option value="hbond">Puente de hidrógeno</option>
+                <option value="hydro">Hidrofóbico</option>
+              </select>
+            </div>
+            <div class="sl-cg"><span class="sl-lbl">Velocidad</span>
+              <select id="sl-spd">
+                <option value="0.4">Lenta</option>
+                <option value="1" selected>Normal</option>
+                <option value="2.2">Rápida</option>
+              </select>
+            </div>
+            <button onclick="slRestart()">▶ Iniciar</button>
+            <button onclick="slReset()">↺ Reiniciar</button>
+          </div>
+          <div class="sl-stage"><canvas id="slcv"></canvas></div>
+          <div class="sl-info">
+            <div class="sl-ic"><div class="sl-il">Enlace</div><div class="sl-iv" id="sl-iname">Iónico</div></div>
+            <div class="sl-ic"><div class="sl-il">Energía</div><div class="sl-iv" id="sl-ienergy">20–40 kJ/mol</div></div>
+            <div class="sl-ic"><div class="sl-il">Reversibilidad</div><div class="sl-iv sl-rev" id="sl-irev">Reversible</div></div>
+            <div class="sl-ic"><div class="sl-il">Estado</div><div class="sl-iv" id="sl-istate">En espera</div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -2168,6 +2268,278 @@ buildQuizA();
 buildQuizB('farma1');
 buildSidebarSections('asigA', 'modA');
 buildSidebarSections('asigB', 'modB');
+</script>
+
+<!-- ══ SIMULADOR LLAVE-CERRADURA ══ -->
+<script>
+(function(){
+const cv=document.getElementById('slcv');
+if(!cv)return;
+const ctx=cv.getContext('2d');
+let W,H,dpr,raf=null,phase='idle',frame=0,keyX=0,keyVX=0,boundTimer=0;
+const BONDS={
+  cov:{name:'Covalente',energy:'350–400+ kJ/mol',rev:'Irreversible',rc:'sl-irrev',color:'#b5451b',spd:0.55,hold:Infinity,msg:'Unido permanentemente 🔒'},
+  ion:{name:'Iónico',energy:'20–40 kJ/mol',rev:'Reversible',rc:'sl-rev',color:'#1b4d8a',spd:1,hold:200,msg:'Se une y se disocia'},
+  hbond:{name:'Puente de H',energy:'4–20 kJ/mol',rev:'Reversible',rc:'sl-rev',color:'#2d6a4f',spd:1.5,hold:110,msg:'Unión breve'},
+  hydro:{name:'Hidrofóbico',energy:'~débil (↑entropía)',rev:'Reversible',rc:'sl-rev',color:'#c97200',spd:2,hold:60,msg:'Unión muy breve'}
+};
+let bond=BONDS.ion,spd=1;
+function resize(){
+  dpr=window.devicePixelRatio||1;
+  const r=cv.parentElement.getBoundingClientRect();
+  W=r.width;H=r.height;
+  cv.width=W*dpr;cv.height=H*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  if(phase==='idle')drawIdle();
+}
+window.slChangeBond=function(){
+  bond=BONDS[document.getElementById('sl-bond').value];
+  document.getElementById('sl-iname').textContent=bond.name;
+  document.getElementById('sl-ienergy').textContent=bond.energy;
+  const el=document.getElementById('sl-irev');
+  el.textContent=bond.rev;el.className='sl-iv '+bond.rc;
+};
+window.slRestart=function(){
+  if(raf)cancelAnimationFrame(raf);
+  spd=parseFloat(document.getElementById('sl-spd').value)*bond.spd;
+  phase='approach';frame=0;boundTimer=0;
+  keyX=W*0.05;keyVX=spd;
+  setState('Aproximándose...');loop();
+};
+window.slReset=function(){
+  if(raf){cancelAnimationFrame(raf);raf=null;}
+  phase='idle';frame=0;setState('En espera');drawIdle();
+};
+function setState(t){document.getElementById('sl-istate').textContent=t;}
+function loop(){
+  raf=requestAnimationFrame(loop);frame++;
+  ctx.clearRect(0,0,W,H);drawMembrane();
+  const slotX=W*0.58;
+  if(phase==='approach'){
+    keyX+=keyVX;
+    drawReceptor(slotX,H/2,false);drawFarmaco(keyX,H/2,false);
+    if(keyX>=slotX-2){phase='bound';boundTimer=0;setState('¡Encajado!');}
+  } else if(phase==='bound'){
+    boundTimer++;
+    drawReceptor(slotX,H/2,true);drawBondRings(slotX,H/2);
+    if(bond.hold!==Infinity&&boundTimer>bond.hold){phase='release';setState('Disociándose...');}
+    if(bond.hold===Infinity)setState(bond.msg);
+  } else if(phase==='release'){
+    keyVX-=0.1;keyX+=keyVX;
+    drawReceptor(slotX,H/2,false);drawFarmaco(keyX,H/2,false);
+    if(keyX<-80){cancelAnimationFrame(raf);raf=null;phase='idle';setState('Disociado — libre');}
+  }
+}
+function drawMembrane(){
+  ctx.fillStyle='rgba(53,138,221,0.07)';ctx.fillRect(0,H*0.28,W,H*0.44);
+  ctx.fillStyle='rgba(53,138,221,0.18)';ctx.fillRect(0,H*0.28,W,H*0.035);ctx.fillRect(0,H*0.685,W,H*0.035);
+  ctx.fillStyle='rgba(80,130,180,0.45)';ctx.font='10px Outfit,sans-serif';ctx.textAlign='left';
+  ctx.fillText('Membrana plasmática',8,H*0.295);
+  ctx.fillStyle='rgba(80,130,180,0.35)';ctx.font='10px Outfit,sans-serif';
+  ctx.fillText('Exterior',8,H*0.22);ctx.fillText('Interior',8,H*0.77);
+}
+function getKeyShape(){
+  return {bW:44,bH:26,sh1W:13,sh1H:18,t1W:7,t1H:9,t2W:7,t2H:6,totalW:44,totalH:53};
+}
+function drawKeyPath(c,ox,oy,sk){
+  const {bW,bH,sh1W,sh1H,t1W,t1H,t2W,t2H}=sk;
+  c.beginPath();
+  c.moveTo(ox,oy);c.lineTo(ox+bW,oy);c.lineTo(ox+bW,oy+bH);
+  c.lineTo(ox+(bW+sh1W)/2,oy+bH);c.lineTo(ox+(bW+sh1W)/2,oy+bH+sh1H);
+  c.lineTo(ox+(bW+sh1W)/2+t1W,oy+bH+sh1H);c.lineTo(ox+(bW+sh1W)/2+t1W,oy+bH+sh1H+t1H);
+  c.lineTo(ox+(bW-sh1W)/2-t2W,oy+bH+sh1H+t1H);c.lineTo(ox+(bW-sh1W)/2-t2W,oy+bH+sh1H+t2H);
+  c.lineTo(ox+(bW-sh1W)/2,oy+bH+sh1H+t2H);c.lineTo(ox+(bW-sh1W)/2,oy+bH+sh1H);
+  c.lineTo(ox+(bW-sh1W)/2,oy+bH);c.lineTo(ox,oy+bH);c.closePath();
+}
+function drawReceptor(rx,ry,docked){
+  const sk=getKeyShape();const rW=88,rH=130;
+  ctx.save();
+  ctx.fillStyle='rgba(127,119,221,0.18)';ctx.strokeStyle='rgba(127,119,221,0.65)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.roundRect(rx-rW/2,ry-rH/2,rW,rH,12);ctx.fill();ctx.stroke();
+  const ox=rx-sk.totalW/2+1,oy=ry-sk.totalH/2;
+  ctx.fillStyle=docked?'transparent':'rgba(237,233,224,0.9)';
+  ctx.strokeStyle='rgba(127,119,221,0.45)';ctx.lineWidth=1.5;
+  drawKeyPath(ctx,ox,oy,sk);ctx.fill();ctx.stroke();
+  if(docked){
+    ctx.fillStyle=bond.color;ctx.strokeStyle=bond.color;ctx.lineWidth=1.5;
+    drawKeyPath(ctx,ox,oy,sk);ctx.fill();ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,0.5)';ctx.beginPath();ctx.arc(ox+10,oy+sk.bH/2,4,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=bond.color;ctx.font='500 11px Outfit,sans-serif';ctx.textAlign='center';
+    ctx.fillText(bond.msg,rx,ry+rH/2+16);
+  }
+  ctx.fillStyle='rgba(127,119,221,0.6)';ctx.font='500 11px Outfit,sans-serif';ctx.textAlign='center';
+  ctx.fillText('Receptor (cerradura)',rx,ry-rH/2-8);ctx.restore();
+}
+function drawFarmaco(kx,ky,docked){
+  const sk=getKeyShape();const ox=kx-sk.totalW/2,oy=ky-sk.totalH/2;
+  ctx.save();
+  ctx.fillStyle='rgba(127,119,221,0.82)';ctx.strokeStyle='rgba(127,119,221,1)';ctx.lineWidth=1.5;
+  drawKeyPath(ctx,ox,oy,sk);ctx.fill();ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,0.55)';ctx.beginPath();ctx.arc(ox+10,oy+sk.bH/2,4,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(80,80,180,0.6)';ctx.font='500 11px Outfit,sans-serif';ctx.textAlign='center';
+  ctx.fillText('Fármaco (llave)',kx,ky-sk.totalH/2-8);ctx.restore();
+}
+function drawBondRings(cx,cy){
+  const pulse=0.4+Math.abs(Math.sin(frame*0.09))*0.6;
+  ctx.strokeStyle=bond.color;ctx.lineWidth=1.5;
+  for(let i=1;i<=3;i++){ctx.globalAlpha=pulse*(1-i*0.25);ctx.beginPath();ctx.arc(cx,cy,28+i*18,0,Math.PI*2);ctx.stroke();}
+  ctx.globalAlpha=1;
+}
+function drawIdle(){
+  ctx.clearRect(0,0,W,H);drawMembrane();
+  drawReceptor(W*0.58,H/2,false);drawFarmaco(W*0.14,H/2,false);
+  ctx.fillStyle='rgba(100,100,100,0.5)';ctx.font='12px Outfit,sans-serif';ctx.textAlign='center';
+  ctx.fillText('Selecciona el enlace y presiona Iniciar',W/2,H*0.9);
+}
+new ResizeObserver(resize).observe(cv.parentElement);
+slChangeBond();resize();
+})();
+</script>
+
+<!-- ══ SIMULADOR FARMACÓFORO REA ══ -->
+<script>
+(function(){
+const mc=document.getElementById('srcv');
+if(!mc)return;
+const ctx=mc.getContext('2d');
+let W,H,dpr;
+const R1DATA={
+  H:   {act:55,sel:30,lip:15,vol:5, label:'H',    color:'#888780',note:'El H es muy pequeño para llenar la cavidad hidrofóbica del receptor β. Actividad y selectividad bajas.'},
+  Me:  {act:75,sel:45,lip:35,vol:25,label:'CH₃',  color:'#1b4d8a',note:'Metilo: actividad buena. Selectividad β moderada — no llena completamente la cavidad del receptor β.'},
+  Et:  {act:80,sel:58,lip:55,vol:45,label:'C₂H₅', color:'#2d6a4f',note:'Etilo: mayor volumen → ↑ interacción hidrofóbica → ↑ selectividad β respecto al metilo.'},
+  iPr: {act:82,sel:88,lip:70,vol:70,label:'iPr',   color:'#7b3fa0',note:'<b>Isopropilo — caso clásico:</b> llena perfectamente la cavidad hidrofóbica del receptor β → máxima selectividad β. Adrenalina → Isoprenalina. El isopropilo es APOLAR.'},
+  tBu: {act:58,sel:38,lip:75,vol:95,label:'tBu',   color:'#b5451b',note:'tert-butilo: exceso de volumen estérico → ya no cabe bien en la cavidad del receptor → ↓ actividad. Existe un tamaño óptimo.'}
+};
+const R2MOD={
+  'none':    {actM:0,  lipM:0,  note:'Sin sustitución aromática.'},
+  'para-OH': {actM:15, lipM:-10,note:'<b>para-OH:</b> efecto resonancia → base más débil → ↑ puentes de H con receptor → ↑ actividad.'},
+  'meta-Cl': {actM:8,  lipM:12, note:'<b>meta-Cl:</b> solo efecto inductivo → ↑ lipofilicidad → mejor penetración de membrana.'},
+  'para-F':  {actM:10, lipM:5,  note:'<b>para-F:</b> flúor en para → resonancia + pequeño volumen → ↑ afinidad con mínimo impedimento estérico.'},
+  'orto-NO2':{actM:-20,lipM:8,  note:'<b>orto-NO₂:</b> impedimento estérico en orto → bloquea acceso al receptor → ↓ actividad.'}
+};
+function srBar(id,v,c){
+  document.getElementById('sr-b'+id).style.cssText=`width:${v}%;background:${c}`;
+  document.getElementById('sr-v'+id).textContent=v+'%';
+}
+window.srUpdate=function(){
+  const r1k=document.getElementById('sr-r1').value;
+  const r2k=document.getElementById('sr-r2').value;
+  const d=R1DATA[r1k];const m=R2MOD[r2k];
+  const act=Math.min(100,Math.max(0,d.act+m.actM));
+  const lip=Math.min(100,Math.max(0,d.lip+m.lipM));
+  srBar('act',act,'#2d6a4f');srBar('sel',d.sel,'#1b4d8a');
+  srBar('lip',lip,'#c97200');srBar('vol',d.vol,'#7b3fa0');
+  document.getElementById('sr-note').innerHTML=r2k==='none'?d.note:d.note+'<br>'+m.note;
+  srDraw(r1k,r2k,d);
+};
+function resize(){
+  dpr=window.devicePixelRatio||1;
+  const r=mc.parentElement.getBoundingClientRect();
+  W=r.width;H=r.height;
+  mc.width=W*dpr;mc.height=H*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  srUpdate();
+}
+function srDraw(r1k,r2k,d){
+  ctx.clearRect(0,0,W,H);
+  const cx=W/2,cy=H/2+10;
+  const isDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+  const tc=isDark?'rgba(220,220,220,0.85)':'rgba(40,40,40,0.85)';
+  const bc=isDark?'rgba(180,180,180,0.7)':'rgba(80,80,80,0.7)';
+  ctx.save();
+  ctx.fillStyle='rgba(181,69,27,0.09)';ctx.strokeStyle='rgba(181,69,27,0.5)';
+  ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+  ctx.beginPath();ctx.roundRect(cx-125,cy-75,250,150,14);ctx.fill();ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='rgba(181,69,27,0.55)';ctx.font='10px Outfit,sans-serif';ctx.textAlign='left';
+  ctx.fillText('Farmacóforo — intocable',cx-121,cy-81);ctx.restore();
+  const rR=38,rCX=cx-20,rCY=cy-8;
+  const hex=[];
+  for(let i=0;i<6;i++){const a=Math.PI/6+i*(Math.PI/3);hex.push([rCX+rR*Math.cos(a),rCY+rR*Math.sin(a)]);}
+  ctx.strokeStyle=bc;ctx.lineWidth=2;
+  for(let i=0;i<6;i++){
+    const [x1,y1]=hex[i];const [x2,y2]=hex[(i+1)%6];
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+    if(i%2===0){
+      const nx=-(y2-y1)*0.15,ny=(x2-x1)*0.15;
+      ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x1+nx,y1+ny);ctx.lineTo(x2+nx,y2+ny);ctx.stroke();
+      ctx.lineWidth=2;
+    }
+  }
+  const oh1=[hex[3][0]-28,hex[3][1]+2];
+  ctx.strokeStyle=bc;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(hex[3][0],hex[3][1]);ctx.lineTo(oh1[0],oh1[1]);ctx.stroke();
+  aLabel(oh1[0],oh1[1],'OH','#2d6a4f',tc,11);
+  const oh2=[hex[4][0]-22,hex[4][1]+24];
+  ctx.beginPath();ctx.moveTo(hex[4][0],hex[4][1]);ctx.lineTo(oh2[0],oh2[1]);ctx.stroke();
+  aLabel(oh2[0],oh2[1],'OH','#2d6a4f',tc,11);
+  if(r2k!=='none'){
+    const r2lbl=r2k.replace(/para-|meta-|orto-/,'');
+    const r2c=r2k.includes('OH')?'#2d6a4f':r2k.includes('Cl')?'#1b4d8a':r2k.includes('F')?'#7b3fa0':'#b5451b';
+    const posMap={'para-OH':0,'para-F':0,'meta-Cl':1,'orto-NO2':5};
+    const vi=posMap[r2k]??0;
+    const [vx,vy]=hex[vi];
+    const ang=Math.PI/6+vi*(Math.PI/3);
+    const r2end=[vx+Math.cos(ang)*44,vy+Math.sin(ang)*44];
+    ctx.strokeStyle=r2c;ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(vx,vy);ctx.lineTo(r2end[0],r2end[1]);ctx.stroke();
+    aLabel(r2end[0],r2end[1],r2lbl,r2c,r2c,12);
+    ctx.fillStyle=r2c;ctx.font='500 9px Outfit,sans-serif';ctx.textAlign='center';
+    ctx.fillText('R2',r2end[0],r2end[1]+22);
+  }
+  const c1=hex[0];
+  const choh=[c1[0]+44,c1[1]-2];
+  const ch2=[choh[0]+42,choh[1]];
+  const nh=[ch2[0]+42,ch2[1]];
+  ctx.strokeStyle=bc;ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(c1[0],c1[1]);ctx.lineTo(choh[0],choh[1]);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(choh[0],choh[1]);ctx.lineTo(ch2[0],ch2[1]);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ch2[0],ch2[1]);ctx.lineTo(nh[0],nh[1]);ctx.stroke();
+  aLabel(choh[0],choh[1],'C',bc,tc,10);
+  const ohS=[choh[0]+3,choh[1]-34];
+  ctx.strokeStyle=bc;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(choh[0],choh[1]);ctx.lineTo(ohS[0],ohS[1]);ctx.stroke();
+  aLabel(ohS[0],ohS[1],'OH','#2d6a4f',tc,11);
+  aLabel(ch2[0],ch2[1],'C',bc,tc,10);
+  aLabel(nh[0],nh[1],'N','#7b3fa0',tc,12);
+  const rc=d.color;
+  if(r1k==='H'){const e=[nh[0]+28,nh[1]-28];ctx.strokeStyle=rc;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(nh[0],nh[1]);ctx.lineTo(e[0],e[1]);ctx.stroke();aLabel(e[0],e[1],'H',rc,tc,12);}
+  else if(r1k==='Me'){const e=[nh[0]+36,nh[1]-28];ctx.strokeStyle=rc;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(nh[0],nh[1]);ctx.lineTo(e[0],e[1]);ctx.stroke();aLabel(e[0],e[1],'CH₃',rc,tc,13);}
+  else if(r1k==='Et'){
+    const m=[nh[0]+34,nh[1]-24];const e=[nh[0]+66,nh[1]-24];
+    ctx.strokeStyle=rc;ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(nh[0],nh[1]);ctx.lineTo(m[0],m[1]);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(m[0],m[1]);ctx.lineTo(e[0],e[1]);ctx.stroke();
+    aLabel(m[0],m[1],'C',rc,tc,10);aLabel(e[0],e[1],'CH₃',rc,tc,13);
+  } else if(r1k==='iPr'){
+    const m=[nh[0]+34,nh[1]-26];const b1=[m[0]-14,m[1]-34];const b2=[m[0]+24,m[1]-34];
+    ctx.strokeStyle=rc;ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(nh[0],nh[1]);ctx.lineTo(m[0],m[1]);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(m[0],m[1]);ctx.lineTo(b1[0],b1[1]);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(m[0],m[1]);ctx.lineTo(b2[0],b2[1]);ctx.stroke();
+    aLabel(m[0],m[1],'C',rc,tc,10);aLabel(b1[0],b1[1],'CH₃',rc,tc,13);aLabel(b2[0],b2[1],'CH₃',rc,tc,13);
+  } else if(r1k==='tBu'){
+    const m=[nh[0]+32,nh[1]-24];const bs=[[m[0]-18,m[1]-32],[m[0]+8,m[1]-36],[m[0]+28,m[1]-20]];
+    ctx.strokeStyle=rc;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(nh[0],nh[1]);ctx.lineTo(m[0],m[1]);ctx.stroke();
+    bs.forEach(b=>{ctx.beginPath();ctx.moveTo(m[0],m[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();aLabel(b[0],b[1],'CH₃',rc,tc,12);});
+    aLabel(m[0],m[1],'C',rc,tc,10);
+  }
+  ctx.fillStyle=rc;ctx.font='500 9px Outfit,sans-serif';ctx.textAlign='center';
+  if(r1k!=='H') ctx.fillText('R1 — '+d.label,nh[0]+40,nh[1]+20);
+  ctx.fillStyle='rgba(181,69,27,0.5)';ctx.font='9px Outfit,sans-serif';ctx.textAlign='left';
+  ctx.fillText('Rojo punteado = farmacóforo intocable',10,H-12);
+}
+function aLabel(x,y,label,circleColor,textColor,fontSize){
+  const r=fontSize*0.72+3.5;
+  ctx.fillStyle=circleColor+'22';ctx.strokeStyle=circleColor;ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.stroke();
+  ctx.fillStyle=circleColor==='rgba(80,80,80,0.7)'||circleColor==='rgba(180,180,180,0.7)'?textColor:circleColor;
+  ctx.font=`500 ${fontSize}px Outfit,sans-serif`;ctx.textAlign='center';
+  ctx.fillText(label,x,y+fontSize*0.35);
+}
+new ResizeObserver(resize).observe(mc.parentElement);
+})();
+</script>
 </script>
 
 <!-- ══ RAPG SIMULATOR SCRIPT ══ -->
